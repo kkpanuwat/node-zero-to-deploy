@@ -1,13 +1,13 @@
 ---
 id: nodejs-course
-title: สอน Node.js สำหรับมือใหม่ (5 สัปดาห์)
+title: Node.js: Zero to Deploy
 sidebar_position: 1
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 🧠 สอน Node.js สำหรับมือใหม่ (5 สัปดาห์)
+# Node.js: Zero to Deploy
 
 > ระยะเวลาอบรม: **5 สัปดาห์**  
 > วันเรียนต่อสัปดาห์: **2 วัน**  
@@ -18,63 +18,146 @@ import TabItem from '@theme/TabItem';
 
 ## 🗓️ ภาพรวมคอร์ส
 
-| สัปดาห์ | หัวข้อหลัก | เป้าหมายการเรียนรู้ |
+| สัปดาห์ | หัวข้อหลัก | ผลลัพธ์ / สิ่งที่ได้ |
 |----------|--------------|----------------------|
-| 1 | เข้าใจพื้นฐาน JavaScript และ Node.js | สร้างโปรแกรม CLI ง่ายๆ |
-| 2 | การจัดการแพ็กเกจและโมดูล | ใช้ npm/yarn ได้คล่อง |
-| 3 | การสร้าง Web Server ด้วย Express | เขียน REST API ง่ายๆ |
-| 4 | เชื่อมต่อฐานข้อมูล MongoDB / PostgreSQL | เข้าใจ CRUD Operation |
-| 5 | ทำโปรเจกต์จริงพร้อม Deploy | Deploy ด้วย Docker และ GitHub |
+| **Week 1** | พื้นฐาน JavaScript & Node.js | เข้าใจ syntax, runtime, และ environment |
+| **Week 2** | เริ่มต้นกับ Express.js | สร้าง RESTful API แรก |
+| **Week 3** | Database & Authentication | ใช้ MongoDB และทำระบบ login/signup |
+| **Week 4** | Project Workshop & Middleware | สร้างระบบจริง มี middleware, file upload |
+| **Week 5** | Deploy & Final Project | Deploy ขึ้น cloud, สรุป & present project |
 
----
 
 ## 📚 รายละเอียดรายสัปดาห์
 
 <Tabs>
 <TabItem value="week1" label="สัปดาห์ที่ 1">
 
-### 🔹 หัวข้อ
-- ทำความเข้าใจ JavaScript เบื้องต้น (variable, function, object)
-- รู้จัก Node.js และการรันโค้ดด้วย `node`
-- ใช้ npm ติดตั้ง package
-- Workshop: “Hello CLI App”
+## JavaScript Essentials & Node.js Fundamentals
+---
+### Day 1
+#### JavaScript for Absolute Beginners
+- แนะนำแนวคิดการเขียนโปรแกรม (Input / Process / Output)
+- Variables, Data Types, Operators
+- Control Flow (if, loop, switch)
+- Functions, Scope, Arrow Functions
+- Array & Object
+- Workshop: Mini Calculator CLI (Command Line)
 
-### 🎯 ผลลัพธ์ที่คาดหวัง
-นักเรียนสามารถรันโปรแกรม Node.js ได้เอง และเข้าใจการทำงานของ JavaScript runtime
-
+### Day 2
+#### Getting Started with Node.js
+- ทำความเข้าใจ Node.js คืออะไร (Runtime vs Browser)
+- การใช้ npm, package.json, และโมดูล
+- File System (fs), Path, และ Environment Variables
+- Workshop: สร้าง CLI App อ่าน/เขียนไฟล์ JSON
 </TabItem>
 
 <TabItem value="week2" label="สัปดาห์ที่ 2">
 
-### 🔹 หัวข้อ
-- Module system (`require`, `import/export`)
-- ใช้งาน external packages (lodash, axios)
-- การอ่าน/เขียนไฟล์ด้วย `fs`
-- Workshop: สร้าง CLI ที่อ่านไฟล์ JSON แล้วสรุปผล
+## Build Your First Web Server
+---
+### Day 3
+#### Web Server & Express Basics
 
-### 🎯 ผลลัพธ์
-เข้าใจการจัดการ dependencies และโครงสร้างโปรเจกต์ Node.js
+- HTTP, Request, Response, Status Codes
+- การสร้าง server ด้วย http module
+- แนะนำ Express.js
+- Routing, Query Params, Body, Static Files
+- Workshop: “Simple Notes API”
+
+### Day 4
+#### REST API & CRUD
+
+- RESTful API คืออะไร
+- ใช้ Postman ทดสอบ API
+- CRUD Operations (GET, POST, PUT, DELETE)
+- การจัดโครงสร้างโค้ด (Routes, Controllers)
+- Workshop: “Todo List API”
 
 </TabItem>
 
 <TabItem value="week3" label="สัปดาห์ที่ 3">
-(รายละเอียดต่อ...)
+
+## Database & Authentication
+---
+### Day 5
+#### MongoDB with Node.js
+
+- แนะนำ NoSQL vs SQL
+- MongoDB และ Mongoose
+- Schema & Model
+- CRUD กับ Database
+- Workshop: “Product Catalog API”
+
+### Day 6
+#### Authentication & Security
+
+- การเข้ารหัสรหัสผ่าน (bcrypt)
+- JWT (JSON Web Token) Authentication
+- Middleware for Auth
+- Error Handling
+- Workshop: “User Login API + Protected Routes”
+
+</TabItem>
+
+<TabItem value="week4" label="สัปดาห์ที่ 4">
+
+## Project Workshop & Advanced Features
+---
+### Day 7
+#### Middleware & Uploads
+
+- Custom Middleware
+- File Upload (multer)
+- Validation (Joi / Validator)
+- Logging และ Error Handling
+- Workshop: “Image Upload API”
+
+### Day 8
+#### Mini Project Development
+
+- เริ่มต้นวางโครงสร้างและออกแบบ API
+- เลือกโจทย์ เช่น
+  - Book Store API
+  - Movie Review API
+  - Expense Tracker
+
+</TabItem>
+
+<TabItem value="week5" label="สัปดาห์ที่ 5">
+
+## Deploy & Presentation
+---
+### Day 9
+#### Deploy & Tools
+
+- Git & GitHub พื้นฐาน
+- .env และ config management
+- Deploy ด้วย Vercel
+- CI/CD เบื้องต้น
+- Workshop: “Deploy My API to Cloud”
+
+### Day 10
+#### Final Project & Demo Day
+
+- เขียน README & Documentation
+- Present โปรเจกต์หน้าชั้นเรียน
+- Q&A + สรุปเส้นทางต่อยอด (Next.js, NestJS, Docker, etc.)
+
 </TabItem>
 
 </Tabs>
 
 ---
 
-## 💡 โครงงานสุดท้าย (Final Project)
-> พัฒนา REST API สำหรับระบบ Todo List / Mini Blog  
+## 💡 Final Project
+> พัฒนา REST API สำหรับระบบ Book Store API, Movie Review API, Expense Tracker
 > ใช้ Express + MongoDB  
-> Deploy ด้วย Docker หรือ Render
+> Deploy Vercel
 
 ---
 
-## 🧰 Tools ที่ใช้
+## Tools
 - Node.js LTS
 - VS Code
-- Git / GitHub
+- Git
 - Postman
-- Docker (optional)

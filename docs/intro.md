@@ -1,6 +1,6 @@
 ---
 id: nodejs-course
-title: Node.js: Zero to Deploy
+title: Node.js Zero to Deploy
 sidebar_position: 1
 ---
 

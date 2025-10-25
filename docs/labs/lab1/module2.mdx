@@ -1,0 +1,106 @@
+---
+sidebar_position: 2
+---
+
+# Module:2 Getting Started with Node.js & NVM
+
+# ทำความเข้าใจกับ Node.js
+
+## Node.js คืออะไร?
+
+**Node.js** คือ _JavaScript Runtime Environment_  
+ที่ทำให้เราสามารถรัน JavaScript **นอก browser** ได้
+
+> ปกติแล้ว JavaScript ถูกออกแบบมาให้รันบน Browser  
+> เช่น Chrome, Edge, Safari — เพื่อควบคุมพฤติกรรมของหน้าเว็บ  
+> แต่ Node.js ทำให้เรารัน JavaScript ได้บน **เครื่องของเราเอง (server หรือ local machine)**
+
+---
+
+## ทำงานอย่างไร?
+
+Node.js ถูกสร้างขึ้นบน **V8 Engine** (ตัวเดียวกับที่ Chrome ใช้)  
+โดยเพิ่มความสามารถพิเศษเข้ามา เช่น:
+
+- การเข้าถึง **File System** (`fs`)
+- การสร้าง **Web Server**
+- การทำงานแบบ **Asynchronous (non-blocking I/O)**
+- การจัดการ Package ด้วย **npm (Node Package Manager)**
+
+---
+
+## 🌐 เปรียบเทียบ Browser vs Node.js
+
+| หัวข้อ                    | **Browser (Client-side)**                 | **Node.js (Server-side)**       |
+| ----------------------- | ----------------------------------------- | ------------------------------- |
+| จุดประสงค์                | รันโค้ดควบคุมหน้าเว็บ                          | รันโค้ดฝั่งเซิร์ฟเวอร์หรือเครื่องเรา      |
+| ตัวอย่างการใช้งาน          | DOM Manipulation, Event Listener          | File System, API, Database, CLI |
+| มี `window` object ไหม   | ✅ มี (ใช้จัดการหน้าจอ)                        | ❌ ไม่มี                           |
+| มี `document` object ไหม | ✅ มี (อ้างอิง HTML)                          | ❌ ไม่มี                           |
+| การเข้าถึงไฟล์ในเครื่อง      | ❌ ไม่ได้ (เพราะความปลอดภัย)                  | ✅ ทำได้ผ่าน `fs` module            |
+| ใช้ Engine อะไร          | V8 (ใน Chrome), SpiderMonkey (ใน Firefox) | V8 (จาก Chrome)                 |
+| ตัวอย่างโค้ด               | `document.getElementById("app")`          | `fs.readFile("data.txt")`       |
+
+---
+
+## 💡 ตัวอย่าง
+
+**Browser JavaScript**
+```html title="index.html"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">We love Node.js</button>
+</body>
+</html>
+```
+<div>
+  <button
+    id = "btn"
+    style={{
+      backgroundColor: '#1a73e8',
+      color: 'white',
+      fontSize: '16px',
+      fontWeight: 600,
+      padding: '10px 22px',
+      border: 'none',
+      borderRadius: '8px',
+      cursor: 'pointer',
+      boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
+      transition: 'all 0.2s ease-in-out',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '6px',
+      paddingTop: '2rem'
+    }}
+  >
+    💙 We Love Node.js
+  </button>
+</div>
+<br></br>
+
+```js
+document.querySelector("#btn").addEventListener("click", () => {
+  alert("Hello from Browser!");
+});
+```
+
+**Node.js**
+```js
+import fs from "fs";
+
+fs.writeFileSync("hello.txt", "Hello from Node.js!");
+console.log("successfully!");
+```
+
+<iframe
+  src="https://stackblitz.com/edit/nodejs-starter?embed=1&file=index.js"
+  width="100%"
+  height="450"
+></iframe>
+

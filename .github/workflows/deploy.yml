@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Docusaurus
+      - name: Build Docs
         run: npm run build
 
       - name: Build Docker image
@@ -43,6 +43,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /opt/kcode
-            docker pull kkpanuwatt/nodejsdocs:latest
-            docker compose up -d --no-deps  nodeJsDocs
+            cd /opt/kcode-deploy
+            docker compose pull kcode-doc
+            docker compose up -d --force-recreate kcode-doc

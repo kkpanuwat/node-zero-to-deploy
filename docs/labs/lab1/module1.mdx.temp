@@ -2,11 +2,16 @@
 sidebar_position: 1
 ---
 
-# Module:1 Programming Concept: Input → Process → Output
+# Module 1: JavaScript Foundation
 
-การเขียนโปรแกรมคือการ “บอกคอมพิวเตอร์ให้ทำตามขั้นตอน”  
-โดยทุกโปรแกรมไม่ว่าจะซับซ้อนแค่ไหน ก็มักประกอบด้วยแนวคิดพื้นฐาน 3 ส่วนนี้เสมอ
+### Description:
+Module นี้คือจุดเริ่มต้นสำหรับคนที่อยากเขียน Backend ด้วย Node.js แบบไม่ต้องมีพื้นฐานมาก่อน เราจะพาไปรู้จักพื้นฐานของ JavaScript ตั้งแต่ตัวแปร ฟังก์ชัน การทำงานของเงื่อนไขและลูป จนถึงการจัดการข้อมูลด้วย Object และ Array แบบเข้าใจง่าย พร้อมสอนเทคนิค Modern JS ที่ใช้จริง เช่น Destructuring, Spread/Rest, Template Literals และ Import/Export
 
+### Goal
+- เข้าใจพื้นฐาน JS ที่ใช้เขียน Backend
+- ใช้ Array/Object เป็น
+- ใช้ function, loop, condition ได้
+- ทำ Mini Project: Movie List (เก็บ, ลบ, ค้นหา)
 ---
 
 ## 1. Input (ข้อมูลนำเข้า)

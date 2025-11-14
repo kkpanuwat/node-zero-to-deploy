@@ -1,0 +1,31 @@
+import MultiProjectImg from './cover.png';
+
+# Module 1.1: Introduction & Environment Setup
+
+เริ่มต้น เราจะเตรียมสภาพแวดล้อมสำหรับการเขียน Node.js ให้พร้อมใช้งาน เพื่อให้ทุกคนทำตาม Workshop ได้เหมือนกันหมด ขั้นตอนทั้งหมดจะใช้ NVM (Node Version Manager) ซึ่งเป็นตัวช่วยจัดการ Node.js แบบง่ายที่สุด ติดตั้งหลายเวอร์ชัน สลับเวอร์ชันได้ และอัปเดตได้สะดวกมาก
+
+<img src={MultiProjectImg} style={{ width: "100%" }} />
+
+### เคส 1: โปรเจกต์เก่าใช้ Node 16 แต่คุณมี Node 20
+clone โปรเจกต์จาก GitHub มาและกำลังจะ install package ต่าง ๆ:
+
+```sh title="sh"
+npm install
+```
+
+ สิ่งที่คุณจะได้พบคือ...
+```sh title="sh"
+Error: Cannot find module...
+```
+
+### เคส 2: มีหลายโปรเจกต์ที่ต้องทำงานในเครื่องเดียวกัน
+
+| โปรเจกต์  | ประเภทงาน             | รายละเอียด                                      |
+| --------- | --------------------- | ----------------------------------------------- |
+| CoffeeHub | เว็บร้านกาแฟ          | ใช้ระบบเดิมที่ยังรองรับแค่ **Node 16**          |
+| EduLearn  | ระบบเรียนออนไลน์      | ใช้ฟีเจอร์ใหม่ ES Modules → ต้องใช้ **Node 18** |
+| ShopMania | เว็บขายของ E-commerce | Dev ทีมใหม่ใช้ **Node 20**                      |
+
+- CoffeeHub รันไม่ได้เพราะ Node ปัจจุบันสูงเกินไป
+- EduLearn ขึ้น error เพราะ dependency บางตัวไม่รองรับ Node 20
+- ShopMania ต้องการ Node ใหม่กว่า แต่เครื่องคุณยังเป็น Node 16

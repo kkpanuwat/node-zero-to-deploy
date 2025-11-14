@@ -1,0 +1,82 @@
+# Module 1: JavaScript Foundation
+
+ยินดีต้อนรับสู่ Module แรกที่จะวางรากฐานการเขียนโปรแกรมด้วย JavaScript สำหรับงาน Backend แบบเข้าใจง่าย ไม่ต้องมีพื้นฐานมาก่อนก็เริ่มได้ ในส่วนนี้คุณจะได้เห็นภาพรวมของสิ่งที่จะเรียน เป้าหมายของ Module และหัวข้อหลักที่เราจะฝึกทำไปพร้อมกัน
+
+เราจะค่อย ๆ ปูพื้นตั้งแต่โครงสร้างภาษา การใช้ตัวแปร ฟังก์ชัน ไปจนถึง Modern JavaScript ที่ใช้จริงในงาน พร้อมตัวอย่างและแบบฝึกหัดที่จะทำให้คุณคุ้นมือและมั่นใจมากขึ้น ก่อนก้าวไปสู่การสร้าง API และระบบจริงใน Module ถัดไป
+
+## JavaScript ใช้บน Backend อย่างไร?
+
+ถ้าพูดถึง JavaScript หลายคนจะนึกถึงฝั่งหน้าเว็บ ปุ่มเด้ง ๆ ฟอร์มเช็คข้อมูล เมนูขยับตามเมาส์ ฯลฯ
+แต่จริง ๆ แล้ว JavaScript ไม่ได้อยู่แค่ในเบราว์เซอร์เสมอไป เพราะเรามี Node.js ที่ทำให้เราเอา JavaScript ไปรันบนฝั่งเซิร์ฟเวอร์ได้เหมือนภาษาอื่น เช่น Python หรือ PHP
+
+## 💡 ตัวอย่าง
+
+**Browser JavaScript**
+```html title="index.html"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">We love Node.js</button>
+</body>
+</html>
+```
+<div>
+  <button
+    id = "btn"
+    style={{
+      backgroundColor: '#1a73e8',
+      color: 'white',
+      fontSize: '16px',
+      fontWeight: 600,
+      padding: '10px 22px',
+      border: 'none',
+      borderRadius: '8px',
+      cursor: 'pointer',
+      boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
+      transition: 'all 0.2s ease-in-out',
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: '6px',
+      paddingTop: '2rem'
+    }}
+  >
+    💙 We Love Node.js
+  </button>
+</div>
+<br></br>
+
+
+```js title="alert action"
+document.querySelector("#btn").addEventListener("click", () => {
+  alert("Hello from Browser!");
+});
+```
+
+```js title="change style"
+document.querySelector("#btn").addEventListener("mouseenter", () => {
+  document.querySelector("#btn").style.backgroundColor = "green";
+});
+
+document.querySelector("#btn").addEventListener("mouseleave", () => {
+  document.querySelector("#btn").style.backgroundColor = "#1a73e8";
+});
+```
+
+**Node.js**
+```js
+import fs from "fs";
+
+fs.writeFileSync("hello.txt", "Hello from Node.js!");
+console.log("successfully!");
+```
+
+<iframe
+  src="https://stackblitz.com/edit/nodejs-starter?embed=1&file=index.js"
+  width="100%"
+  height="450"
+></iframe>

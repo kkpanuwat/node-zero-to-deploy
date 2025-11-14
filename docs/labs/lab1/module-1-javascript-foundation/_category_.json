@@ -1,0 +1,7 @@
+{
+  "label": "Module 1: JavaScript Foundation",
+  "position": 1,
+  "collapsible": true,
+  "collapsed": false,
+  "description": "Module นี้เป็นพื้นฐานสำคัญของคนที่เริ่มเขียน Backend ด้วย JavaScript และ Node.js ปูพื้นฐานตั้งแต่ตัวแปร ฟังก์ชัน การจัดการข้อมูล ไปจนถึง Modern JS ที่ใช้จริง"
+}

@@ -1,0 +1,109 @@
+# Chapter 4: Objects & Arrays
+
+ถ้า Variables คือกล่องเก็บค่าเดี่ยว ๆ, Objects/Arrays คือกล่องใหญ่ที่เก็บข้อมูลหลายชิ้นในโครงสร้างเดียว เหมาะกับการเก็บข้อมูลจริงในงาน Node.js เช่น โปรไฟล์ผู้ใช้ รายการสินค้า ตะกร้าสินค้า
+
+---
+
+## Object — เก็บค่าด้วยคู่ key/value
+```js
+const user = {
+  name: "Beam",
+  age: 22,
+  role: "member"
+};
+```
+
+- อ่านค่า: `user.name` หรือ `user["role"]`
+- เพิ่ม/แก้: `user.age = 23`
+- ลบ: `delete user.role`
+
+### ตัวอย่าง: ตั้งค่าเริ่มต้นแล้วอัปเดตทีหลัง
+```js
+const profile = { name: "Fah", isActive: false };
+profile.isActive = true;
+profile.email = "fah@example.com";
+console.log(profile);
+```
+
+---
+
+## Array — เก็บลำดับรายการ
+```js
+const menu = ["Latte", "Mocha", "Ame"];
+```
+
+- อ่านตำแหน่ง: `menu[0]`
+- เพิ่มท้าย: `menu.push("Cappuccino")`
+- ลบท้าย: `menu.pop()`
+- ความยาว: `menu.length`
+
+### วนลูปง่าย ๆ
+```js
+for (const item of menu) {
+  console.log(item);
+}
+```
+
+---
+
+## Object + Array ทำงานร่วมกันบ่อยมาก
+```js
+const cart = [
+  { name: "Latte", price: 55, qty: 1 },
+  { name: "Mocha", price: 65, qty: 2 }
+];
+
+// เพิ่มสินค้า
+cart.push({ name: "Ame", price: 45, qty: 1 });
+
+// ปรับจำนวน
+cart[1].qty = 3;
+```
+
+### รวมยอดจาก array ของ object
+```js
+let total = 0;
+for (const item of cart) {
+  total += item.price * item.qty;
+}
+console.log(`ยอดรวม: ${total}`);
+```
+
+---
+
+## Copy vs Reference (สำคัญ)
+- Object/Array ถูกคัดลอกแบบอ้างอิง ถ้าใช้ตัวแปรใหม่ชี้ไปของเดิม การแก้ไขจะกระทบทั้งคู่
+
+```js
+const user1 = { name: "Beam" };
+const user2 = user1; // อ้างอิงเดียวกัน
+user2.name = "Fah";
+console.log(user1.name); // "Fah"
+```
+
+- ถ้าต้องการสำเนาแยก ใช้ spread (`...`)
+```js
+const user3 = { ...user1, role: "admin" }; // copy แล้วเพิ่ม field ใหม่
+const cartCopy = [...cart]; // copy array ระดับตื้น (shallow copy)
+```
+
+---
+
+## Destructuring เบื้องต้น (แค่พอใช้)
+```js
+const product = { name: "Latte", price: 55, stock: 10 };
+const { name, price } = product; // ดึงบาง field
+
+const numbers = [10, 20, 30];
+const [first, second] = numbers;
+```
+ช่วยให้โค้ดอ่านง่าย ไม่ต้องพิมพ์ `product.name` บ่อย ๆ
+
+---
+
+# Lab — Objects & Arrays
+1) สร้าง object `product` มีชื่อ ราคา และ `inStock` (boolean)  
+2) สร้าง array `cart` เก็บ item อย่างน้อย 2 ชิ้น (แต่ละชิ้นเป็น object มี `name`, `price`, `qty`)  
+3) เขียนลูปหายอดรวมราคา  
+4) ใช้ spread copy `cart` เป็นตัวใหม่ แก้ qty ของสินค้าแรก แล้ว console.log เพื่อเปรียบเทียบว่า cart เดิมไม่เปลี่ยน  
+5) ใช้ destructuring ดึง `name` กับ `price` ของสินค้าชิ้นแรกมา log แยก

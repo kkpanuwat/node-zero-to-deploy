@@ -1,0 +1,90 @@
+# Chapter 6: Scope & Hoisting
+
+เข้าใจว่า “ตัวแปรมองเห็นได้แค่ไหน” (scope) และ “ตัวแปรถูกยกขึ้นบนสุดก่อนรันหรือไม่” (hoisting) จะช่วยให้เขียนโค้ดได้ถูกที่และเลี่ยงบั๊กแปลก ๆ โดยเฉพาะกับ `var`
+
+---
+
+## Scope คือขอบเขตการมองเห็นตัวแปร
+- Global scope: อยู่ข้างนอกสุด มองเห็นได้ทุกที่ (ควรใช้ให้น้อย)
+- Function scope: ตัวแปรภายในฟังก์ชัน มองเห็นเฉพาะในฟังก์ชัน
+- Block scope: `{ }` จาก `if`, `for`, `while` ทำให้ `let`/`const` มองเห็นเฉพาะในบล็อกนั้น
+
+```js
+if (true) {
+  const a = 1;
+  let b = 2;
+  var c = 3;
+}
+// console.log(a); // ❌ มองไม่เห็น (block scope)
+// console.log(b); // ❌ มองไม่เห็น (block scope)
+console.log(c);    // ✅ มองเห็น (var ไม่มี block scope)
+```
+
+---
+
+## Function scope
+```js
+function show() {
+  const message = "Hello";
+  console.log(message); // ใช้ได้
+}
+show();
+// console.log(message); // ❌ นอกฟังก์ชันมองไม่เห็น
+```
+
+---
+
+## Hoisting คือการย้ายประกาศตัวแปร/ฟังก์ชันขึ้นบนสุดก่อนรัน
+- `var` ถูก hoist และค่าเริ่มเป็น `undefined`
+- `function declaration` ถูก hoist ทั้งตัว
+- `let/const` ถูก hoist แต่จะอยู่ใน “temporal dead zone” ใช้ก่อนประกาศไม่ได้
+
+```js
+console.log(x); // undefined (เพราะ var x ถูก hoist แล้วกำหนดเป็น undefined)
+var x = 5;
+
+// console.log(y); // ❌ Error (TDZ) เพราะ let ถูก hoist แต่ห้ามใช้ก่อนประกาศ
+let y = 10;
+
+sayHi(); // ✅ ใช้ได้เพราะ function declaration ถูก hoist ทั้งฟังก์ชัน
+function sayHi() {
+  console.log("hi");
+}
+```
+
+---
+
+## ทำไมต้องเลี่ยง var?
+- ไม่มี block scope ทำให้ค่าหลุดออกนอก if/for ได้ง่าย
+- Hoisting ของ var ทำให้เจอ undefined โดยไม่ตั้งใจ
+- ใช้ `let` เมื่อค่าเปลี่ยน และ `const` เมื่อค่าไม่ควรเปลี่ยน
+
+---
+
+## Scope chain (การค้นหาตัวแปรจากในออกนอก)
+```js
+const globalName = "KCode";
+
+function outer() {
+  const outerName = "Outer";
+  function inner() {
+    const innerName = "Inner";
+    console.log(globalName); // หาเจอใน global
+    console.log(outerName);  // หาเจอใน outer
+    console.log(innerName);  // หาเจอใน inner
+  }
+  inner();
+}
+
+outer();
+```
+ตัวแปรจะถูกมองหาจาก scope ปัจจุบัน → scope นอก → global ถ้าไม่เจอจะ error
+
+---
+
+# Lab — Scope & Hoisting
+1) เขียน `if` พร้อม `let/const/var` ทดสอบการมองเห็นหลังบล็อก แล้วบันทึกผลที่ console  
+2) ทดลองเรียกใช้ตัวแปรที่ประกาศด้วย `var` ก่อนบรรทัดประกาศ และอธิบายผลลัพธ์  
+3) ทดลองเรียกใช้ตัวแปรที่ประกาศด้วย `let` ก่อนบรรทัดประกาศ แล้วอธิบาย TDZ  
+4) สร้างฟังก์ชันซ้อนฟังก์ชัน 2 ชั้น แล้ว log ตัวแปรจากชั้นนอกในชั้นใน เพื่อเห็น scope chain  
+5) (เสริม) แปลงโค้ดที่ใช้ `var` ใน loop ให้เป็น `let`/`const` และอธิบายว่าทำไมปลอดภัยกว่า

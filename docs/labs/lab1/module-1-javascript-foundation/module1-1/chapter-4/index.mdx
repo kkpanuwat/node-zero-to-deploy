@@ -123,3 +123,32 @@ const [first, second] = numbers;
 3) เขียนลูปหายอดรวมราคา  
 4) ใช้ spread copy `cart` เป็นตัวใหม่ แก้ qty ของสินค้าแรก แล้ว console.log เพื่อเปรียบเทียบว่า cart เดิมไม่เปลี่ยน  
 5) ใช้ destructuring ดึง `name` กับ `price` ของสินค้าชิ้นแรกมา log แยก
+
+<details>
+<summary>เฉลย</summary>
+
+```js
+const product = { name: "Latte", price: 55, inStock: true };
+
+const cart = [
+  { name: "Latte", price: 55, qty: 1 },
+  { name: "Mocha", price: 65, qty: 2 },
+];
+
+let total = 0;
+for (const item of cart) {
+  total += item.price * item.qty;
+}
+console.log("ยอดรวม:", total);
+
+const cartCopy = [...cart];
+cartCopy[0] = { ...cartCopy[0], qty: 3 };
+
+console.log("cart เดิม:", cart);
+console.log("cartCopy:", cartCopy);
+
+const { name, price } = cart[0];
+console.log(name, price);
+```
+
+</details>

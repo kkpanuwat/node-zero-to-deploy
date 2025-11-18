@@ -131,3 +131,33 @@ let ameSold = 3;
 
 // เขียนโค้ดคำนวณยอดรวม
 ```
+
+<details>
+<summary>เฉลย</summary>
+
+```js
+const shopName = "KCode Café";
+const VAT = 0.07;
+
+const menu = {
+  latte: 45,
+  mocha: 55,
+  americano: 40
+};
+
+let latteSold = 4;
+let mochaSold = 2;
+let ameSold = 3;
+
+const totalBeforeVat =
+  latteSold * menu.latte +
+  mochaSold * menu.mocha +
+  ameSold * menu.americano;
+
+const totalWithVat = totalBeforeVat * (1 + VAT);
+
+console.log(`${shopName} ขายได้ (ก่อน VAT): ${totalBeforeVat} บาท`);
+console.log(`รวม VAT แล้ว: ${totalWithVat.toFixed(2)} บาท`);
+```
+
+</details>

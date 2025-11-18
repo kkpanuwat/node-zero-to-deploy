@@ -142,3 +142,37 @@ console.log(`ยอดรวม (รวม VAT): ${totalWithVat}`);
 3) ใช้ `map` กับราคาหลายรายการแล้วแปลงเป็นราคาพร้อม VAT  
 4) ใช้ `filter` คัดราคาที่เกิน 100 บาท  
 5) (เสริม) ทดลองเปรียบเทียบ `this` ใน method ของ object ระหว่างฟังก์ชันปกติและ arrow แล้วสังเกตผลลัพธ์
+
+<details>
+<summary>เฉลย</summary>
+
+```js
+function calcVat(price, vatRate) {
+  return price * (1 + vatRate);
+}
+
+const formatPrice = (price) => `${price} บาท`;
+
+const prices = [55, 80, 120];
+const vatRate = 0.07;
+
+const withVat = prices.map((p) => calcVat(p, vatRate));
+const premium = withVat.filter((p) => p > 100);
+
+console.log(withVat); // [58.85, 85.6, 128.4]
+console.log(premium); // [128.4]
+
+// bonus: this แตกต่าง
+const box = {
+  value: 10,
+  normal() {
+    return this.value;
+  },
+  arrow: () => this.value
+};
+
+console.log(box.normal()); // 10 (this ชี้ box)
+console.log(box.arrow());  // undefined (this มาจากบริบทนอกสุด)
+```
+
+</details>

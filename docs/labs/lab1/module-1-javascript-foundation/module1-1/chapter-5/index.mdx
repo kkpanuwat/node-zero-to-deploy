@@ -132,3 +132,31 @@ console.log(premiumOnly);
 2) นับจำนวนคนที่ได้เกิน 90 คะแนน  
 3) ใช้ `reduce` คำนวณคะแนนรวม และหาค่าเฉลี่ย  
 4) (เสริม) ใช้ ternary สร้าง array ใหม่ที่เก็บ `"Pass"`/`"Fail"` แทนตัวเลขคะแนน
+
+<details>
+<summary>เฉลย</summary>
+
+```js
+const scores = [80, 55, 95, 40];
+
+let excellent = 0;
+for (const s of scores) {
+  if (s >= 50) {
+    console.log("ผ่าน", s);
+  } else {
+    console.log("ตก", s);
+  }
+  if (s > 90) excellent++;
+}
+
+const total = scores.reduce((acc, s) => acc + s, 0);
+const avg = total / scores.length;
+
+const labels = scores.map((s) => (s >= 50 ? "Pass" : "Fail"));
+
+console.log("ได้เกิน 90:", excellent);
+console.log("รวม:", total, "เฉลี่ย:", avg.toFixed(2));
+console.log(labels);
+```
+
+</details>

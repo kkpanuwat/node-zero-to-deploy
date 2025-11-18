@@ -141,3 +141,32 @@ console.log(cart); // array ของ object (reference)
 3) คำนวณส่วนลด: สร้างตัวแปร `discountedPrice` เป็น number  
 4) ใช้ `typeof` ตรวจทุกตัวแปรและ console.log ผลลัพธ์  
 5) ทดลองเปลี่ยน `tags` เดิมกับสำเนาอีกตัวเพื่อสังเกตผล copy by reference
+
+<details>
+<summary>เฉลย</summary>
+
+```js
+const product = {
+  name: "Latte",
+  price: 55,
+  isOpen: true
+};
+
+const tags = ["coffee", "milk"];
+
+const discountedPrice = product.price * 0.9;
+
+console.log(typeof product);          // "object"
+console.log(typeof product.price);    // "number"
+console.log(typeof product.isOpen);   // "boolean"
+console.log(typeof discountedPrice);  // "number"
+console.log(Array.isArray(tags));     // true
+
+const tagsCopy = [...tags]; // สำเนาใหม่
+tagsCopy.push("promo");
+
+console.log(tags);     // ["coffee", "milk"]
+console.log(tagsCopy); // ["coffee", "milk", "promo"]
+```
+
+</details>

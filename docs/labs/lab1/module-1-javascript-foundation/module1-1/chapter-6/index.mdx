@@ -88,3 +88,51 @@ outer();
 3) ทดลองเรียกใช้ตัวแปรที่ประกาศด้วย `let` ก่อนบรรทัดประกาศ แล้วอธิบาย TDZ  
 4) สร้างฟังก์ชันซ้อนฟังก์ชัน 2 ชั้น แล้ว log ตัวแปรจากชั้นนอกในชั้นใน เพื่อเห็น scope chain  
 5) (เสริม) แปลงโค้ดที่ใช้ `var` ใน loop ให้เป็น `let`/`const` และอธิบายว่าทำไมปลอดภัยกว่า
+
+<details>
+<summary>เฉลย</summary>
+
+```js
+// 1) block scope
+if (true) {
+  const a = 1;
+  let b = 2;
+  var c = 3;
+}
+// console.log(a); // ReferenceError
+// console.log(b); // ReferenceError
+console.log("c (var) ยังมองเห็น:", c);
+
+// 2) var hoist
+console.log("x ก่อนประกาศ:", x); // undefined
+var x = 10;
+
+// 3) let TDZ
+try {
+  console.log(y); // จะเข้า catch
+} catch (err) {
+  console.log("y error (TDZ):", err.message);
+}
+let y = 5;
+
+// 4) scope chain
+const globalName = "Global";
+function outer() {
+  const outerName = "Outer";
+  function inner() {
+    const innerName = "Inner";
+    console.log(globalName, outerName, innerName);
+  }
+  inner();
+}
+outer();
+
+// 5) var ใน loop → ใช้ let/const
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => {
+    console.log("ใช้ let จับค่า i ถูกต้อง:", i);
+  }, 0);
+}
+```
+
+</details>

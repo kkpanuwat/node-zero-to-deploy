@@ -1,0 +1,133 @@
+import MultiProjectImg from './variable.png';
+
+# Chapter 1 Variables
+
+# บทที่ 1: ตัวแปร (Variables) — let, const และการตั้งชื่ออย่างเหมาะสม
+
+บทนี้เป็นพื้นฐานสำหรับการเริ่มต้นเขียน JavaScript ตัวแปรคือจุดเริ่มต้นของการเก็บข้อมูล คำนวณ และควบคุมการทำงานของโปรแกรม
+
+---
+
+<img src={MultiProjectImg} style={{ width: "100%" }} />
+
+## ตัวแปรคืออะไร?
+
+ตัวแปรคือช่องเก็บข้อมูลที่มีชื่อกำกับ เช่น ราคา คะแนน ชื่อผู้ใช้ หรือค่าต่าง ๆ
+
+JavaScript มีคำสั่งสร้างตัวแปร 3 แบบ: `var`, `let`, `const`  
+แต่ปัจจุบันนิยมใช้แค่ `let` และ `const`
+
+---
+
+## ความแตกต่างระหว่าง var, let และ const
+
+### var – ไม่แนะนำให้ใช้
+```js
+if (true) {
+  var name = "Alice";
+}
+console.log(name); // "Alice"
+```
+`var` ไม่มี block scope ทำให้ค่าหลุดออกนอกบล็อกได้ง่าย
+
+---
+
+### let – ใช้เมื่อค่าต้องมีการเปลี่ยน
+```js
+let score = 0;
+score = 10;
+```
+
+---
+
+### const – ใช้เมื่อค่าคงเดิม
+```js
+const VAT = 0.07;
+const APP_NAME = "KCode App";
+```
+
+แม้ `const` จะไม่ให้เปลี่ยนทั้งตัวแปร แต่ข้อมูลภายใน object/array เปลี่ยนได้:
+```js
+const user = { name: "Alice" };
+user.name = "Bob"; // ทำได้
+```
+
+แต่แบบนี้ทำไม่ได้:
+```js
+user = {}; // ❌
+```
+
+---
+
+## หลักการตั้งชื่อตัวแปร
+
+- ใช้ภาษาอังกฤษ
+- ใช้ camelCase เช่น `totalPrice`
+- หลีกเลี่ยงชื่อกำกวม เช่น `data`, `info`
+- ค่าประเภท boolean ขึ้นต้นด้วย is/has/can เช่น `isActive`
+
+---
+
+## Mutability และการคัดลอกค่า
+
+### Primitive → copy by value
+```js
+let a = 5;
+let b = a;
+a = 10;
+console.log(b); // 5
+```
+
+### Object/Array → reference
+```js
+const user1 = { name: "Alice" };
+const user2 = user1;
+user1.name = "Bob";
+console.log(user2.name); // "Bob"
+```
+
+---
+
+## ตัวอย่าง: ร้านกาแฟ KCode Café
+```js
+const shopName = "KCode Café";
+let customerToday = 5;
+
+customerToday += 3;
+
+const menu = {
+  latte: 45,
+  mocha: 55
+};
+
+menu.latte = 50;
+
+console.log(`${shopName} วันนี้มีลูกค้า ${customerToday} คน`);
+console.log(menu);
+```
+
+---
+
+# Lab — ระบบตัวแปรร้านกาแฟ
+1) ตั้งชื่อร้าน (const)  
+2) ตั้งราคาเมนูอย่างน้อย 3 รายการ  
+3) จำนวนที่ขายได้ (let)  
+4) คำนวณยอดรวม  
+5) แสดงผล
+
+```js
+const shopName = "KCode Café";
+const VAT = 0.07;
+
+const menu = {
+  latte: 45,
+  mocha: 55,
+  americano: 40
+};
+
+let latteSold = 4;
+let mochaSold = 2;
+let ameSold = 3;
+
+// เขียนโค้ดคำนวณยอดรวม
+```

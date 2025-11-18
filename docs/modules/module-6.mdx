@@ -1,0 +1,31 @@
+# Module 6: Basic Authentication (Day 6)
+
+ทำระบบล็อกอินแบบ session ที่เรียบง่าย เหมาะกับผู้เริ่มต้น
+
+## Chapter Highlights
+- Auth concept: Register, Login
+- Hash password ด้วย bcrypt
+- Session-based auth (ง่ายกว่า JWT)
+- Login-check middleware
+
+## Lesson Flow
+1) ทบทวน auth concept (register/login, hash, session)  
+2) ตั้ง `express-session`, กำหนด secret, cookie age  
+3) สร้าง route register/login/logout (บันทึก user ใน DB หรือ mock table)  
+4) Middleware เช็ก `req.session.user` สำหรับหน้า admin/manage-menus
+
+## Lab
+- ระบบหลังร้าน (Admin Dashboard)  
+  - Login Page  
+  - Session  
+  - หน้า `admin/manage-menus` (ต้องล็อกอิน)
+
+## เป้าหมาย
+- เข้าใจการปกป้อง route ด้วย session
+- มีหน้าหลังบ้านที่ล็อกอินแล้วจัดการเมนูได้
+
+## Implementation Notes
+- ใช้ `bcrypt` สำหรับ hash password
+- ใช้ `express-session` เก็บ session ในหน่วยความจำ (เหมาะกับเรียน)
+- Middleware ง่าย ๆ เช็ก `req.session.user` ก่อนเข้าหน้า admin
+*- เก็บแค่ role/userId ใน session; ข้อมูลอื่นอ่านจาก DB เมื่อจำเป็น

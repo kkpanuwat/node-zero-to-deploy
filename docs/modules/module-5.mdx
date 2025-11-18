@@ -1,0 +1,29 @@
+# Module 5: Database Basics & Connect (Day 5)
+
+ย้ายข้อมูลเมนูจาก array ไป DB ด้วย Prisma + SQLite
+
+## Chapter Highlights
+- SQL เบื้องต้น: Table, PK/FK, INSERT/SELECT/UPDATE/DELETE
+- Prisma workflow: `prisma init`, สร้าง schema, migrate
+- Models: Menu, Category, Order, OrderItem
+
+## Lesson Flow
+1) อธิบาย schema → table → record ด้วยเมนูอาหาร  
+2) `prisma init --datasource-provider sqlite` และตั้ง path DB  
+3) เขียน `schema.prisma` (Menu/Category) แล้ว `npx prisma migrate dev`  
+4) Seed ข้อมูลเมนู (ย้ายจาก array) และอ่านข้อมูลด้วย Prisma client ใน controller  
+5) Render หน้า `/menus` จาก DB
+
+## Lab
+- ย้ายเมนูจาก array → Prisma DB
+- migrate และปรับหน้าเว็บให้ดึงเมนูจาก DB
+
+## เป้าหมาย
+- เชื่อม Node.js กับ DB จริง
+- รู้จัก schema/model และการ migrate
+
+## Implementation Notes
+- `prisma init --datasource-provider sqlite`
+- นิยาม model Menu/Category/Order/OrderItem ใน `schema.prisma`
+- seed ข้อมูลเมนูเริ่มต้น (ย้ายจาก array เดิม) แล้วดึงมาแสดงในหน้า `/menus`
+*- ชี้ให้เห็นข้อดี: ข้อมูลอยู่ใน DB เดียวกันสำหรับทุกคนในทีม ไม่ต้องแก้ array ในโค้ด

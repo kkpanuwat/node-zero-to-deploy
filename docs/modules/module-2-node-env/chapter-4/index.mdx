@@ -1,0 +1,36 @@
+# Chapter 4: สร้างโปรเจกต์แรก + nodemon
+
+ตั้งค่าโปรเจกต์ Node ให้พร้อม run/ reload ง่าย
+
+## สร้างโครงโปรเจกต์
+```sh
+mkdir cafe-server
+cd cafe-server
+npm init -y
+npm install nodemon --save-dev
+```
+
+## ตั้ง script
+```json title="package.json"
+{
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  }
+}
+```
+
+## สร้างไฟล์หลัก
+```js title="server.js"
+console.log("Server starting...");
+```
+
+รัน
+```sh
+npm run dev
+```
+nodemon จะคอยดูไฟล์ เปลี่ยนปุ๊บ reload ทันที
+
+## Debugging เบื้องต้น
+- แทรก `console.log` ดูค่าตัวแปร/ลำดับ
+- ถ้า nodemon ไม่ reload ให้เช็กว่าอยู่ในโฟลเดอร์โปรเจกต์และไฟล์ถูกบันทึกแล้ว

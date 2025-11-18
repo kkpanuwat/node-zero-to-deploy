@@ -1,0 +1,30 @@
+# Module 4: Form & Template (Day 4)
+
+ฝึกรับข้อมูลจากผู้ใช้ผ่านฟอร์มและจัดการ layout/partial
+
+## Chapter Highlights
+- รับข้อมูลจาก form: req.body, method POST
+- Validation ง่าย ๆ
+- Layout & Partial: header/footer ใน EJS
+
+## Lesson Flow
+1) เปิดใช้ `express.urlencoded()` เพื่ออ่าน body ฟอร์ม  
+2) ทำ layout/partial: header/footer, include ไฟล์ CSS เดียวกลาง  
+3) ฟอร์ม `/menus/new` → POST → push ลง array → redirect/render `/menus`  
+4) เพิ่ม validation เบื้องต้น (ชื่อเมนูไม่ว่าง, ราคาเป็นตัวเลข) พร้อมแสดงข้อความในฟอร์ม
+
+## Lab
+- ระบบเพิ่มเมนูอาหาร (ยังไม่ใช้ DB)  
+  - หน้า `/menus`  
+  - ฟอร์ม `/menus/new`  
+  - POST แล้วบันทึกลง Array → render ใหม่
+
+## เป้าหมาย
+- เข้าใจการรับ/ส่งข้อมูลฝั่ง server
+- โค้ดหน้าเว็บเป็นมิตร (มี layout/partial) พร้อมต่อยอดสู่ DB
+
+## Implementation Notes
+- ใช้ `express.urlencoded()` เพื่ออ่าน body ฟอร์ม
+- แยก partial `header.ejs` / `footer.ejs` และไฟล์ layout กลาง
+- ตรวจข้อมูลเบื้องต้น (เช่น ช่องว่าง, ราคาเป็นตัวเลข) ก่อนบันทึกลง array
+*- ผูกกับ mock data เมนูเดิม เพื่อให้เมื่อเพิ่มรายการใหม่เห็นผลทันทีในหน้า `/menus`

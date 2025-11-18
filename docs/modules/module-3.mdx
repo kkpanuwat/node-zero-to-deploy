@@ -1,0 +1,31 @@
+# Module 3: Express.js Core (Day 3)
+
+สร้างเว็บด้วย Express และโครงสร้างโปรเจกต์พื้นฐาน
+
+## Chapter Highlights
+- express() เบื้องต้น, routing, middleware, req/res
+- โครงสร้างโปรเจกต์: `src/routes`, `src/controllers`, `public/`, `views/`, `assets/css`
+- View engine: เลือก EJS สำหรับผู้เริ่มต้น
+
+## Lesson Flow
+1) ติดตั้ง express, สร้าง `app.js` หรือ `server.js`  
+2) ตั้ง static folder (`public/`) ให้เสิร์ฟรูป/ CSS  
+3) ตั้ง view engine = EJS, สร้าง layout/base และหน้า Home/Contact ง่าย ๆ  
+4) Routing แยกไฟล์: `routes/index.js`, `routes/menu.js` → กลับไปเรียก controller  
+5) ใช้ mock data เมนูจาก Module 1 render หน้า Menu
+
+## Lab
+- สร้างหน้าเว็บร้านอาหารด้วย Express + EJS  
+  - Home  
+  - Menu (mock data array จาก Module 1)  
+  - Contact
+
+## เป้าหมาย
+- จับโครงสร้าง Express ที่อ่านง่ายและขยายต่อได้
+- ใช้ mock data เมนูเพื่อแสดงหน้าเว็บจริง
+
+## Implementation Notes
+- เริ่มจาก `express()` + `app.get()` และแยกเป็น `routes/` + `controllers/`
+- เสิร์ฟ static ใน `public/` (เช่น รูป/ CSS เบื้องต้น)
+- สร้าง view EJS พร้อม layout ง่าย ๆ เพื่อเตรียมใช้ partial ใน Module 4
+*- ให้เน้นโครงสร้างโฟลเดอร์ตั้งแต่ต้น เพื่อง่ายต่อการโตขึ้น (routes/controllers/views/public)

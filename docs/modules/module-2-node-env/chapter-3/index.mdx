@@ -1,0 +1,42 @@
+# Chapter 3: npm / npx / package.json
+
+รู้จักเครื่องมือจัดการแพ็กเกจของ Node เพื่อเตรียมโปรเจกต์ให้พร้อมใช้งาน
+
+## npm คืออะไร?
+- ตัวจัดการแพ็กเกจของ Node.js
+- ใช้ติดตั้ง ลบ อัปเดต ไลบรารีจาก npm registry
+
+## package.json
+สร้างไฟล์และตั้งค่าเริ่มต้น:
+```sh
+npm init -y
+```
+ไฟล์สำคัญ:
+- `name`, `version`: ข้อมูลโปรเจกต์
+- `scripts`: คำสั่ง shorthand เช่น `npm run dev`
+- `dependencies` / `devDependencies`: แพ็กเกจที่ใช้จริง/ใช้ตอนพัฒนา
+
+## ติดตั้งแพ็กเกจ
+```sh
+npm install nodemon --save-dev   # dev dependency
+npm install express              # dependency
+```
+หรือใช้ `-D` แทน `--save-dev`
+
+## scripts พื้นฐาน
+```json
+{
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  }
+}
+```
+
+## npx คืออะไร?
+- รันแพ็กเกจแบบชั่วคราว โดยไม่ต้องติดตั้งทั่วโลก
+- ตัวอย่าง: `npx create-react-app myapp`, `npx prisma init`
+
+## ทิปสำหรับผู้เริ่มต้น
+- อย่าลืม commit `package-lock.json` เพื่อ lock เวอร์ชัน
+- ถ้า permission error บน macOS ให้เช็กสิทธิ์โฟลเดอร์ ไม่ต้องใช้ sudo กับ npm ถ้าไม่จำเป็น

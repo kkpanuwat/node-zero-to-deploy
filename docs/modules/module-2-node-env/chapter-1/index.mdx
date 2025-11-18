@@ -1,0 +1,59 @@
+# Chapter 1: Node.js คืออะไร + Event Loop
+
+Node.js คือ “ที่รัน JavaScript นอกเบราว์เซอร์” เปลี่ยนภาษาเดียวที่เคยรันบนเว็บ ให้ทำงานฝั่งเซิร์ฟเวอร์ได้เหมือน Python/PHP
+
+## Node ต่างจาก JS ในเบราว์เซอร์อย่างไร
+- Browser มี `window`, `document`, DOM, fetch แบบฝังมาให้
+- Node ไม่มี DOM แต่มีโมดูลฝั่งเซิร์ฟเวอร์ เช่น `fs` (ไฟล์), `http` (เว็บเซิร์ฟเวอร์), `process` (ข้อมูลโปรเซส)
+
+## ทำไม Node ถึง “เร็ว” เวลาเจอ I/O
+- ข้างใต้ Node มี libuv คอยจัดคิวงาน I/O ให้แบบไม่ต้องรอ (non-blocking)
+- JS main thread จึงไม่หยุดรออ่านไฟล์/เรียก API แต่จะไปรันงานอื่นก่อน พอ I/O เสร็จค่อยเอาผลกลับมาทำต่อ
+
+### ตัวอย่างที่เห็นลำดับชัด ๆ
+```js
+import fs from "fs";
+
+console.log("start");
+fs.readFile("menu.txt", "utf8", (err, data) => {
+  if (err) throw err;
+  console.log("file loaded:", data);
+});
+console.log("end");
+```
+ลำดับที่ได้: `start` → `end` → `file loaded: ...`
+
+- `fs.readFile` เป็นงาน I/O → Node ส่งให้ libuv ไปทำ พอเสร็จค่อย callback กลับมา
+- ระหว่างนั้นโค้ดไม่ค้าง สามารถรับ request อื่นต่อได้
+
+## Event Loop แบบภาพรวม (จำง่าย ๆ)
+1) รับคำสั่ง JS มารันทีละบรรทัด (main thread)  
+2) ถ้าเจองาน I/O (อ่านไฟล์, รอ HTTP) ส่งงานให้ libuv ไปทำเบื้องหลัง  
+3) เมื่อเสร็จ จะเอา callback กลับเข้าคิว (queue)  
+4) Event Loop ดึง callback มารันต่อใน main thread
+
+## เปรียบเทียบสั้น ๆ: Blocking vs Non-blocking
+- Blocking: อ่านไฟล์ใหญ่แล้วรอให้จบ ถึงค่อยทำอย่างอื่น → request อื่นถูกดอง
+- Non-blocking: สั่งอ่านไฟล์แล้วไปทำอย่างอื่นก่อน พอเสร็จค่อย callback → รับงานอื่นได้ไม่สะดุด
+
+ทดลองค้างโปรเซส (อย่าทำในโปรดักชัน):
+```js
+import fs from "fs";
+
+console.log("before blocking");
+const data = fs.readFileSync("menu.txt", "utf8"); // blocking
+console.log("after blocking", data.length);
+```
+ลองสลับเป็น `readFile` แบบ async จะเห็นว่า log ไม่ถูกบล็อก
+
+## ฟังก์ชัน/โมดูลพื้นฐานที่ควรรู้ในบทนี้
+- `console.log()` ใช้เช็กลำดับและค่า (เครื่องมือ debug เริ่มต้น)
+- `fs.readFile` / `fs.readFileSync` สำหรับอ่านไฟล์ (เปรียบ async vs sync)
+- `setTimeout` ทดสอบคิวงานใน Event Loop
+- `process.uptime()` ดูเวลาที่เซิร์ฟเวอร์ทำงาน (ใช้ใน health/status)
+- `process.memoryUsage()` ดูหน่วยความจำ (ให้ภาพรวมระบบ)
+
+## สิ่งที่อยากให้ผู้เรียนได้จากบทนี้
+- เข้าใจว่า Node รัน JS นอกเบราว์เซอร์ และไม่มี DOM
+- เห็นลำดับ log ของ non-blocking I/O ชัด ๆ
+- รู้จักเครื่องมือ debug ง่าย ๆ (`console.log`, `node --watch` หรือ nodemon ในบทถัดไป)

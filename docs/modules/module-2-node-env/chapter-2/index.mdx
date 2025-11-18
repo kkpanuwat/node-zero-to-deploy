@@ -1,0 +1,38 @@
+# Chapter 2: ติดตั้ง/เช็ก NVM และสลับ Node version
+
+ใช้ NVM เพื่อจัดการหลายเวอร์ชันของ Node ในเครื่องเดียว
+
+## ติดตั้ง (macOS/Linux)
+```sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+```
+โหลด environment
+```sh
+source ~/.nvm/nvm.sh
+```
+
+## ตรวจสอบ
+```sh
+nvm --version
+nvm list
+```
+
+## ติดตั้ง/สลับเวอร์ชัน
+```sh
+nvm install 18
+nvm install 20
+nvm use 18
+nvm use 20
+```
+
+## ตั้ง default
+```sh
+nvm alias default 18
+```
+
+## Windows
+- ใช้ nvm-windows (คนละตัวกับ macOS/Linux) ดาวน์โหลดไฟล์ .exe จาก GitHub แล้วติดตั้งตามขั้นตอน
+
+## ทิปสำหรับคลาส
+- บอกเวอร์ชันที่ใช้ในคอร์สชัดเจน (เช่น Node 20 LTS)
+- ถ้าขึ้น command not found ให้ restart terminal แล้ว `source ~/.nvm/nvm.sh`

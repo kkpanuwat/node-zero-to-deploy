@@ -34,3 +34,24 @@ nodemon จะคอยดูไฟล์ เปลี่ยนปุ๊บ relo
 ## Debugging เบื้องต้น
 - แทรก `console.log` ดูค่าตัวแปร/ลำดับ
 - ถ้า nodemon ไม่ reload ให้เช็กว่าอยู่ในโฟลเดอร์โปรเจกต์และไฟล์ถูกบันทึกแล้ว
+
+## ทดลอง npx vs npm install
+### ใช้ npx โดยไม่ติดตั้ง
+```sh
+npx nodemon server.js
+```
+- ไม่ต้องมี nodemon ใน `package.json` แต่ npx จะโหลดมาใช้ชั่วคราว
+- ถ้าดึงออกจาก cache ไม่ได้ จะดาวน์โหลดชั่วคราวให้
+
+### ติดตั้งแบบ dev dependency
+```sh
+npm install -D nodemon
+```
+จะเห็น `nodemon` ถูกบันทึกใน `devDependencies` และรันได้ด้วย script:
+```sh
+npm run dev
+```
+
+### ความต่างให้ผู้เรียนสังเกต
+- npx: ใช้งานทันที ไม่ต้องเพิ่มใน package.json (สะดวกทดลองสั้น ๆ)
+- npm install -D: บันทึกเป็น devDependency ทำให้ทีมอื่น `npm install` แล้วใช้งาน script เดิมได้

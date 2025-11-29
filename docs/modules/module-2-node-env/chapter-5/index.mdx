@@ -2,7 +2,16 @@
 
 สร้างเว็บเซิร์ฟเวอร์ง่าย ๆ ด้วย `http` module ตอบข้อความและส่ง JSON เมนูจาก Module 1 พร้อมอธิบายคำสั่งที่ต้องใช้
 
-## ชุดข้อมูลเมนู (จาก Module 1)
+## คำสั่งพื้นฐานที่ต้องใช้
+- `http.createServer((req, res) => { ... })` สร้างเซิร์ฟเวอร์และรับ request ผ่าน callback
+- `req.method`, `req.url` เช็กชนิดคำขอ (GET/POST/...) และเส้นทาง
+- `res.writeHead(statusCode, headers)` ตั้งสถานะและ header (เช่น `Content-Type`)
+- `res.end(body)` จบการตอบกลับและส่งข้อมูล
+- `JSON.stringify(data)` แปลง object/array → JSON string ก่อนส่งกลับ
+- `process.uptime()` เวลาที่เซิร์ฟเวอร์ทำงาน (วินาที) ใช้ใน `/status`
+- `console.log(...)` ดูลำดับการเข้า route และ debug
+
+## ชุดข้อมูลเมนู
 ```js
 const menu = [
   { name: "Latte", price: 55 },
@@ -11,7 +20,7 @@ const menu = [
 ];
 ```
 
-## โค้ดตัวอย่าง (อธิบายทีละส่วน)
+## โค้ดตัวอย่าง
 ```js title="server.js"
 import http from "http"; // โมดูลพื้นฐานของ Node สำหรับสร้างเซิร์ฟเวอร์
 
@@ -67,15 +76,6 @@ server.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
 ```
-
-### คำสั่งสำคัญที่ใช้
-- `http.createServer((req, res) => { ... })`: สร้างเซิร์ฟเวอร์และจัดการทุก request ผ่าน callback
-- `req.method`, `req.url`: ใช้ตรวจว่าเป็น GET/POST และเส้นทางอะไร
-- `res.writeHead(statusCode, headers)`: ตั้งสถานะและ header (เช่น `Content-Type`)
-- `res.end(body)`: จบการตอบกลับและส่งข้อมูลไปยัง client
-- `JSON.stringify(data)`: แปลง object/array เป็นสตริง JSON เพื่อส่งกลับ
-- `process.uptime()`: เวลาเซิร์ฟเวอร์ทำงาน (วินาที) ใช้ใน `/status`
-- `console.log(...)`: ดูลำดับการเข้า route และ debug
 
 ### เช็กด้วย curl / browser
 ```sh

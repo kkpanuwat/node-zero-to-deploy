@@ -1,42 +1,66 @@
 # Chapter 3: npm / npx / package.json
 
-รู้จักเครื่องมือจัดการแพ็กเกจของ Node เพื่อเตรียมโปรเจกต์ให้พร้อมใช้งาน
+npm คือเครื่องมือจัดการแพ็กเกจของ Node ใช้ติดตั้ง/อัปเดต/ลบ ไลบรารีจาก npm registry ส่วน package.json คือ “บัตรประชาชน” ของโปรเจกต์ที่บันทึกชื่อ สคริปต์ และ dependency
 
-## npm คืออะไร?
-- ตัวจัดการแพ็กเกจของ Node.js
-- ใช้ติดตั้ง ลบ อัปเดต ไลบรารีจาก npm registry
-
-## package.json
-สร้างไฟล์และตั้งค่าเริ่มต้น:
+## สร้าง package.json แบบด่วน
 ```sh
 npm init -y
 ```
-ไฟล์สำคัญ:
-- `name`, `version`: ข้อมูลโปรเจกต์
-- `scripts`: คำสั่ง shorthand เช่น `npm run dev`
-- `dependencies` / `devDependencies`: แพ็กเกจที่ใช้จริง/ใช้ตอนพัฒนา
+- สร้างไฟล์ `package.json` ให้พร้อมใช้งาน
+- ใส่ `name`, `version`, `scripts`, `dependencies`
 
-## ติดตั้งแพ็กเกจ
+## ติดตั้งแพ็กเกจ (ตัวอย่างจริง)
 ```sh
-npm install nodemon --save-dev   # dev dependency
-npm install express              # dependency
+npm install express              # ใช้ตอนรันโปรดักชัน → dependencies
+npm install nodemon --save-dev   # ใช้เฉพาะตอนพัฒนา → devDependencies
+# shorthand: npm i express; npm i -D nodemon
 ```
-หรือใช้ `-D` แทน `--save-dev`
 
-## scripts พื้นฐาน
+หลังติดตั้งจะมี `node_modules/` และ `package-lock.json` (lock เวอร์ชัน)
+
+## เข้าใจ dependencies vs devDependencies
+- dependencies: ต้องใช้จริงตอนรัน (เช่น express)
+- devDependencies: ใช้เฉพาะตอนพัฒนา (เช่น nodemon, eslint)
+
+ตัวอย่างบางส่วนของ package.json:
 ```json
 {
+  "name": "cafe-server",
+  "version": "1.0.0",
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }
 ```
 
-## npx คืออะไร?
-- รันแพ็กเกจแบบชั่วคราว โดยไม่ต้องติดตั้งทั่วโลก
-- ตัวอย่าง: `npx create-react-app myapp`, `npx prisma init`
+## npx ใช้ทำอะไร
+- รันคำสั่งจากแพ็กเกจโดยไม่ต้องติดตั้งแบบ global (ลดปัญหาเวอร์ชันไม่ตรง)
+- ความหมายของ “ไม่ถาวร”: npx จะดาวน์โหลดแพ็กเกจมาใช้จาก cache ชั่วคราวครั้งที่สั่งรัน ถ้าไม่ต้องการใช้อีกก็ไม่ต้องมีในเครื่อง/ไม่มีใน package.json
+- ตัวอย่าง:
+  - `npx create-react-app myapp` สร้างโปรเจกต์ React ทันที
+  - `npx prisma init` สร้างไฟล์ตั้งค่า Prisma
+  - `npx nodemon server.js` รัน nodemon โดยไม่ต้องติดตั้งถาวร
 
-## ทิปสำหรับผู้เริ่มต้น
-- อย่าลืม commit `package-lock.json` เพื่อ lock เวอร์ชัน
-- ถ้า permission error บน macOS ให้เช็กสิทธิ์โฟลเดอร์ ไม่ต้องใช้ sudo กับ npm ถ้าไม่จำเป็น
+## Semantic Versioning (อ่านเลขเวอร์ชัน)
+- รูปแบบ `MAJOR.MINOR.PATCH` เช่น `4.19.0`
+- `^4.19.0` อัปเดตได้ถึง `<5.0.0` (เปลี่ยน minor/patch)
+- `~4.19.0` อัปเดตได้ถึง `<4.20.0` (เปลี่ยน patch)
+
+## ทดสอบสคริปต์
+```sh
+npm run dev    # ใช้ nodemon reload อัตโนมัติ
+npm run start  # ใช้ node ธรรมดา
+```
+ลองเพิ่ม `console.log("server starting")` ใน server.js แล้วรัน `npm run dev` เพื่อให้เห็น nodemon รีโหลดเมื่อเซฟไฟล์
+
+## สิ่งที่ควรรู้สำหรับผู้เริ่มต้น
+- อย่าลบ `package-lock.json` เพราะช่วยล็อกเวอร์ชันให้ตรงกันทุกเครื่อง
+- ถ้าเจอ permission error บน macOS ให้เช็กสิทธิ์โฟลเดอร์ ไม่ควรใช้ sudo กับ npm ถ้าไม่จำเป็น
+- เมื่อแชร์โปรเจกต์ ให้ commit ทั้ง `package.json` และ `package-lock.json`

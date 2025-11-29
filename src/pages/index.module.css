@@ -21,3 +21,29 @@
   align-items: center;
   justify-content: center;
 }
+
+.tableWrapper {
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+
+.tableWrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.tableWrapper th,
+.tableWrapper td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e5e5;
+}
+
+.tableWrapper th {
+  background: #f2f7fb;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  font-size: 0.9rem;
+}

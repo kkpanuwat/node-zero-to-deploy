@@ -6,13 +6,9 @@ sidebar_position: 2
 
 # Node.js Zero→Hero
 
-ถ้าคุณเพิ่งเริ่มต้นและอยากรู้ว่าจากศูนย์จะไปถึงการสร้าง REST API + Frontend + Docker Deploy ต้องผ่านอะไรบ้าง หน้านี้คือแผนเดินทาง 10 วันเต็ม ๆ ที่อธิบายเหมือนคุยกันในคลาสจริง
+> หลักสูตร 10 วันนี้พาคุณสร้าง REST API + Frontend + Docker Deploy อย่างเป็นขั้นตอน ใช้เครื่องมือที่คนทำงานจริงใช้ และมีโค้ชคอยประกบตลอดเส้นทาง
 
-## ทำไมต้องค่ายนี้
-- เรียนแบบ Learn → Try → Run → Fix → Repeat ทุกช่วงเวลา ไม่ได้แค่นั่งดูสไลด์
-- ผู้สอนอยู่กับคุณทั้งวัน รันโค้ดพร้อมกัน และช่วย debug แบบคนทำงานจริง
-- Workshop + Homework ถูกออกแบบให้ต่อยอดกัน จบวัน 10 จะได้โปรเจกต์ KKU Movie ที่นำเสนอได้
-- ใช้ภาษาไทยล้วน เปรียบเทียบ Server เป็นครัว, Middleware เป็นจุดตรวจคุณภาพ เพื่อให้ภาพชัดเจน
+ถ้าคุณเพิ่งเริ่มต้นและอยากรู้ว่าจากศูนย์จะไปถึงการสร้าง REST API + Frontend + Docker Deploy ต้องผ่านอะไรบ้าง ที่นี่คือ roadmap แบบจับต้องได้
 
 ## ตารางสรุปแต่ละวัน (Overview)
 
@@ -29,8 +25,22 @@ sidebar_position: 2
 | Day 9 | KKU Movie Frontend (EJS) | เว็บ UI เชื่อมกับ API |
 | Day 10 | Deploy + Final Presentation | Deploy local Docker + สรุปงาน |
 
-## โครงสร้างที่ผู้สอนสามารถเติมต่อ
-- วัตถุประสงค์หลักของคอร์ส
-- ตารางบทเรียนรายวันพร้อมแทรกโค้ด
-- Workshop / Homework
-- Checklist การประเมินผลนักเรียน
+## Tools ที่ใช้ตลอดคอร์ส
+- **VS Code** + Extensions พื้นฐาน (ESLint, Prettier)
+- **Node.js LTS** (ผ่าน NVM เพื่อสลับเวอร์ชันง่าย)
+- **npm / npx / nodemon** สำหรับรันสคริปต์
+- **Express.js**, **EJS**, และ **Fetch API** บนฝั่ง frontend
+- **Postman** หรือ **Thunder Client** สำหรับทดสอบ API
+- **MySQL** ผ่าน Docker + Adminer สำหรับดูตาราง
+- **Prisma** หรือ **mysql2** (เลือกใช้ตามบทเรียน) เพื่อเชื่อม DB
+- **Docker & Docker Compose** ใช้สร้าง environment และ deploy
+- **Git/GitHub** สำหรับ snapshot งานและทำ teamwork
+
+## Goal ของหลักสูตร
+- เป้าหมายสุดท้ายคือระบบ **KKU Movie**: API + Frontend สำหรับจัดการหนังในคลัง
+- ผู้เรียนต้องสร้าง API `/movies` (CRUD ครบ)
+- Frontend ใช้ EJS + Bootstrap ให้ admin เพิ่ม/แก้/ลบหนังได้จากหน้าเว็บ
+- ฝั่ง client เรียก Fetch API เพื่ออัปเดตข้อมูลแบบไม่ต้องรีเฟรชทั้งหน้า
+- ข้อมูลเก็บใน MySQL (ผ่าน connection pool) และรันบน Docker Compose พร้อม Adminer
+- ผู้เรียนต้องเขียน README + .env.example + สคริปต์ `npm run dev` / `npm run prod`
+- วันสุดท้าย deploy stack ทั้งหมดบนเครื่องตัวเองด้วย Docker แล้วสาธิตการใช้งาน

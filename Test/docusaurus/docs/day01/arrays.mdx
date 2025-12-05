@@ -1,0 +1,21 @@
+---
+title: Array & Object
+---
+
+# Array & Object (60 นาที)
+
+- Array เก็บลิสต์ข้อมูล, Object เก็บข้อมูลแบบ key/value
+- แนะนำ `push`, `pop`, และเมธอดเชิงฟังก์ชัน `map`, `filter`
+
+```js
+const movies = [
+  { title: 'Interstellar', rating: 8.7 },
+  { title: 'Inception', rating: 8.8 },
+  { title: 'Tenet', rating: 7.4 }
+];
+
+const goodMovies = movies.filter(movie => movie.rating > 8);
+console.log(goodMovies);
+```
+
+**Workshop**: ให้ผู้เรียนสร้าง Array หนัง 3 เรื่อง แล้ว filter เรื่องที่ rating > 8 จากนั้น log ชื่อเรื่องอย่างเดียว

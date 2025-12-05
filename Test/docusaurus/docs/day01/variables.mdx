@@ -1,0 +1,22 @@
+---
+title: Variables & Data Types
+---
+
+# Variables & Data Types (50 นาที)
+
+- ใช้ `const` เป็นตัวเลือกแรก ถ้าต้องเปลี่ยนค่าให้ใช้ `let` ไม่ใช้ `var`
+- Primitive types หลัก: number, string, boolean, undefined, null
+- ใช้ `typeof` ช่วย debug
+
+```js
+const studentName = 'Beam';
+let age = 19;
+const isActive = true;
+let notAssigned; // undefined
+const nothing = null;
+
+console.log(typeof age); // number
+console.log(typeof notAssigned); // undefined
+```
+
+**Workshop**: ให้ประกาศ object `student` มีชื่อ/อายุ/คณะ แล้วพิมพ์ข้อความแนะนำตัวด้วย template literal

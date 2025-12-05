@@ -1,0 +1,39 @@
+---
+title: Mini Lab — KKU Movie Data
+---
+
+# Mini Lab (90 นาที) — KKU Movie Data
+
+เป้าหมายคือฝึกจัดการ Array เพื่อเตรียม mindset สำหรับ CRUD จริงใน Day 8
+
+```js
+const movies = [];
+
+function addMovie(title, year) {
+  movies.push({ id: Date.now(), title, year });
+}
+
+function removeMovie(id) {
+  const idx = movies.findIndex(movie => movie.id === id);
+  if (idx === -1) {
+    console.log('ไม่พบหนังที่ต้องการลบ');
+    return;
+  }
+  movies.splice(idx, 1);
+}
+
+function listMovies() {
+  if (!movies.length) {
+    console.log('ยังไม่มีหนังในระบบ');
+    return;
+  }
+  movies.forEach(movie => console.log(`${movie.title} (${movie.year})`));
+}
+```
+
+## ขั้นตอนการทำงาน
+1. Instructor โชว์การเพิ่ม/ลบ/แสดงผล 1 รอบ (15 นาที)
+2. ผู้เรียนจับคู่แล้วทำตาม (Pair Programming)
+3. ใส่ภารกิจเพิ่มเติม: `findMovie(title)` หรือ `updateMovie(id, data)` ถ้าเวลาพอ
+
+**Deliverable**: screenshot Terminal ที่มีผลลัพธ์ `addMovie`, `listMovies`, `removeMovie` ครบ

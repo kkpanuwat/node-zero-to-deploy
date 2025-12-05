@@ -15,7 +15,13 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     'nodejs-course',
-    'nodejs-zero-to-hero',
+    {
+      type: 'category',
+      label: 'Node.js Zero→Hero',
+      collapsed: false,
+      link: {type: 'doc', id: 'nodejs-zero-to-hero/nodejs-zero-to-hero'},
+      items: ['nodejs-zero-to-hero/module-1/nodejs-zero-to-hero-module-1'],
+    },
     {
       type: 'category',
       label: 'Modules',

@@ -1,0 +1,21 @@
+---
+title: Functions + Arrow Functions
+---
+
+# Functions + Arrow Functions (45 นาที)
+
+- โครงสร้างฟังก์ชัน, parameter, return, default parameter
+- เปรียบเทียบ function declaration และ arrow function
+
+```js
+function formatMovie(title, rating = 'N/A') {
+  return `${title} (rating: ${rating})`;
+}
+
+const formatArrow = (title, rating) => `${title} - ${rating}`;
+
+console.log(formatMovie('Interstellar', 8.7));
+console.log(formatArrow('Inception', 8.8));
+```
+
+**Mission**: ให้ผู้เรียนลอง refactor ฟังก์ชันใน workshop ก่อนหน้าให้เป็น arrow function และอธิบายความต่างเรื่อง `this` (เกริ่นเตรียมสำหรับวันต่อไป)

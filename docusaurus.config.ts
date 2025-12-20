@@ -8,6 +8,9 @@ const config: Config = {
   title: 'Kcode Doc',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
+  markdown: {
+    mermaid: true,
+  },
   stylesheets: [
     {
       href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap",
@@ -56,8 +59,15 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+  themes: ['@docusaurus/theme-mermaid'],
 
   themeConfig: {
+    mermaid: {
+      theme: {
+        light: 'neutral',
+        dark: 'forest',
+      },
+    },
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {

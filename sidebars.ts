@@ -20,7 +20,10 @@ const sidebars: SidebarsConfig = {
       label: 'Node.js Zero→Hero',
       collapsed: false,
       link: {type: 'doc', id: 'nodejs-zero-to-hero/nodejs-zero-to-hero'},
-      items: ['nodejs-zero-to-hero/module-1/nodejs-zero-to-hero-module-1'],
+      items: [
+        'nodejs-zero-to-hero/day-1-introduction',
+        'nodejs-zero-to-hero/module-1/nodejs-zero-to-hero-module-1',
+      ],
     },
     {
       type: 'category',

@@ -63,6 +63,60 @@ library-system/
 - จุดสำคัญคือทุกบทเรียนถัดไปจะต่อยอดจากโฟลเดอร์นี้
 - สอนให้นักเรียนจัดระเบียบไฟล์ตั้งแต่วันแรกเพื่อสร้างนิสัยที่ดี
 
+### 3.5 The JavaScript Revolution
+- **จุดเริ่มต้น**: ยุคแรก JavaScript มีหน้าที่ทำให้เว็บ “ขยับได้” เช่น เปิด/ปิดเมนู, ตรวจฟอร์มบน Browser เท่านั้น
+- **ยุคปัจจุบัน**: Node.js ทำให้ภาษาเดียวกันนี้ย้ายมาวิ่งบน Backend ได้ พอรวมกับ React Native, Electron เราจึงใช้ JavaScript สร้าง Mobile App หรือ Desktop App ได้ด้วย
+- **ตัวอย่างสถานการณ์**  
+  1. Startup ต้องการสร้างระบบจองห้องสมุด + แอป mobile → ใช้ React ทำหน้าเว็บ, ใช้ Node/Express ทำ API, ใช้ React Native ทำแอปมือถือ ทั้งหมดใช้ JavaScript หมด  
+  2. ทีม Data สร้าง Script จัดการไฟล์ CSV ด้วย Node.js แล้วเอาโค้ดบางส่วนไปใช้แสดงผลบน Browser ได้ทันที
+- **Ecosystem ใหญ่**: npm มีแพ็กเกจกว่า 2 ล้าน ถัดจาก Day 1 นักเรียนจะได้ลอง `nodemon` (รีรันอัตโนมัติ), `express` (สร้าง API), `mysql2`/`prisma` (คุยกับฐานข้อมูล), `dotenv` (จัดการ environment)
+- **เชื่อมกลับโปรเจกต์เรา**: วันนี้แค่ Array + `console.log` แต่ Day 3 จะมี API `/books`, Day 6 เชื่อม Database, Day 8 เชื่อม Frontend ทั้งหมดด้วยภาษาเดียว → นี่แหละคือ “JavaScript Revolution”
+
+### 3.6 Introducing Express
+- **Express คืออะไร?** Framework บน Node.js ที่ทำให้การสร้าง Web Server เหมือนต่อบล็อกเลโก้ มี Route, Middleware, Error Handling ให้พร้อม
+- **Mini Demo (อ่านเฉย ๆ ยังไม่ต้องพิมพ์)**:
+  ```javascript
+  import express from "express";
+  const app = express();
+
+  // route ที่ส่งรายการหนังสือแบบ hard-coded
+  app.get("/books", (req, res) => {
+    res.json([
+      { id: 1, title: "Clean Code" },
+      { id: 2, title: "Node.js in Action" },
+    ]);
+  });
+
+  app.listen(3000, () => {
+    console.log("Library API ready on http://localhost:3000");
+  });
+  ```
+  - เส้นทาง `/books` จะส่ง JSON กลับให้ Browser หรือ Postman ทันที
+- **แนวคิดหลัก**  
+  - *Routing*: บอกว่า URL ไหนตอบอะไร เช่น `GET /books`, `POST /members`  
+  - *Middleware*: ตัวคั่นกลาง เช่น ตรวจ Token, แปลง JSON, log request  
+  - *Response*: `res.json()`, `res.send()`, `res.status()` เพื่อสื่อสารผลลัพธ์/ข้อผิดพลาด
+- **โยงกับ Day 1**: เราเริ่มจากสคริปต์เดี่ยว ๆ ให้ชินกับ JavaScript ก่อน พอถึง Day 3 เราจะ wrap ความรู้เหล่านี้เข้า Express แล้วได้ API จริงสำหรับระบบห้องสมุด
+
+### 3.7 Server-Side และ Client-Side Applications
+- **Server-Side (Backend / หลังบ้าน)**  
+  - โค้ดรันบน Server เช่น Node.js ที่อยู่ในเครื่องผู้เรียนหรือบน Cloud  
+  - ทำงานหนัก ๆ เช่น ตรวจสอบสิทธิ์, เชื่อม Database, คำนวณค่าปรับ, ป้องกันข้อมูล  
+  - ตัวอย่าง: Endpoint `/borrow` รับ memberId + bookId → ตรวจว่ามีเล่มเหลือไหม → บันทึกการยืม → ส่งผลกลับว่าประสบความสำเร็จหรือไม่
+- **Client-Side (Frontend / หน้าบ้าน)**  
+  - โค้ดรันใน Browser หรือ Mobile App เช่น React, Vue, Expo  
+  - เน้น UI/UX แสดงข้อมูลจาก Server และส่ง input จากผู้ใช้  
+  - ตัวอย่าง: หน้า “My Books” ดึงข้อมูลจาก `/borrowed` แล้วเรนเดอร์เป็นการ์ดสวย ๆ พร้อมปุ่มคืนหนังสือ
+- **Flow เปรียบเทียบ**:
+  ```
+  1. User คลิกปุ่ม "ยืมหนังสือ" บนหน้าเว็บ (Client)
+  2. Browser ส่ง HTTP Request → Server (Express)
+  3. Server ตรวจ member status + update Database (Server)
+  4. Server ส่ง Response { status: "success", dueDate: "2025-01-10" }
+  5. Client แสดง Toast "ยืมสำเร็จ! คืนภายใน 10 ม.ค."
+  ```
+- **เหตุผลที่ Day 1 เน้น Server**: เริ่มจาก Terminal ช่วยให้เห็นภาพ “คำสั่ง → ผลลัพธ์” ชัดเจน เมื่อไปถึง Day 4–5 ที่มีหน้าเว็บจริง นักเรียนจะเข้าใจทันทีว่าปุ่มบน Client ก็แค่ส่งคำสั่งเดิม ๆ ไปยัง Server ที่เราทำความรู้จักตั้งแต่วันแรก
+
 ---
 
 ## 4. System & Flow Diagram

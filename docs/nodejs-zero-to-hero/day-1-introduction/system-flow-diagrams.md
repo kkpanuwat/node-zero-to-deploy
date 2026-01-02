@@ -1,7 +1,9 @@
-id: nodejs-zero-to-hero/day-1-introduction/system-flow-diagrams
-title: Part 4 — System & Flow Diagrams
-sidebar_label: Part 4 — System & Flow
+---
+id: day-1-system-flow-diagrams
+title: 'Day 1: System and Flow Diagrams'
+sidebar_label: 'System & Flow Diagrams'
 description: Diagram อธิบายวงจร Request → Process → Output ของ Hello Library Script
+---
 
 # Part 4 — System & Flow Diagram
 

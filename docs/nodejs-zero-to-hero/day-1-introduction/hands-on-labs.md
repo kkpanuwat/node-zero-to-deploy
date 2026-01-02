@@ -1,7 +1,9 @@
-id: nodejs-zero-to-hero/day-1-introduction/hands-on-labs
-title: Part 5 — Hands-on Labs
-sidebar_label: Part 5 — Hands-on Labs
+---
+id: day-1-hands-on-labs
+title: 'Day 1: Hands-on Labs'
+sidebar_label: 'Hands-on Labs'
 description: Workshop ตั้งค่าโฟลเดอร์ เขียน hello-library.js และทำ Git commit แรก
+---
 
 # Part 5 — Hands-on Labs
 

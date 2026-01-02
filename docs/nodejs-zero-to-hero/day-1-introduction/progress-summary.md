@@ -1,7 +1,9 @@
-id: nodejs-zero-to-hero/day-1-introduction/progress-summary
-title: Part 6 — Progression & Summary
-sidebar_label: Part 6 — Summary & Next
+---
+id: day-1-progress-summary
+title: 'Day 1: Progress and Summary'
+sidebar_label: 'Summary & Next Steps'
 description: สรุป Day 1 พร้อมภาพการเติบโตของโปรเจกต์และสปอยล์ Day 2
+---
 
 # Part 6 — Project Progression & Summary
 

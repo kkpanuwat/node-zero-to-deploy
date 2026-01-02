@@ -1,7 +1,9 @@
-id: nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals
-title: Part 3 — JavaScript Fundamentals
-sidebar_label: Part 3 — JS Fundamentals
+---
+id: day-1-javascript-fundamentals
+title: 'Day 1: JavaScript Fundamentals'
+sidebar_label: 'JS Fundamentals'
 description: เน้นย้ำตัวแปร ประเภทข้อมูล Operators Functions Arrow Functions Array Methods Loops และ Conditional Logic
+---
 
 # Part 3 — JavaScript Fundamentals
 
@@ -217,6 +219,34 @@ console.log(totalPrice); // ผลลัพธ์: 770
 
 - `accumulator`: คือค่าสะสมที่ได้จากการดำเนินการในรอบก่อนหน้า (ในรอบแรกคือค่าเริ่มต้นที่เรากำหนดให้, ในที่นี้คือ `0`)
 - `currentPrice`: คือไอเท็มปัจจุบันใน Array ที่กำลังถูกประมวลผล
+
+### `find()`: ค้นหาไอเท็มแรกที่ตรงตามเงื่อนไข
+
+`find()` ใช้สำหรับ "ค้นหา" ไอเท็มตัวแรกใน Array ที่ตรงตามเงื่อนไขที่เรากำหนด และจะคืนค่าไอเท็มนั้นกลับมา หากไม่พบไอเท็มที่ตรงตามเงื่อนไข จะคืนค่าเป็น `undefined`
+
+```javascript
+const libraryBooks = [
+  { id: 1, title: "Clean Code", available: true },
+  { id: 2, title: "Node.js for Dummies", available: false },
+  { id: 3, title: "The Pragmatic Programmer", available: true },
+];
+
+// ต้องการค้นหาหนังสือที่มี id เป็น 2
+const bookId2 = libraryBooks.find((book) => {
+  return book.id === 2;
+});
+
+console.log(bookId2);
+// ผลลัพธ์: { id: 2, title: "Node.js for Dummies", available: false }
+
+// ต้องการค้นหาหนังสือที่ชื่อ "NonExistent Book"
+const nonExistentBook = libraryBooks.find((book) => {
+  return book.title === "NonExistent Book";
+});
+
+console.log(nonExistentBook);
+// ผลลัพธ์: undefined
+```
 
 `map`, `filter`, และ `reduce` เป็นแนวคิดที่สำคัญมากในการเขียน JavaScript สมัยใหม่ (Functional Programming) การทำความเข้าใจและฝึกใช้บ่อยๆ จะช่วยให้คุณเขียนโค้ดที่สะอาด มีประสิทธิภาพ และจัดการข้อมูลได้ดียิ่งขึ้นครับ
 

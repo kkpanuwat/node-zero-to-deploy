@@ -1,7 +1,9 @@
-id: nodejs-zero-to-hero/day-1-introduction/overview-objectives
-title: Part 1 — Day 1 Overview
-sidebar_label: Part 1 — Overview & Goals
+---
+id: day-1-overview-objectives
+title: 'Day 1: Overview and Objectives'
+sidebar_label: 'Overview & Objectives'
 description: ภาพรวมเน้น ๆ ของ Day 1 ทั้งโฟกัสหลัก Output และ Learning Objectives
+---
 
 # Part 1 — Day 1 Overview
 

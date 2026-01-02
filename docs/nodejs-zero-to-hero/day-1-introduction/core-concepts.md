@@ -1,7 +1,9 @@
-id: nodejs-zero-to-hero/day-1-introduction/core-concepts
-title: Part 2 — Concepts for Beginners
-sidebar_label: Part 2 — Core Concepts
+---
+id: day-1-core-concepts
+title: 'Day 1: Core Concepts for Beginners'
+sidebar_label: 'Core Concepts'
 description: ทำความเข้าใจภาพรวมโปรแกรม Request/Response Terminal Express และการแบ่งหน้าที่ Client/Server
+---
 
 # Part 2 — Concepts สำหรับมือใหม่
 

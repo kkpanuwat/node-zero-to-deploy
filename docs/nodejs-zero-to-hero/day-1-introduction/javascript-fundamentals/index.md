@@ -15,7 +15,6 @@ description: เน้นย้ำตัวแปร ประเภทข้อ
 - [ประเภทข้อมูล (Data Types)](./data-types.md) — รู้จักข้อมูลพื้นฐานทั้ง String, Number, Boolean, Array และ Object
 - [เครื่องหมายและการดำเนินการ (Operators)](./operators.md) — รวมตัวอย่างคำสั่งคณิตศาสตร์ การเปรียบเทียบ และตรรกะ
 - [ฟังก์ชัน (Functions)](./functions.md) — เห็นภาพโครงสร้างฟังก์ชันและการเรียกใช้งานซ้ำ ๆ ให้โค้ดกระชับ
-- [ฟังก์ชันลูกศร (Arrow Functions)](./arrow-functions.md) — ย่อสไตล์การเขียนให้ทันสมัยและจัดการ `this` ได้ง่ายขึ้น
 - [Array Methods](./array-methods.md) — จัดเต็ม `map`, `filter`, `reduce` และ `find` สำหรับประมวลผลรายการข้อมูล
 - [การวนซ้ำ (Loops)](./loops.md) — คุมการทำงานซ้ำด้วย `for` และแนวคิด loop อื่น ๆ
 - [เงื่อนไข (Conditional Logic)](./conditional-logic.md) — ใช้ `if...else` ตัดสินใจตามสถานการณ์จริงในโปรแกรม

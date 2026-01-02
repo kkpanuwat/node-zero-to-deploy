@@ -21,12 +21,12 @@ Day 1 คือการปูพื้นฐานทุกอย่างท�
 
 ## Part Breakdown
 
-- [Day 1: Overview and Objectives](./overview-objectives): ข้อมูลวันเรียน, โฟกัสหลัก, สิ่งที่ต้องได้เมื่อจบ พร้อม Learning Objectives แบบ bullet ชัด ๆ
-- [Day 1: Core Concepts for Beginners](./core-concepts): ปูพื้นเรื่องโปรแกรม, Request/Response, Terminal, โครงสร้างไฟล์, Express และการแยก Client/Server
-- [Day 1: JavaScript Fundamentals](./javascript-fundamentals): ตัวแปร, ประเภทข้อมูล, Operators, Functions, Arrow Functions, Array Methods, Loops และ Conditional Logic
-- [Day 1: System and Flow Diagrams](./system-flow-diagrams): Sequence Diagram + UI Flow เพื่อเห็นภาพ Hello Library Script แบบ visual
-- [Day 1: Hands-on Labs](./hands-on-labs): Workshop ตั้งค่าโฟลเดอร์, เขียน `hello-library.js`, และทำ Git commit แรก
-- [Day 1: Progress and Summary](./progress-summary): ประมวลสิ่งที่ได้เรียนและส่องสปอยล์ Day 2 ว่าจะต่อยอดอะไรต่อ
+- [Day 1: Overview and Objectives](./overview-objectives.md): ข้อมูลวันเรียน, โฟกัสหลัก, สิ่งที่ต้องได้เมื่อจบ พร้อม Learning Objectives แบบ bullet ชัด ๆ
+- [Day 1: Core Concepts for Beginners](./core-concepts.md): ปูพื้นเรื่องโปรแกรม, Request/Response, Terminal, โครงสร้างไฟล์, Express และการแยก Client/Server
+- [Day 1: JavaScript Fundamentals](./javascript-fundamentals/): ตัวแปร, ประเภทข้อมูล, Operators, Functions, Arrow Functions, Array Methods, Loops และ Conditional Logic
+- [Day 1: System and Flow Diagrams](./system-flow-diagrams.md): Sequence Diagram + UI Flow เพื่อเห็นภาพ Hello Library Script แบบ visual
+- [Day 1: Hands-on Labs](./hands-on-labs.md): Workshop ตั้งค่าโฟลเดอร์, เขียน `hello-library.js`, และทำ Git commit แรก
+- [Day 1: Progress and Summary](./progress-summary.md): ประมวลสิ่งที่ได้เรียนและส่องสปอยล์ Day 2 ว่าจะต่อยอดอะไรต่อ
 
 > Tip: หลังอ่านแต่ละ Part ให้ลองจับคู่กับ checkpoint ของตัวเอง (เช่น สร้างไฟล์แล้วหรือยัง, เข้าใจ flow แล้วหรือยัง) จะช่วยให้การบ้านและโปรเจกต์จริงลื่นขึ้น
 - **ทำไมต้องแยกสองฝั่ง?**  

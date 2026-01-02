@@ -21,7 +21,20 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       link: {type: 'doc', id: 'nodejs-zero-to-hero/nodejs-zero-to-hero'},
       items: [
-        'nodejs-zero-to-hero/day-1-introduction',
+        {
+          type: 'category',
+          label: 'Day 1 — Hello Library',
+          collapsed: false,
+          link: {type: 'doc', id: 'nodejs-zero-to-hero/day-1-introduction/day-1-introduction'},
+          items: [
+            'nodejs-zero-to-hero/day-1-introduction/overview-objectives',
+            'nodejs-zero-to-hero/day-1-introduction/core-concepts',
+            'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals',
+            'nodejs-zero-to-hero/day-1-introduction/system-flow-diagrams',
+            'nodejs-zero-to-hero/day-1-introduction/hands-on-labs',
+            'nodejs-zero-to-hero/day-1-introduction/progress-summary',
+          ],
+        },
         'nodejs-zero-to-hero/module-1/nodejs-zero-to-hero-module-1',
       ],
     },

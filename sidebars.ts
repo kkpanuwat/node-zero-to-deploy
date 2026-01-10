@@ -37,11 +37,10 @@ const sidebars: SidebarsConfig = {
               items: [
                 'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-variables',
                 'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-data-types',
-                'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-operators',
+                'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-conditional-logic',
                 'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-functions',
                 'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-array-methods',
                 'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-loops',
-                'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-conditional-logic',
               ],
             },
             'nodejs-zero-to-hero/day-1-introduction/day-1-system-flow-diagrams',

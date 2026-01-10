@@ -25,6 +25,7 @@ Day 1 คือการปูพื้นฐานทุกอย่างท�
 - [Day 1: Core Concepts for Beginners](./core-concepts.md): ปูพื้นเรื่องโปรแกรม, Request/Response, Terminal, โครงสร้างไฟล์, Express และการแยก Client/Server
 - [Day 1: JavaScript Fundamentals](./javascript-fundamentals/): ตัวแปร, ประเภทข้อมูล, Operators, Functions, Arrow Functions, Array Methods, Loops และ Conditional Logic
 - [Day 1: System and Flow Diagrams](./system-flow-diagrams.md): Sequence Diagram + UI Flow เพื่อเห็นภาพ Hello Library Script แบบ visual
+- [Day 1: Git Basics](./git-basics.md): ทำความเข้าใจ Version Control, คำสั่ง Git สำคัญ, แนวคิด commit prefix และการตั้งชื่อ branch
 - [Day 1: Hands-on Labs](./hands-on-labs.md): Workshop ตั้งค่าโฟลเดอร์, เขียน `hello-library.js`, และทำ Git commit แรก
 - [Day 1: Progress and Summary](./progress-summary.md): ประมวลสิ่งที่ได้เรียนและส่องสปอยล์ Day 2 ว่าจะต่อยอดอะไรต่อ
 

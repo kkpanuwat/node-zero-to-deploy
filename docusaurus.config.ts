@@ -101,7 +101,7 @@ const config: Config = {
           items: [
             {
               label: 'Document',
-              to: '/docs/nodejs-course',
+              to: '/docs/nodejs-zero-to-hero',
             },
           ],
         },

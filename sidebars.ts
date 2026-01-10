@@ -14,7 +14,6 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
  */
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
-    'nodejs-course',
     {
       type: 'category',
       label: 'Node.js Zero→Hero',
@@ -49,7 +48,6 @@ const sidebars: SidebarsConfig = {
             'nodejs-zero-to-hero/day-1-introduction/day-1-progress-summary',
           ],
         },
-        'nodejs-zero-to-hero/module-1/nodejs-zero-to-hero-module-1',
       ],
     },
     {

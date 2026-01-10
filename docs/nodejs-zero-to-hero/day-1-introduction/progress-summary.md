@@ -5,7 +5,7 @@ sidebar_label: 'Summary & Next Steps'
 description: สรุป Day 1 พร้อมภาพการเติบโตของโปรเจกต์และสปอยล์ Day 2
 ---
 
-# Part 6 — Project Progression & Summary
+# Part 7 — Project Progression & Summary
 
 ## Project Progression (เชื่อมต่อบทถัดไป)
 

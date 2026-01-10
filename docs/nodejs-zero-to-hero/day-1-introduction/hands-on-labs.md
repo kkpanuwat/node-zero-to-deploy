@@ -5,15 +5,32 @@ sidebar_label: 'Hands-on Labs'
 description: Workshop ตั้งค่าโฟลเดอร์ เขียน hello-library.js และทำ Git commit แรก
 ---
 
-# Part 5 — Hands-on Labs
+# Part 6 — Hands-on Labs
+
+## ก่อนเริ่ม (Prerequisites)
+
+เพื่อให้แล็บลื่นขึ้น แนะนำให้เช็กเครื่องมือให้พร้อมก่อน:
+
+```bash
+node -v
+npm -v
+git --version
+code .
+```
+
+- ถ้า `code .` ใช้ไม่ได้ แปลว่ายังไม่ได้ติดตั้งคำสั่ง `code` สำหรับ VS Code (ดูหัวข้อ Troubleshooting ท้ายหน้า)
 
 ## Lab 1 — ตั้งค่าโฟลเดอร์ Library System
 
 1. เปิด Terminal
 2. พิมพ์ `mkdir library-system && cd library-system`
 3. พิมพ์ `npm init -y` (อธิบายว่าไฟล์ `package.json` เก็บข้อมูลโปรเจกต์ เช่น ชื่อ, เวอร์ชัน, สคริปต์)
-4. สร้างไฟล์ `README.md` แล้วให้ผู้เรียนจด bullet “สิ่งที่ได้เรียนวันนี้”
-5. เปิดโฟลเดอร์ใน VS Code (`code .`)
+4. สร้างไฟล์ `.gitignore` และใส่บรรทัดนี้ (อธิบายว่าเราไม่ commit ของที่ติดตั้งใหม่ได้เสมอ และใหญ่เกินจำเป็น):
+   ```
+   node_modules/
+   ```
+5. สร้างไฟล์ `README.md` แล้วให้ผู้เรียนจด bullet “สิ่งที่ได้เรียนวันนี้”
+6. เปิดโฟลเดอร์ใน VS Code (`code .`)
 
 ---
 
@@ -103,20 +120,66 @@ books.forEach((book, index) => {
 node hello-library.js
 ```
 
-คุณควรจะเห็นผลลัพธ์แสดงรายการหนังสือออกมา
+คุณควรจะเห็นผลลัพธ์ประมาณนี้:
+
+```text
+สวัสดีจาก My Awesome Library
+วันนี้มีหนังสือในระบบ 4 เล่ม
+--- รายการหนังสือทั้งหมด ---
+1. Clean Code
+2. Designing Data-Intensive Applications
+3. Node.js in Action
+4. The Pragmatic Programmer
+```
 
 2. **ทดลองแก้ไข:** ลองเพิ่มชื่อหนังสือที่คุณชอบเข้าไปในอาร์เรย์ `books` อีก 1-2 เล่ม จากนั้นบันทึกไฟล์ (Save) แล้วรันโปรแกรมอีกครั้ง คุณจะเห็นว่าจำนวนหนังสือและรายการจะอัปเดตอัตโนมัติ!
 
 3. **ความสำคัญของคอมเมนต์:** สังเกตบรรทัดที่ขึ้นต้นด้วย `//` สิ่งนี้เรียกว่า "คอมเมนต์" (Comment) ซึ่งคอมพิวเตอร์จะไม่อ่าน แต่มีไว้เพื่อให้โปรแกรมเมอร์เขียนโน้ตอธิบายโค้ดส่วนนั้น ๆ เป็นการฝึกนิสัยที่ดีในการเขียนโค้ดที่คนอื่น (หรือตัวเราในอนาคต) เข้าใจง่าย
 
+### Mini Challenges (โยงกับ Conditional Logic)
+
+ลองปรับโค้ดเพิ่มเล็กน้อยเพื่อฝึก “เงื่อนไข”:
+
+1. ถ้า `books.length === 0` ให้แสดงข้อความว่า `"ยังไม่มีหนังสือในระบบ"`
+2. ถ้ามีหนังสือมากกว่า 3 เล่ม ให้แสดงข้อความเพิ่มว่า `"หนังสือเยอะมาก! เลือกอ่านได้เลย"`
+3. (ท้าทาย) ให้แสดงแค่หนังสือที่ชื่อยาวเกิน 15 ตัวอักษร (ใช้ `if` ภายใน `forEach`)
+
 ---
 
 ## Lab 3 — Git Snapshot แรก
 
-1. ยืนยันว่าทุกไฟล์บันทึกแล้ว พิมพ์ `git init`
-2. `git status` → อธิบายสีแดง/เขียว
-3. `git add .`
-4. `git commit -m "feat: hello library"`
-5. บันทึกใน README.md ว่าการ commit คือการ “ถ่ายรูป” งานเก็บไว้ย้อนกลับได้
+> ถ้ายังไม่มั่นใจเรื่องคำสั่ง/แนวคิด แนะนำอ่านหน้า [Git Basics](./git-basics.md) ก่อนเริ่ม
 
+1. ยืนยันว่าทุกไฟล์บันทึกแล้ว พิมพ์ `git init`
+2. `git status` → อธิบายสีแดง/เขียว (ไฟล์ที่ยังไม่ถูก track / ไฟล์ที่ถูก stage แล้ว)
+3. `git diff` → ดูว่ามีอะไรเปลี่ยนไปจากเดิมบ้าง (ก่อนจะถ่าย snapshot)
+4. `git add .`
+5. `git status` อีกรอบเพื่อเช็กว่าไฟล์ขึ้นเป็น staged แล้ว
+6. `git commit -m "feat: add hello-library script"`
+7. `git log --oneline` เพื่อดูว่า commit ถูกบันทึกแล้วจริง
+8. บันทึกใน `README.md` ว่าการ commit คือการ “ถ่ายรูป” งานเก็บไว้ย้อนกลับได้
+
+### (Optional) ลองทำบน Branch
+
+ถ้าอยากฝึก workflow แบบทีม ให้ลองสร้าง branch ก่อน commit:
+
+```bash
+git checkout -b feature/hello-library
+```
+
+จากนั้นค่อย `git add` และ `git commit` ตามขั้นตอนด้านบน
+
+---
+
+## Troubleshooting (ปัญหาที่พบบ่อย)
+
+- `code: command not found`: เปิด VS Code → กด `Cmd+Shift+P` → ค้นหา `Shell Command: Install 'code' command in PATH` แล้วลองใหม่
+- `git commit` แล้วขึ้นให้ตั้งค่า user:
+  ```bash
+  git config --global user.name "Your Name"
+  git config --global user.email "you@example.com"
+  ```
+- `node: command not found` หรือเวอร์ชันไม่ตรง: ติดตั้ง/อัปเดต Node.js แล้วเปิด Terminal ใหม่ จากนั้นเช็กด้วย `node -v`
+- งงว่าไฟล์ไหนจะถูก commit: ใช้ `git status` และ `git diff` ก่อน `git add .` ทุกครั้ง
+  
 > เคล็ดลับ: หลังจบแต่ละ Lab ให้จด lesson learned ลง README.md หรือ Notion ของตัวเอง จะช่วยให้จำขั้นตอนสำคัญได้ยาว ๆ

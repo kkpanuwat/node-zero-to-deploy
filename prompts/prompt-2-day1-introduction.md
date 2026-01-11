@@ -144,6 +144,39 @@ books.forEach((book, index) => {
 2. ถ้ามีหนังสือมากกว่า 3 เล่ม ให้แสดง `"หนังสือเยอะมาก! เลือกอ่านได้เลย"`
 3. (ท้าทาย) ให้แสดงเฉพาะหนังสือที่ชื่อยาวเกิน 15 ตัวอักษร (ใช้ `if` ใน `forEach`)
 
+#### Sequence Diagram (ภาพรวมการทำงานของเงื่อนไข)
+```mermaid
+sequenceDiagram
+  participant User
+  participant Terminal
+  participant App as hello-library.js
+
+  User->>Terminal: รัน node hello-library.js
+  Terminal->>App: เริ่มรันสคริปต์
+
+  alt books.length === 0
+    App-->>Terminal: "ยังไม่มีหนังสือในระบบ"
+  else books.length > 0
+    alt ทำ Challenge #3 (กรองชื่อยาว)
+      loop books.forEach(book)
+        alt book.length > 15
+          App-->>Terminal: พิมพ์ชื่อหนังสือ (ชื่อยาว)
+        else book.length <= 15
+          App-->>Terminal: (ข้าม)
+        end
+      end
+    else ยังไม่ทำ Challenge #3
+      loop books.forEach(book)
+        App-->>Terminal: พิมพ์ชื่อหนังสือ (ทุกเล่ม)
+      end
+    end
+
+    opt books.length > 3
+      App-->>Terminal: "หนังสือเยอะมาก! เลือกอ่านได้เลย"
+    end
+  end
+```
+
 ### Lab 3: สรุปผ่าน Git เบื้องต้น
 1. พิมพ์ `git init`
 2. `git status` (อธิบายไฟล์ที่ยังไม่ถูก track / staged)

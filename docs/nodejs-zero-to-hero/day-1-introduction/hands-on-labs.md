@@ -136,16 +136,63 @@ node hello-library.js
 
 3. **ความสำคัญของคอมเมนต์:** สังเกตบรรทัดที่ขึ้นต้นด้วย `//` สิ่งนี้เรียกว่า "คอมเมนต์" (Comment) ซึ่งคอมพิวเตอร์จะไม่อ่าน แต่มีไว้เพื่อให้โปรแกรมเมอร์เขียนโน้ตอธิบายโค้ดส่วนนั้น ๆ เป็นการฝึกนิสัยที่ดีในการเขียนโค้ดที่คนอื่น (หรือตัวเราในอนาคต) เข้าใจง่าย
 
-### Mini Challenges (โยงกับ Conditional Logic)
+### Mini Challenges
 
 ลองปรับโค้ดเพิ่มเล็กน้อยเพื่อฝึก “เงื่อนไข”:
 
-1. ถ้า `books.length === 0` ให้แสดงข้อความว่า `"ยังไม่มีหนังสือในระบบ"`
-2. ถ้ามีหนังสือมากกว่า 3 เล่ม ให้แสดงข้อความเพิ่มว่า `"หนังสือเยอะมาก! เลือกอ่านได้เลย"`
-3. (ท้าทาย) ให้แสดงแค่หนังสือที่ชื่อยาวเกิน 15 ตัวอักษร (ใช้ `if` ภายใน `forEach`)
-4. (สำคัญมาก) ให้ทำฟังก์ชัน `hasBook(title)` เพื่อเช็คว่า “มีหนังสือนี้อยู่ในระบบไหม” (ใบ้: ใช้ `books.includes(title)`)
+1. ทำฟังก์ชัน `printLibraryStatus(books)`:
+   - ถ้า `books.length === 0` ให้แสดง `"ยังไม่มีหนังสือในระบบ"`
+2. ใน `printLibraryStatus(books)` เดิม:
+   - ถ้า `books.length > 3` ให้แสดงเพิ่ม `"หนังสือเยอะมาก! เลือกอ่านได้เลย"` (ถ้ามี 3 เล่มพอดี จะไม่แสดงบรรทัดนี้ เพราะเงื่อนไขคือ `> 3`)
+3. ทำฟังก์ชัน `hasBook(books, title)` เพื่อเช็คว่า “มีหนังสือนี้อยู่ในระบบไหม” (ใบ้: ใช้ `books.includes(title)`)
 
-### (Optional) Preview: ลองแยกไฟล์เป็น Module (เตรียมต่อ Day 2)
+#### Sequence Diagram
+
+**อ่านสัญลักษณ์ใน Diagram**
+- `alt` (alternative) = เงื่อนไขแบบ `if/else` (ต้องเลือกเกิด “ทางใดทางหนึ่ง”) เช่น `books.length === 0` vs `books.length > 0`
+- `opt` (optional) = เงื่อนไขแบบ `if` อย่างเดียว (เกิด “เฉพาะเมื่อเงื่อนไขเป็นจริง” และไม่มี `else` ก็ได้)
+
+> เพื่อไม่ให้สับสน ในตัวอย่างนี้ใช้ `alt` ให้เห็นทั้งกรณี “เข้าเงื่อนไข” และ “ไม่เข้าเงื่อนไข” ชัด ๆ
+
+##### Flow 1: `printLibraryStatus(books)`
+```mermaid
+sequenceDiagram
+  participant User
+  participant Terminal
+  participant App as mini-hallenges.js
+
+  User->>Terminal: รัน node mini-hallenges.js
+  Terminal->>App: เริ่มรันสคริปต์
+
+  App->>App: printLibraryStatus(books)
+  alt books.length === 0
+    App-->>Terminal: "ยังไม่มีหนังสือในระบบ"
+  else books.length > 0
+    alt books.length > 3
+      App-->>Terminal: "หนังสือเยอะมาก! เลือกอ่านได้เลย"
+    else books.length <= 3
+      Note over App,Terminal: ไม่แสดงข้อความเพิ่ม (เพราะเงื่อนไขคือ > 3)
+    end
+  end
+
+```
+
+##### Flow 2: `hasBook(books, title)`
+```mermaid
+sequenceDiagram
+  participant User
+  participant Terminal
+  participant App as mini-hallenges.js
+
+  User->>Terminal: รัน node mini-hallenges.js
+  Terminal->>App: เริ่มรันสคริปต์
+
+  App->>App: hasBook(books, "<title>")
+  App->>App: books.includes(title)
+  App-->>Terminal: แสดงผล true/false
+```
+
+### แยกไฟล์เป็น Module
 
 ถ้าอยากลอง “export / import” แบบง่ายสุด ให้ทำ 2 ไฟล์นี้:
 
@@ -182,7 +229,7 @@ console.log("มี Clean Code ไหม:", hasBook(books, "Clean Code"));
 7. `git log --oneline` เพื่อดูว่า commit ถูกบันทึกแล้วจริง
 8. บันทึกใน `README.md` ว่าการ commit คือการ “ถ่ายรูป” งานเก็บไว้ย้อนกลับได้
 
-### (Optional) ลองทำบน Branch
+### ลองทำบน Branch
 
 ถ้าอยากฝึก workflow แบบทีม ให้ลองสร้าง branch ก่อน commit:
 

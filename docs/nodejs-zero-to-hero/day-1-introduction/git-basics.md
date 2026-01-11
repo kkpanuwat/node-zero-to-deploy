@@ -5,7 +5,7 @@ sidebar_label: Git Basics
 description: เข้าใจ Git คืออะไร, ทำไมต้องมี Version Control, คำสั่งสำคัญ รวมถึงแนวทางการตั้ง prefix ให้ commit และการทำงานกับ branch
 ---
 
-# Part 5 — Git Basics (Version Control 101)
+# Part 3 — Git Basics (Version Control 101)
 
 Git คือระบบ **Version Control** (VCS) ที่ช่วยให้เราบันทึก, ย้อนกลับ, และทำงานร่วมกับผู้อื่นได้อย่างเป็นระเบียบ เสมือนมี Time Machine สำหรับซอร์สโค้ด เมื่อทำงานโปรเจกต์จริง Git จะเป็นหัวใจที่คอยเชื่อมต่อทั้งทีมเข้าด้วยกัน
 

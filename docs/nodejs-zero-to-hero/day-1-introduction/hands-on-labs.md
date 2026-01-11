@@ -5,7 +5,7 @@ sidebar_label: 'Hands-on Labs'
 description: Workshop ตั้งค่าโฟลเดอร์ เขียน hello-library.js และทำ Git commit แรก
 ---
 
-# Part 6 — Hands-on Labs
+# Part 4 — Hands-on Labs
 
 ## ก่อนเริ่ม (Prerequisites)
 
@@ -143,6 +143,29 @@ node hello-library.js
 1. ถ้า `books.length === 0` ให้แสดงข้อความว่า `"ยังไม่มีหนังสือในระบบ"`
 2. ถ้ามีหนังสือมากกว่า 3 เล่ม ให้แสดงข้อความเพิ่มว่า `"หนังสือเยอะมาก! เลือกอ่านได้เลย"`
 3. (ท้าทาย) ให้แสดงแค่หนังสือที่ชื่อยาวเกิน 15 ตัวอักษร (ใช้ `if` ภายใน `forEach`)
+4. (สำคัญมาก) ให้ทำฟังก์ชัน `hasBook(title)` เพื่อเช็คว่า “มีหนังสือนี้อยู่ในระบบไหม” (ใบ้: ใช้ `books.includes(title)`)
+
+### (Optional) Preview: ลองแยกไฟล์เป็น Module (เตรียมต่อ Day 2)
+
+ถ้าอยากลอง “export / import” แบบง่ายสุด ให้ทำ 2 ไฟล์นี้:
+
+```javascript
+// book-utils.js
+function hasBook(books, title) {
+  return books.includes(title);
+}
+
+module.exports = { hasBook };
+```
+
+```javascript
+// hello-library.js
+const { hasBook } = require("./book-utils");
+
+// ใช้ books ตัวเดิมจากแล็บ หรือจะประกาศใหม่ก็ได้
+// const books = ["Clean Code", "Node.js in Action"];
+console.log("มี Clean Code ไหม:", hasBook(books, "Clean Code"));
+```
 
 ---
 

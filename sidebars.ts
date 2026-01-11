@@ -26,7 +26,6 @@ const sidebars: SidebarsConfig = {
           collapsed: false,
           link: {type: 'doc', id: 'nodejs-zero-to-hero/day-1-introduction/day-1-introduction'},
           items: [
-            'nodejs-zero-to-hero/day-1-introduction/day-1-overview-objectives',
             'nodejs-zero-to-hero/day-1-introduction/day-1-core-concepts',
             {
               type: 'category',
@@ -40,9 +39,9 @@ const sidebars: SidebarsConfig = {
                 'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-functions',
                 'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-array-methods',
                 'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-loops',
+                'nodejs-zero-to-hero/day-1-introduction/javascript-fundamentals/day-1-javascript-modules',
               ],
             },
-            'nodejs-zero-to-hero/day-1-introduction/day-1-system-flow-diagrams',
             'nodejs-zero-to-hero/day-1-introduction/day-1-git-basics',
             'nodejs-zero-to-hero/day-1-introduction/day-1-hands-on-labs',
             'nodejs-zero-to-hero/day-1-introduction/day-1-progress-summary',

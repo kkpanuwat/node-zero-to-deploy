@@ -2,210 +2,130 @@
 id: day-2-core-concepts
 title: 'Day 2: Core Concepts'
 sidebar_label: 'Core Concepts'
-description: ทำความเข้าใจ Node.js Runtime, npm/package.json, โครงสร้างโปรเจกต์, และ HTTP module ก่อนเข้า Express
+description: ทำความเข้าใจ Node.js, npm, การวางโครงสร้างโปรเจกต์, และการสร้าง HTTP Server พื้นฐาน
 ---
 
-# Part 1 — Core Concepts
+# Part 1 — Core Concepts: ปูพื้นฐานสู่การเป็นนักพัฒนา Node.js
 
-## เรากำลังเตรียมตัวไป Express (ทำไมต้องเรียนเรื่องโครงสร้าง)
+## ทำไมเราต้องใส่ใจกับ "โครงสร้างโปรเจกต์"?
 
-ในโปรเจกต์จริง เราไม่ได้มีแค่ไฟล์เดียวแล้วจบ เพราะจะมี:
+ในชีวิตจริง โปรเจกต์ไม่ได้มีแค่ไฟล์เดียวแล้วจบ แต่ประกอบด้วยส่วนต่างๆ มากมาย:
+- โค้ดสำหรับ **"รันเซิร์ฟเวอร์"** (จุดเริ่มต้นของโปรแกรม)
+- โค้ดสำหรับ **"จัดการข้อมูล"** (เช่น การเชื่อมต่อฐานข้อมูล)
+- โค้ดสำหรับ **"ฟังก์ชันเสริม"** ที่ใช้ซ้ำๆ (Utilities)
+- ไฟล์ **"ตั้งค่า"** ต่างๆ ของโปรเจกต์ (Configuration)
 
-- โค้ดที่ “รัน server” (entrypoint)
-- โค้ดที่ “เก็บ/จัดการข้อมูล” (data/service)
-- โค้ดที่ “ช่วยเหลือซ้ำ ๆ” (utils)
-- การตั้งค่า (config/environment)
+Day 2 จึงเน้นที่การ **"จัดระเบียบ"** โปรเจกต์ให้พร้อมเติบโต และ **"สร้างมาตรฐาน"** ให้ทีมทำงานร่วมกันได้ง่ายผ่าน `npm scripts` ก่อนที่เราจะไปสร้าง API ที่ซับซ้อนกันต่อ
 
-Day 2 เลยโฟกัสที่ **จัดระเบียบ** และ **รันได้แบบทีม** ก่อน (ผ่าน `npm scripts`) มากกว่าการทำ API หลาย ๆ อัน
+---
 
-## Node.js Runtime (รัน JavaScript ฝั่ง Server)
+## Node.js: เมื่อ JavaScript ออกมาวิ่งนอก Browser
 
-- **Node.js** คือ runtime ที่ทำให้เราเขียน JavaScript แล้วรันนอก Browser ได้ (เช่นใน Terminal/Server)
-- สิ่งที่ต่างจาก Browser: Node มี API อย่าง `fs` (อ่าน/เขียนไฟล์), `http` (ทำ server), `process` (ตัวแปรแวดล้อม) เป็นต้น
-- แนวคิดสำคัญ: **Event Loop** (อธิบายแบบคิวงาน)
-  - Node รับงานเข้าคิว → ทำงานที่ทำได้ทันที → งานที่ต้องรอ (เช่น I/O) จะไปทำแบบไม่บล็อก → พอเสร็จค่อยกลับมาส่งผล
-  - เป้าหมายคือ “รับหลายคำขอได้” โดยไม่ต้องสร้าง thread ใหม่ทุกครั้ง (ในระดับพื้นฐานให้จำภาพคิวงานไว้ก่อน)
+**Node.js** คือเครื่องมือที่ทำให้เราสามารถรันโค้ด JavaScript ที่ไหนก็ได้ ไม่ว่าจะเป็นบนเซิร์ฟเวอร์, ใน Terminal, หรือบนคอมพิวเตอร์ของเรา
 
-### Browser vs Node (จำง่าย ๆ)
+**สิ่งที่แตกต่างจาก JavaScript ใน Browser:**
+- **Browser JS**: มีเครื่องมือสำหรับจัดการหน้าเว็บ เช่น `document`, `window`, และ DOM เพื่อสร้าง UI ที่ผู้ใช้มองเห็น
+- **Node.js**: ไม่มีหน้าเว็บให้ยุ่งเกี่ยว แต่มีเครื่องมือสำหรับทำงานฝั่งเซิร์ฟเวอร์ เช่น `fs` (อ่าน/เขียนไฟล์), `http` (สร้างเซิร์ฟเวอร์), `process` (เข้าถึงค่า Environment)
 
-- **Browser**: มี `document`, `window`, DOM, Fetch API เป็นหลัก (เน้น UI)
-- **Node**: ไม่มี DOM แต่มี `fs`, `http`, `path`, `process` (เน้น server/CLI)
+**หัวใจสำคัญ: Event Loop**
+ลองจินตนาการว่า Node.js คือพนักงานรับออเดอร์ที่เก่งมากๆ:
+- เมื่อมีงานเข้ามา (Request), Node.js จะรับมาแล้วเริ่มทำทันที
+- ถ้าเจองานที่ต้องรอ (เช่น อ่านไฟล์, เรียกข้อมูลจาก Database), มันจะไม่ยืนรอเฉยๆ แต่จะส่งงานนั้นไปให้ "ผู้ช่วย" แล้วหันไปรับงานอื่นต่อ
+- เมื่องานที่รอเสร็จ, "ผู้ช่วย" จะนำผลลัพธ์กลับมาส่งให้
+- วิธีนี้ทำให้ Node.js จัดการหลายๆ คำขอได้พร้อมกันโดยไม่ติดขัด (Non-blocking)
 
-### สรุป: “วันนี้เราเขียนโปรแกรมประเภทไหน?”
+**สรุป:** วันนี้เรากำลังสร้าง **HTTP Server** ที่รันด้วย Node.js โดยมี Browser หรือ `curl` เป็น Client ที่ส่งคำขอเข้ามา และเราจะตอบกลับเป็นข้อมูล JSON ซึ่งเป็นพื้นฐานของการสร้าง API นั่นเอง
 
-- เป็น **HTTP Server** ที่รันด้วย Node
-- Client คือ Browser/Terminal (`curl`) ส่ง HTTP request มาให้เรา
-- เราจะตอบ JSON กลับไปเหมือน “API แบบเริ่มต้น”
+---
 
-## npm และ `package.json`
+## npm และ `package.json`: กล่องเครื่องมือและบัตรประชาชนของโปรเจกต์
 
-- `package.json` คือ “บัตรประชาชนของโปรเจกต์” เก็บชื่อโปรเจกต์, เวอร์ชัน, dependencies, และ scripts
-- `npm install <pkg>` ใช้ติดตั้งไลบรารีจากชุมชน
-- `npm run <script>` ช่วยย่อคำสั่งยาว ๆ ให้เหลือคำสั้น ๆ ที่ทีมใช้ร่วมกันได้
+- **`package.json`**: เปรียบเสมือน "บัตรประชาชนของโปรเจกต์" ที่บอกทุกอย่างเกี่ยวกับโปรเจกต์ของเรา: ชื่อ, เวอร์ชั่น, และที่สำคัญคือรายชื่อเครื่องมือ (Dependencies) ที่เรายืมมาใช้
+- **`npm install <package-name>`**: คำสั่งสำหรับติดตั้ง "เครื่องมือ" หรือไลบรารีจากชุมชนนักพัฒนาทั่วโลก
+- **`npm run <script-name>`**: คำสั่งสำหรับรันสคริปต์ที่เราเขียนทางลัดไว้ ช่วยให้เราไม่ต้องพิมพ์คำสั่งยาวๆ ซ้ำไปซ้ำมา
 
-ตัวอย่างที่ใช้บ่อย:
+**dependencies vs devDependencies: ของที่ใช้จริง vs ของที่ใช้ตอนสร้าง**
+- **`dependencies`**: คือไลบรารีที่จำเป็นสำหรับให้โปรแกรม **"รันได้"** ในชีวิตจริง (Production) เช่น `express`
+- **`devDependencies`**: คือเครื่องมือที่ช่วยเราตอน **"พัฒนา"** เท่านั้น ไม่ได้ถูกส่งไปใช้งานจริง เช่น `nodemon` (สำหรับรีสตาร์ทเซิร์ฟเวอร์อัตโนมัติ), `eslint` (สำหรับตรวจจับข้อผิดพลาดในโค้ด)
 
-- `npm run start` → รันโปรแกรมจริง
-- `npm run dev` → โหมดพัฒนา (มักใช้ `nodemon` เพื่อรีรันอัตโนมัติ)
+---
 
-### dependencies vs devDependencies
+## Project Structure: จัดบ้านให้เป็นระเบียบ
 
-- `dependencies`: โค้ดที่ “ตอนรันจริงต้องใช้” (เช่น `express`, `dotenv`)
-- `devDependencies`: โค้ดช่วยตอนพัฒนา (เช่น `nodemon`, `eslint`)
+เป้าหมายคือการ "แยกไฟล์ตามหน้าที่" เพื่อให้ง่ายต่อการแก้ไขและต่อยอดในอนาคต
 
-### `npm run` ทำอะไรให้เรา
-
-- ทำให้ทุกคนในทีมรันคำสั่งได้เหมือนกัน (ไม่ต้องจำคำสั่งยาว)
-- ลดปัญหา “เครื่องใครเครื่องมัน” เพราะ entrypoint ถูกกำหนดไว้ชัดเจน
-
-### ชุด scripts ที่แนะนำให้มีในโปรเจกต์จริง
-
-- `start`: รันแบบ production-ish (ไม่ต้อง auto reload)
-- `dev`: รันแบบ dev (auto reload)
-- (optional) `test`: ใช้กับวันถัด ๆ ไป
-
-## โครงสร้างโปรเจกต์ (Project Structure)
-
-เป้าหมายคือ “แยกไฟล์ตามหน้าที่” เพื่อให้ขยายต่อเป็น Express ได้ง่าย:
-
+**โครงสร้างพื้นฐานสำหรับวันนี้:**
 ```
 library-system/
   package.json
   src/
-    server-basic.js
+    server-basic.js     # จุดเริ่มต้นของเซิร์ฟเวอร์
     data/
-      books.js
+      books.js          # แหล่งข้อมูลจำลอง (ยังไม่ต่อ DB)
     utils/
-      logger.js
+      logger.js         # ฟังก์ชันเสริมที่ใช้ซ้ำๆ
 ```
 
-- `src/server-basic.js`: จุดเริ่มต้นของ server
-- `src/data/books.js`: ข้อมูลจำลองแบบ in-memory (ยังไม่ต่อ DB)
-- `src/utils/logger.js`: utility เล็ก ๆ ที่ใช้ซ้ำ
+**Pro-tip: โครงสร้างสำหรับโปรเจกต์ที่ใหญ่ขึ้น**
+เมื่อโปรเจกต์เริ่มซับซ้อน เราอาจแบ่งโฟลเดอร์ละเอียดขึ้นอีก เช่น:
+- `config/`: เก็บไฟล์ตั้งค่าต่างๆ
+- `routes/`: จัดการเส้นทาง (URL) ของ API
+- `handlers/` หรือ `controllers/`: โค้ดที่จัดการ Logic ของแต่ละ Request
+- `repositories/`: ส่วนที่รับผิดชอบการคุยกับฐานข้อมูลโดยเฉพาะ
 
-### แนวทางการตั้งชื่อไฟล์/โฟลเดอร์ (แนะนำ)
+---
 
-- `server-*.js` หรือ `index.js` ไว้เป็น entrypoint ชัด ๆ
-- `data/` เก็บ dataset จำลอง หรือ “repository แบบง่าย”
-- `utils/` เก็บฟังก์ชันที่ใช้ซ้ำ และ “ไม่ควรรู้เรื่อง business มาก”
-- ถ้ามีการตั้งค่า ให้แยก `config/` (เช่นอ่าน env, constants)
+## Module System: `require` vs `import`
 
-### โครงสร้างที่ “เหมือนโปรเจกต์จริงขึ้น” (สำหรับช่วงบ่าย)
+Node.js มีระบบการเรียกใช้ไฟล์ 2 แบบหลัก:
+- **CommonJS (CJS)**: ใช้ `require()` และ `module.exports` (รูปแบบดั้งเดิมที่เจอบ่อย)
+- **ES Modules (ESM)**: ใช้ `import` และ `export` (รูปแบบทันสมัย)
 
-ถ้าฟีเจอร์เริ่มเยอะ ให้เริ่มแยกเพิ่ม:
+ในคอร์สนี้เราจะใช้ **CommonJS** เป็นหลักเพื่อความง่าย แต่สิ่งสำคัญคือ **"เลือกใช้แค่แบบเดียวในโปรเจกต์"** เพื่อป้องกันความสับสน
 
-```
-src/
-  server.js           # entrypoint
-  config/
-    env.js            # อ่าน env + default
-  routes/
-    index.js          # dispatch ตาม path/method
-  handlers/
-    health.js
-    books.js
-  data/
-    books.json        # persistence
-  repositories/
-    books-repo.js     # read/write data
-  utils/
-    logger.js
-    response.js       # sendJson/sendError
-```
+---
 
-แนวคิดสำคัญ: handler “ไม่ควรรู้ว่าเก็บข้อมูลในไฟล์ยังไง” ให้ repository ดูแล
+## HTTP Module: สร้างเซิร์ฟเวอร์ตัวแรก
 
-## Module System (CommonJS vs ESM) แบบพื้นฐาน
+ก่อนจะไปใช้เฟรมเวิร์คอย่าง Express เรามาลองสร้างเซิร์ฟเวอร์ด้วยเครื่องมือพื้นฐานของ Node.js อย่าง `http` กันก่อน
+- เราจะใช้ `http.createServer((req, res) => { ... })`
+- **`req` (Request)**: คือ "จดหมาย" ที่ Client ส่งมา บอกเราว่าต้องการอะไร (เช่น `req.method`, `req.url`)
+- **`res` (Response)**: คือ "คำตอบ" ที่เราจะส่งกลับไปให้ Client (เช่น `res.statusCode`, `res.end()`)
 
-Node.js เจอ 2 แบบหลัก:
+**สิ่งสำคัญที่ต้องรู้:**
+- **404 Not Found**: Client ขอ URL ที่ไม่มีอยู่จริง
+- **405 Method Not Allowed**: Client ขอ URL ที่มีอยู่ แต่ใช้ Method ผิด (เช่น ขอ `POST` ไปที่ URL ที่รับแค่ `GET`)
 
-- **CommonJS (CJS)**: `require()` / `module.exports` (เจอบ่อยในตัวอย่าง Node รุ่นเดิม)
-- **ES Modules (ESM)**: `import` / `export` (สไตล์สมัยใหม่)
+---
 
-วันนี้ให้ “เลือกใช้แบบเดียวทั้งโปรเจกต์” เพื่อไม่งง (ใน prompt นี้ใช้ CJS)
+## Environment Variables (.env)
 
-## พื้นฐาน HTTP Module (ก่อนเข้า Express)
+เราไม่ควร Hardcode ค่าที่อาจเปลี่ยนแปลงได้ (เช่น Port, รหัสผ่าน Database) ลงในโค้ดโดยตรง
+- **วิธีปฏิบัติที่ดี**: ใช้ `process.env.PORT` เพื่ออ่านค่าจาก Environment
+- **สำหรับการพัฒนา**: เรานิยมสร้างไฟล์ `.env` เพื่อเก็บค่าเหล่านี้ และใช้ไลบรารี `dotenv` เพื่อโหลดค่าเข้ามาในโปรเจกต์
 
-- วันนี้เราจะใช้ `http.createServer((req, res) => { ... })`
-- แนวคิดเดียวกับ Express:
-  - `req` = request (method, url, headers)
-  - `res` = response (กำหนด header/status และส่งข้อมูลกลับ)
+---
 
-### ของที่ควรรู้เวลาทำ HTTP แบบง่าย
+## Persistence: ทำให้ข้อมูลไม่หายไป
 
-- `req.method`: เช่น `GET`, `POST`
-- `req.url`: เช่น `/books`, `/health`
-- `res.statusCode`: ตั้ง status เช่น `200`, `404`
-- `res.setHeader('Content-Type', 'application/json')`: บอกว่าเราส่ง JSON
-- `res.end(...)`: ส่งข้อมูลและจบ response
+ตอนนี้ข้อมูลหนังสือของเราอยู่ใน Memory ซึ่งหมายความว่าถ้าปิดเซิร์ฟเวอร์ ข้อมูลก็จะหายไปทั้งหมด
+- **วิธีแก้แบบง่าย**: เราจะใช้ `fs` (File System) module เพื่อ **อ่าน/เขียน** ข้อมูลลงในไฟล์ JSON
+- ทุกครั้งที่มีการเพิ่มข้อมูลใหม่ เราจะอัปเดตไฟล์ JSON นี้ ทำให้ข้อมูล "คงอยู่" (Persist) แม้จะรีสตาร์ทเซิร์ฟเวอร์
 
-### เรื่องสำคัญ: 404 vs 405
+---
 
-- `404 Not Found`: ไม่มี route นี้เลย
-- `405 Method Not Allowed`: มี route แต่ method ไม่รองรับ (ควรส่ง header `Allow`)
+## Git Hygiene: ข้อปฏิบัติที่ดีในการใช้ Git
 
-### เรื่องสำคัญ: อย่าให้ server crash จาก input แปลก ๆ
+- **ห้าม Commit `node_modules/`**: โฟลเดอร์นี้มีขนาดใหญ่และสามารถสร้างขึ้นใหม่ได้เสมอด้วยคำสั่ง `npm install`
+- **ห้าม Commit `.env`**: ไฟล์นี้อาจเก็บข้อมูลสำคัญ เช่น API Keys หรือรหัสผ่าน ควรสร้าง `.env.example` ไว้เป็นตัวอย่างให้ทีมแทน
+- **Commit ให้มีความหมาย**: ตั้งชื่อ Commit ให้สื่อความหมาย เช่น `feat: add basic server setup` หรือ `fix: correct book data validation`
 
-- `JSON.parse` ต้องอยู่ใน `try/catch`
-- ถ้า handler โยน error แล้ว process ตาย แปลว่าผู้ใช้ “ทำให้ระบบล่ม” ได้ง่ายเกินไป
+---
 
-ตัวอย่าง flow แบบง่าย:
+## Checklist ก่อนเริ่มลงมือทำ Lab
 
-```mermaid
-sequenceDiagram
-  participant User
-  participant Browser as Browser/Terminal
-  participant Server as Node.js Basic Server
-  participant Memory as In-memory Data
+- [ ] คุณสามารถแยกได้ว่าไฟล์ไหนคือ "จุดเริ่มต้น" และไฟล์ไหนเป็น "ข้อมูล" หรือ "ฟังก์ชันเสริม"
+- [ ] คุณเข้าใจว่า `scripts` ใน `package.json` มีไว้เพื่ออะไร
+- [ ] คุณพอจะอธิบายได้ว่า `req` และ `res` ในการสร้างเซิร์ฟเวอร์คืออะไร
 
-  User->>Browser: เปิด http://localhost:3000
-  Browser->>Server: ส่งคำขอ HTTP
-  Server->>Memory: อ่านข้อมูล books
-  Memory-->>Server: ส่ง Array หนังสือ
-  Server-->>Browser: ส่ง JSON กลับไป
-  Browser-->>User: แสดงผล
-```
-
-## Environment Variables (PORT, .env)
-
-เวลา deploy หรือรันบนเครื่องอื่น เราไม่ควร hardcode ค่าบางอย่าง (เช่น port)
-
-- อ่านค่า: `process.env.PORT`
-- ตั้งค่า fallback: `const port = process.env.PORT ?? 3000`
-- ในโปรเจกต์จริงนิยมใช้ `.env` + ไลบรารี `dotenv` เพื่อโหลดค่าตอน dev
-
-## Persistence แบบง่าย: เก็บข้อมูลลงไฟล์ JSON
-
-วันนี้เรายังไม่มี database แต่เราสามารถทำ persistence แบบง่ายด้วย `fs`
-
-แนวคิด:
-
-- อ่านไฟล์ `data/books.json` ตอนเริ่มโปรแกรม (หรืออ่านทุกครั้งที่ request มาก็ได้ในเวอร์ชันง่าย)
-- เวลา `POST /books` ให้เขียนกลับลงไฟล์
-
-ข้อควรระวัง:
-
-- concurrent writes (วันนี้ยังทำแบบง่ายได้ แต่ให้รู้ว่า “มีเรื่องนี้อยู่”)
-- ต้อง validate ข้อมูลก่อนเขียนลงไฟล์เสมอ
-
-## Git Hygiene สำหรับโปรเจกต์ Node
-
-- อย่า commit `node_modules/` (ใหญ่และสร้างใหม่ได้จาก `npm install`)
-- อย่า commit `.env` (มีความลับ) แต่ควรมี `.env.example` ให้ทีมรู้ว่าต้องตั้งค่าอะไร
-- commit ให้ถี่พอ (เล็ก ๆ) และมีความหมาย เช่น “setup scripts”, “add basic server”
-
-## Logger ที่ควรมีตั้งแต่ต้น
-
-สิ่งที่ช่วยมากเวลาสอน/ดีบัก:
-
-- log ทุก request: method/path/status/duration
-- มี `requestId` เพื่อไล่ log ข้ามหลายบรรทัดได้
-- แยกระดับ `info/warn/error` เพื่อให้เวลาเจอปัญหาไม่จมกับ log
-
-## Checklist (ก่อนเริ่ม Lab)
-
-- แยกให้ออกว่า “ไฟล์ไหนเป็น entrypoint” และ “ไฟล์ไหนเป็น data/util”
-- เข้าใจว่าทำไมต้องมี `scripts` ใน `package.json`
-- พออธิบายได้ว่า `req`/`res` คืออะไร (ไม่ต้องลึก)
-
-> Call-to-action: ลองอธิบายด้วยภาษาของตัวเองว่า “ทำไมต้องมี `npm run dev`” และ “ถ้าทีมมี 5 คน มันช่วยอะไร”
+> **ทบทวนความเข้าใจ:** ลองอธิบายด้วยภาษาของคุณเองว่า "ถ้าในทีมมี 5 คน การมี `npm run dev` จะช่วยให้ทุกคนทำงานง่ายขึ้นได้อย่างไร?"

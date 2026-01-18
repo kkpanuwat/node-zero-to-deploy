@@ -1,56 +1,66 @@
 ---
 id: day-2-mini-project
-title: 'Day 2: Mini Project'
+title: 'Day 2: Mini Project Challenge'
 sidebar_label: 'Mini Project'
-description: "งานท้ายวัน: สร้าง Library System Server แบบไม่ใช้ Express ที่มี GET/POST, validation, persistence, และโครงสร้างโปรเจกต์ที่อ่านง่าย"
+description: "Challenge ท้ายวัน: สร้าง Library System API Server ด้วย Node.js พื้นฐาน ที่มี GET/POST, validation, persistence, และโครงสร้างโปรเจกต์ที่สมบูรณ์"
 ---
 
-# Part 5 — Mini Project (ท้ายวัน)
+# Part 5 — Mini Project: The "Library System" API Challenge
 
-## เป้าหมาย
+ถึงเวลาทดสอบความรู้ทั้งหมดที่คุณได้เรียนมาในวันนี้!
 
-ทำ “Library System Server” แบบไม่ใช้ Express ให้รันได้ด้วย `npm run dev` และผ่าน checklist ด้านล่าง
+**ภารกิจของคุณ:** สร้าง API Server สำหรับระบบจัดการหนังสือขนาดเล็ก (`Library System`) โดย **ไม่ใช้ Express.js** เป้าหมายคือการสร้างเซิร์ฟเวอร์ที่สมบูรณ์ด้วย Node.js พื้นฐาน, สามารถรันได้, และมีฟังก์ชันครบถ้วนตามที่กำหนด
 
-## Requirements (ขั้นต่ำ)
+## Core Features (ฟีเจอร์หลักที่ต้องมี)
 
-- Server:
-  - `GET /health` → `{ ok: true }`
-  - `GET /books` → คืนรายการหนังสือ
-  - `POST /books` → เพิ่มหนังสือ (รับ JSON) และคืนหนังสือที่สร้างสำเร็จ
-- Validation:
-  - `title` ต้องเป็น string และห้ามว่าง
-  - `author` ต้องเป็น string และห้ามว่าง
-  - ถ้าไม่ผ่านให้ตอบ `400` พร้อม error code
-- Persistence:
-  - เก็บข้อมูลลงไฟล์ JSON (เช่น `data/books.json`)
-  - ปิดโปรแกรมแล้วเปิดใหม่ ข้อมูลต้องยังอยู่
-- Config:
-  - อ่าน `PORT` จาก `.env` (มี `.env.example`)
-- Logging:
-  - log ทุก request พร้อม request id
-  - มีระดับ `info/warn/error`
+- **Project Setup:**
+  - โปรเจกต์ต้องสามารถรันได้ด้วย `npm install` ตามด้วย `npm run dev`
+  - มี `scripts` สำหรับ `start` และ `dev` ใน `package.json`
+  - สามารถตั้งค่า `PORT` ผ่านไฟล์ `.env` (และต้องมี `.env.example` ในโปรเจกต์)
+  - มี `.gitignore` ที่ถูกต้อง (ไม่ commit `node_modules` หรือ `.env`)
 
-## Stretch Goals (ทำเพิ่มเพื่อเติมเวลา/ความท้าทาย)
+- **API Endpoints:**
+  - `GET /health`: ตอบกลับ `{ ok: true }` เพื่อบอกว่าเซิร์ฟเวอร์ทำงานปกติ
+  - `GET /books`: ตอบกลับรายการหนังสือทั้งหมดในรูปแบบ JSON
+  - `POST /books`: รับข้อมูลหนังสือใหม่ในรูปแบบ JSON (`{ "title": "...", "author": "..." }`), เพิ่มลงในระบบ, และตอบกลับข้อมูลหนังสือที่สร้างสำเร็จ (พร้อม `id` ใหม่)
 
-- `GET /books?limit=...` และ `GET /books?search=...`
-- `GET /books/:id` (ลองทำเองแบบ manual parsing path)
-- กัน `POST` body ใหญ่เกิน (ตอบ `413 Payload Too Large`)
-- เพิ่ม `DELETE /books/:id` (ทำแบบง่าย)
-- เพิ่ม `npm run lint` (ถ้าอยากเริ่มวินัยทีม)
+- **Data Persistence:**
+  - ข้อมูลหนังสือทั้งหมดต้องถูก **บันทึกลงในไฟล์** (เช่น `data/books.json`)
+  - เมื่อปิดและเปิดเซิร์ฟเวอร์ใหม่ ข้อมูลที่เคยเพิ่มไว้ **ต้องไม่หายไป**
 
-## Rubric (ใช้รีวิวโค้ด)
+## Error Handling & Validation (การจัดการข้อผิดพลาด)
 
-- โครงสร้างโฟลเดอร์ชัดเจน (entrypoint / handlers / data / utils)
-- response format สม่ำเสมอทั้งโปรเจกต์
-- error handling ชัดเจน ไม่ crash ด้วย input แปลก ๆ
-- มี commit แยกเป็นช่วง (setup → routes → persistence → polish)
+- **Input Validation:**
+  - `title` และ `author` ที่ส่งเข้ามาใน `POST /books` ต้องเป็น String และห้ามเว้นว่าง
+  - หากข้อมูลไม่ถูกต้อง, ต้องตอบกลับด้วย `Status 400 Bad Request` พร้อมข้อความอธิบายที่ชัดเจน
 
-## สิ่งที่ควรส่งท้ายวัน
+- **Robustness:**
+  - เซิร์ฟเวอร์ต้องไม่ Crash เมื่อได้รับ Input แปลกๆ หรือ JSON ที่ผิดรูปแบบ
 
-- repo ที่รันได้จากศูนย์ด้วย:
-  - `npm install`
-  - `npm run dev`
-- README สั้น ๆ:
-  - วิธีรัน
-  - endpoints
-  - ตัวอย่าง `curl` อย่างน้อย 2 คำสั่ง
+- **Logging:**
+  - ทุกๆ Request ที่เข้ามาต้องมีการบันทึก Log (เช่น Method, Path, Status Code)
+  - ควรมี `requestId` ในแต่ละ Log เพื่อให้ง่ายต่อการติดตาม
+
+## Going the Extra Mile (ทำได้ให้ 10/10!)
+
+อยากท้าทายตัวเองเพิ่ม? ลองทำฟีเจอร์เหล่านี้:
+- `GET /books?limit=...`: เพิ่มความสามารถในการจำกัดจำนวนผลลัพธ์
+- `GET /books?search=...`: เพิ่มความสามารถในการค้นหาหนังสือจากชื่อหรือผู้แต่ง
+- `GET /books/:id`: สร้าง Endpoint สำหรับดึงข้อมูลหนังสือแค่เล่มเดียว (ท้าทาย: คุณต้อง parse `id` จาก URL path ด้วยตัวเอง!)
+- `DELETE /books/:id`: สร้าง Endpoint สำหรับลบหนังสือ
+- **Payload Size Limit:** ป้องกันการส่งข้อมูลขนาดใหญ่เกินไปใน `POST /books` (ตอบกลับด้วย `Status 413 Payload Too Large`)
+
+## Code Quality Checklist (เกณฑ์การตรวจ)
+
+- **Project Structure:** โค้ดมีการแบ่งสัดส่วนอย่างชัดเจนหรือไม่? (เช่น `routes`, `handlers`, `repositories`, `utils`)
+- **Consistency:** รูปแบบของ JSON Response (`ok`, `data`, `error`) เหมือนกันทุก Endpoint หรือไม่?
+- **Readability:** โค้ดอ่านง่าย, มีการตั้งชื่อตัวแปรและฟังก์ชันที่สื่อความหมายหรือไม่?
+- **Git History:** มีการ Commit งานอย่างสม่ำเสมอและมีข้อความ Commit ที่ดีหรือไม่? (เช่น `feat: add POST /books endpoint`)
+
+## สิ่งที่ต้องส่งท้ายวัน
+
+- **GitHub Repository** ที่พร้อมสำหรับให้คนอื่น Clone ไปรันต่อได้
+- ใน Repository ต้องมีไฟล์ **`README.md`** ที่อธิบาย:
+  - วิธีการติดตั้งและรันโปรเจกต์ (`npm install`, `npm run dev`)
+  - รายชื่อ API Endpoints ทั้งหมดที่มี
+  - ตัวอย่างการเรียกใช้งานด้วย `curl` อย่างน้อย 2-3 คำสั่ง (สำหรับ `GET` และ `POST`)

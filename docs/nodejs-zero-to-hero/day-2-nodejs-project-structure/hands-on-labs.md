@@ -2,512 +2,357 @@
 id: day-2-hands-on-labs
 title: 'Day 2: Hands-on Labs'
 sidebar_label: 'Hands-on Labs'
-description: Workshop สร้างโปรเจกต์ library-system, ตั้งค่า npm scripts, และรัน Basic HTTP Server ที่ตอบ JSON รายชื่อหนังสือ
+description: ลงมือสร้างโปรเจกต์ library-system, ตั้งค่า npm scripts, และสร้าง HTTP Server ที่ตอบ JSON, รับข้อมูล, และบันทึกข้อมูลลงไฟล์
 ---
 
-# Part 2 — Hands-on Labs
-
-> เป้าหมาย: รัน `npm run dev` แล้วมี endpoint อย่างน้อย 2 อัน: `/health` และ `/books` ที่ตอบ JSON ได้ และต่อยอดเป็น `POST /books` + persistence ลงไฟล์ได้
-
-## Timeline แนะนำ (ให้เต็มวัน)
-
-- ชั่วโมง 1: setup + scripts + run server ได้
-- ชั่วโมง 2: ทำ routing ให้รองรับ query string + 404/405
-- ชั่วโมง 3: response helpers + standard JSON response
-- ชั่วโมง 4: ทำ `GET /books` ให้รองรับ `?limit`/`?search`
-- ชั่วโมง 5: ทำ `POST /books` + parse body + validation
-- ชั่วโมง 6: persistence ลงไฟล์ `data/books.json` + repo layer
-- ชั่วโมง 7: refactor ให้โครงสร้างเหมือนโปรเจกต์จริง (handlers/routes/config/utils)
-- ชั่วโมง 8: mini-project + review + recap ไป Express
-
-## Lab 1: สร้างโครงสร้างโปรเจกต์ `library-system`
-
-1. สร้างโฟลเดอร์และ init โปรเจกต์
-
-```bash
-mkdir library-system
-cd library-system
-npm init -y
-```
-
-2. สร้างโครงสร้างโฟลเดอร์
-
-```bash
-mkdir -p src/data src/utils
-touch src/server-basic.js src/data/books.js src/utils/logger.js
-```
-
-3. (แนะนำ) สร้าง `.gitignore`
-
-```bash
-printf "node_modules\n.env\n.DS_Store\n" > .gitignore
-```
-
-4. เพิ่มข้อมูลจำลอง `src/data/books.js`
-
-```js
-const books = [
-  { id: 1, title: 'JavaScript for Beginners', author: 'Alice' },
-  { id: 2, title: 'Node.js Essentials', author: 'Bob' },
-];
-
-module.exports = { books };
-```
-
-Checkpoint:
-
-- `tree`/โครงสร้างไฟล์ถูกต้อง
-- `git status` เห็นไฟล์ใหม่ และ `node_modules` ไม่ควรถูก track
-
-## Lab 2: ทำ `logger` utility
-
-สร้าง `src/utils/logger.js`
-
-```js
-function log(message) {
-  const stamp = new Date().toISOString();
-  console.log(`[${stamp}]`, message);
-}
-
-module.exports = { log };
-```
-
-Checkpoint:
-
-- เรียก `log('hello')` แล้วเห็น timestamp
-
-## Lab 3: เขียน Basic HTTP Server
-
-สร้าง `src/server-basic.js` (มี routing แบบง่าย)
-
-```js
-const http = require('http');
-const { books } = require('./data/books');
-const { log } = require('./utils/logger');
-
-function sendJson(res, statusCode, data) {
-  res.statusCode = statusCode;
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  res.end(JSON.stringify(data));
-}
-
-const server = http.createServer((req, res) => {
-  log(`Request: ${req.method} ${req.url}`);
-
-  if (req.method === 'GET' && req.url === '/health') {
-    return sendJson(res, 200, { ok: true });
-  }
-
-  if (req.method === 'GET' && req.url === '/books') {
-    return sendJson(res, 200, { ok: true, data: { books } });
-  }
-
-  return sendJson(res, 404, { message: 'Not Found' });
-});
-
-const port = Number(process.env.PORT ?? 3000);
-server.listen(port, () => {
-  log(`Server running at http://localhost:${port}`);
-});
-```
-
-Checkpoint:
-
-- เปิด `http://localhost:3000/health` ได้
-- เปิด `http://localhost:3000/books` ได้
-
-แนะนำ commit point:
-
-- `chore: init library-system skeleton`
-
-## Lab 4: ตั้งค่า `npm scripts` (start/dev)
-
-1. ติดตั้ง `nodemon` (dev dependency)
-
-```bash
-npm i -D nodemon
-```
-
-2. แก้ `package.json` ให้มี scripts แบบนี้
-
-```json
-{
-  "scripts": {
-    "start": "node src/server-basic.js",
-    "dev": "nodemon src/server-basic.js"
-  }
-}
-```
-
-Checkpoint:
-
-- รัน `npm run dev` แล้วแก้ไฟล์ 1 ครั้ง server restart เอง
-
-## Lab 5: ตั้งค่า `.env` (optional แต่แนะนำ)
-
-1. ติดตั้ง `dotenv`
-
-```bash
-npm i dotenv
-```
-
-2. สร้างไฟล์ `.env.example`
-
-```bash
-printf "PORT=3000\n" > .env.example
-```
-
-3. สร้างไฟล์ `.env` (ห้าม commit)
-
-```bash
-printf "PORT=3000\n" > .env
-```
-
-4. เพิ่มบรรทัดนี้ไว้บนสุดของ `src/server-basic.js`
-
-```js
-require('dotenv').config();
-```
-
-Checkpoint:
-
-- เปลี่ยน `PORT` ใน `.env` แล้ว server เปลี่ยนพอร์ตตาม
-
-## Lab 6: ทำ routing ให้รองรับ query string + 404/405
-
-แก้ routing ให้ parse URL ด้วย `new URL()` และแยก `pathname` ออกจาก query
-
-แนวทาง:
-
-- `/books?search=node` ต้องยัง match route `/books`
-- ถ้า `POST /health` ให้ตอบ `405` พร้อม header `Allow: GET`
-
-> แนะนำให้อ่าน Part: HTTP Routing ก่อนทำ lab นี้
-
-ตัวอย่างโค้ด (แนวทาง):
-
-```js
-const url = new URL(req.url, `http://${req.headers.host}`);
-const pathname = url.pathname;
-
-if (pathname === '/health') {
-  if (req.method !== 'GET') {
-    res.setHeader('Allow', 'GET');
-    return sendJson(res, 405, { ok: false, error: { code: 'METHOD_NOT_ALLOWED', message: 'Method Not Allowed' } });
-  }
-  return sendJson(res, 200, { ok: true });
-}
-
-if (pathname === '/books') {
-  if (req.method !== 'GET') {
-    res.setHeader('Allow', 'GET,POST');
-    return sendJson(res, 405, { ok: false, error: { code: 'METHOD_NOT_ALLOWED', message: 'Method Not Allowed' } });
-  }
-  return sendJson(res, 200, { ok: true, data: { books } });
-}
-
-return sendJson(res, 404, { ok: false, error: { code: 'NOT_FOUND', message: 'Not Found' } });
-```
-
-แนะนำ commit point:
-
-- `feat: url parsing + 404/405`
-
-## Lab 7: ทำ `GET /books` ให้รองรับ `?limit` และ `?search`
-
-เพิ่มความสามารถ:
-
-- `GET /books?limit=1` → คืนหนังสือแค่ 1 รายการ
-- `GET /books?search=node` → filter จาก `title`/`author` (case-insensitive)
-
-แนะนำขั้นตอน:
-
-1. parse query string
-2. ทำ function `filterBooks(books, search)`
-3. ทำ function `limitBooks(books, limit)`
-4. return `200` พร้อม `{ ok: true, data: { books: [...] } }`
-
-ตัวอย่างโค้ด (แนวทาง):
-
-```js
-function filterBooks(allBooks, search) {
-  if (!search) return allBooks;
-  const needle = search.trim().toLowerCase();
-  return allBooks.filter((b) => {
-    return (
-      String(b.title ?? '').toLowerCase().includes(needle) ||
-      String(b.author ?? '').toLowerCase().includes(needle)
-    );
-  });
-}
-
-function limitBooks(allBooks, limitRaw) {
-  const limit = Number(limitRaw);
-  if (!Number.isFinite(limit) || limit <= 0) return allBooks;
-  return allBooks.slice(0, limit);
-}
-
-// ใน handler:
-const search = url.searchParams.get('search');
-const limit = url.searchParams.get('limit');
-let result = filterBooks(books, search);
-result = limitBooks(result, limit);
-return sendJson(res, 200, { ok: true, data: { books: result } });
-```
-
-แนะนำ commit point:
-
-- `feat: books search/limit`
-
-## Lab 8: ทำ `POST /books` + parse JSON body + validation
-
-เพิ่ม endpoint:
-
-- `POST /books` รับ JSON `{ "title": "...", "author": "..." }`
-
-Validation แนะนำ:
-
-- `title` และ `author` ต้องเป็น string และ `.trim()` แล้วไม่ว่าง
-- ถ้าไม่ผ่าน: ตอบ `400` และ return `{ ok: false, error: { code, message } }`
-
-ตัวอย่างทดสอบ:
-
-```bash
-curl -s -X POST http://localhost:3000/books \
-  -H 'Content-Type: application/json' \
-  -d '{"title":"Clean Code","author":"Robert C. Martin"}'
-```
-
-ตัวอย่างโค้ด (แนวทาง):
-
-```js
-async function readJsonBody(req, maxBytes = 50_000) {
-  const chunks = [];
-  let size = 0;
-
-  for await (const chunk of req) {
-    size += chunk.length;
-    if (size > maxBytes) {
-      const error = new Error('Payload too large');
-      error.code = 'PAYLOAD_TOO_LARGE';
-      throw error;
+# Part 4 — Hands-on Labs: สร้าง Library System API
+
+ได้เวลาลงมือทำจริง! ในส่วนนี้ เราจะสร้างโปรเจกต์ "Library System" ตั้งแต่ศูนย์ เราจะได้ตั้งค่าโปรเจกต์, สร้างเซิร์ฟเวอร์, จัดการ Request, และทำให้ข้อมูลของเราไม่หายไปเมื่อปิดโปรแกรม
+
+**เป้าหมายสูงสุดของวันนี้:** รัน `npm run dev` แล้วได้ API Server ที่มี Endpoint ดังนี้:
+- `GET /health`: สำหรับตรวจสอบสถานะเซิร์ฟเวอร์
+- `GET /books`: สำหรับดึงรายการหนังสือทั้งหมด (พร้อมค้นหาและจำกัดจำนวน)
+- `POST /books`: สำหรับเพิ่มหนังสือเล่มใหม่ และบันทึกข้อมูลลงไฟล์
+
+---
+
+### Lab 1: จัดเตรียมพื้นที่ทำงาน (Project Setup)
+
+ขั้นแรก, เรามาสร้างโฟลเดอร์สำหรับโปรเจกต์และไฟล์ที่จำเป็นกันก่อน
+
+1.  **สร้างโฟลเดอร์โปรเจกต์และ `package.json`**
+    ```bash
+    mkdir library-system
+    cd library-system
+    npm init -y
+    ```
+    คำสั่ง `npm init -y` จะสร้างไฟล์ `package.json` ให้เราอัตโนมัติ
+
+2.  **สร้างโครงสร้างโฟลเดอร์และไฟล์**
+    ```bash
+    mkdir -p src/data src/utils
+    touch src/server-basic.js src/data/books.js src/utils/logger.js
+    ```
+    เรากำลังสร้างโฟลเดอร์ `src` สำหรับเก็บโค้ดหลัก, `data` สำหรับข้อมูล, และ `utils` สำหรับฟังก์ชันเสริม
+
+3.  **สร้าง `.gitignore` (สำคัญมาก!)**
+    ```bash
+    # สร้างไฟล์ .gitignore และเพิ่มรายการที่ไม่อยากให้ Git เก็บ
+    printf "node_modules\n.env\n" > .gitignore
+    ```
+    เพื่อบอกให้ Git ไม่ต้องสนใจโฟลเดอร์ `node_modules` และไฟล์ `.env` ที่มีความลับ
+
+4.  **เพิ่มข้อมูลหนังสือจำลอง**
+    ใส่โค้ดนี้ลงในไฟล์ `src/data/books.js`:
+    ```js
+    const books = [
+      { id: 1, title: 'JavaScript for Beginners', author: 'Alice' },
+      { id: 2, title: 'Node.js Essentials', author: 'Bob' },
+    ];
+
+    module.exports = { books };
+    ```
+
+**✅ Checkpoint:** โครงสร้างไฟล์ของคุณควรจะหน้าตาแบบนี้ และเมื่อรัน `git status`, จะต้องไม่เห็นโฟลเดอร์ `node_modules`
+
+---
+
+### Lab 2: สร้างเซิร์ฟเวอร์ให้มีชีวิต (Basic HTTP Server)
+
+ตอนนี้เราจะมาเขียนโค้ดใน `src/server-basic.js` เพื่อสร้างเซิร์ฟเวอร์ตัวแรกกัน
+
+1.  **เขียนโค้ดเซิร์ฟเวอร์พื้นฐาน**
+    ใส่โค้ดนี้ลงใน `src/server-basic.js`:
+    ```js
+    const http = require('http');
+    const { books } = require('./data/books');
+
+    // ฟังก์ชันสำหรับส่ง Response กลับไปเป็น JSON
+    function sendJson(res, statusCode, data) {
+      res.statusCode = statusCode;
+      res.setHeader('Content-Type', 'application/json; charset=utf-8');
+      res.end(JSON.stringify(data));
     }
-    chunks.push(chunk);
-  }
 
-  const raw = Buffer.concat(chunks).toString('utf8');
-  if (!raw) return null;
+    const server = http.createServer((req, res) => {
+      console.log(`Request: ${req.method} ${req.url}`);
 
-  try {
-    return JSON.parse(raw);
-  } catch {
-    const error = new Error('Invalid JSON');
-    error.code = 'INVALID_JSON';
-    throw error;
-  }
-}
+      // Routing แบบง่ายๆ
+      if (req.method === 'GET' && req.url === '/health') {
+        return sendJson(res, 200, { ok: true, message: 'Server is healthy' });
+      }
 
-function validateBookInput(body) {
-  const title = typeof body?.title === 'string' ? body.title.trim() : '';
-  const author = typeof body?.author === 'string' ? body.author.trim() : '';
+      if (req.method === 'GET' && req.url === '/books') {
+        return sendJson(res, 200, { ok: true, data: { books } });
+      }
+      
+      // ถ้าไม่เจอ Route ที่ต้องการ ให้ตอบ 404
+      return sendJson(res, 404, { ok: false, error: { code: 'NOT_FOUND', message: 'The requested resource was not found' } });
+    });
 
-  if (!title) return { ok: false, code: 'VALIDATION_ERROR', message: 'title is required' };
-  if (!author) return { ok: false, code: 'VALIDATION_ERROR', message: 'author is required' };
+    const port = 3000;
+    server.listen(port, () => {
+      console.log(`Server running at http://localhost:${port}`);
+    });
+    ```
 
-  return { ok: true, data: { title, author } };
-}
-```
+2.  **ตั้งค่า `npm scripts`**
+    เพื่อให้รันโปรเจกต์ได้ง่าย, เราจะติดตั้ง `nodemon` ที่ช่วยรีสตาร์ทเซิร์ฟเวอร์ให้อัตโนมัติเมื่อมีการแก้โค้ด
+    ```bash
+    npm install --save-dev nodemon
+    ```
+    จากนั้น, เพิ่ม `scripts` ในไฟล์ `package.json`:
+    ```json
+    "scripts": {
+      "start": "node src/server-basic.js",
+      "dev": "nodemon src/server-basic.js"
+    }
+    ```
 
-และใน route `/books`:
+**✅ Checkpoint:**
+- ลองรัน `npm run dev`
+- เปิดเบราว์เซอร์ไปที่ `http://localhost:3000/health` ควรเห็น JSON ตอบกลับมา
+- ลองเปิด `http://localhost:3000/books`
+- ลองแก้โค้ดใน `server-basic.js` แล้วดูว่าเซิร์ฟเวอร์รีสตาร์ทเองหรือไม่
 
-```js
-if (req.method === 'POST') {
-  if (req.headers['content-type']?.includes('application/json') !== true) {
-    return sendJson(res, 400, { ok: false, error: { code: 'INVALID_CONTENT_TYPE', message: 'Content-Type must be application/json' } });
-  }
+---
 
-  let body;
-  try {
-    body = await readJsonBody(req);
-  } catch (e) {
-    if (e.code === 'PAYLOAD_TOO_LARGE') return sendJson(res, 413, { ok: false, error: { code: 'PAYLOAD_TOO_LARGE', message: 'Payload too large' } });
-    if (e.code === 'INVALID_JSON') return sendJson(res, 400, { ok: false, error: { code: 'INVALID_JSON', message: 'Invalid JSON' } });
-    return sendJson(res, 500, { ok: false, error: { code: 'INTERNAL_ERROR', message: 'Internal Server Error' } });
-  }
+### Lab 3: ยกระดับ Routing ให้ฉลาดขึ้น
 
-  const validated = validateBookInput(body);
-  if (!validated.ok) return sendJson(res, 400, { ok: false, error: { code: validated.code, message: validated.message } });
+เราจะปรับปรุงการจัดการ Routing ให้รองรับ URL ที่ซับซ้อนขึ้น และจัดการ Method ที่ไม่รองรับ
 
-  const newBook = { id: books.length + 1, ...validated.data };
-  books.push(newBook);
-  return sendJson(res, 201, { ok: true, data: { book: newBook } });
-}
-```
+1.  **ปรับปรุงการจัดการ URL**
+    แก้ไขส่วน `createServer` ใน `src/server-basic.js` ให้ใช้ `new URL()` เพื่อแยก `pathname` ออกจาก query string
+    
+    ```js
+    // ... โค้ดส่วนบน ...
+    const server = http.createServer((req, res) => {
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      const pathname = url.pathname;
+      console.log(`Request: ${req.method} ${pathname}`);
 
-แนะนำ commit point:
+      if (pathname === '/health') {
+        if (req.method !== 'GET') {
+          res.setHeader('Allow', 'GET');
+          return sendJson(res, 405, { ok: false, error: { code: 'METHOD_NOT_ALLOWED', message: 'Method Not Allowed' } });
+        }
+        return sendJson(res, 200, { ok: true, message: 'Server is healthy' });
+      }
 
-- `feat: POST /books with validation`
+      if (pathname === '/books') {
+        if (req.method === 'GET') {
+           // เดี๋ยวเราจะมาเพิ่ม feature ตรงนี้
+          return sendJson(res, 200, { ok: true, data: { books } });
+        }
+        res.setHeader('Allow', 'GET, POST');
+        return sendJson(res, 405, { ok: false, error: { code: 'METHOD_NOT_ALLOWED', message: 'Method Not Allowed' } });
+      }
 
-## Lab 9: Persistence ลงไฟล์ `data/books.json` (ใช้ `fs`)
+      return sendJson(res, 404, { ok: false, error: { code: 'NOT_FOUND', message: 'The requested resource was not found' } });
+    });
+    // ... โค้ดส่วนล่าง ...
+    ```
 
-เปลี่ยนจาก in-memory อย่างเดียว → ให้เขียน/อ่านไฟล์:
+**✅ Checkpoint:**
+- ลองเข้า `http://localhost:3000/books?search=abc`, เซิร์ฟเวอร์ควรยังทำงานได้ถูกต้อง
+- ลองใช้ `curl -X POST http://localhost:3000/health`, ควรได้รับ Response 405 Method Not Allowed
 
-- สร้าง `data/books.json` (เริ่มต้นเป็น `[]`)
-- ทำ `repositories/books-repo.js`:
-  - `getAllBooks()`
-  - `addBook({title, author})`
-  - รับผิดชอบอ่าน/เขียนไฟล์
+---
 
-ข้อควรทำ:
+### Lab 4: เพิ่มความสามารถให้ `GET /books`
 
-- ถ้าไฟล์ยังไม่มี ให้สร้าง/เริ่มจาก `[]`
-- เขียนไฟล์แบบ atomic เท่าที่ทำได้ (เช่น write temp แล้ว rename) หรืออย่างน้อยเขียนทับทั้งไฟล์
+ตอนนี้เราจะทำให้ Endpoint `/books` สามารถค้นหา (search) และจำกัดจำนวน (limit) ได้
 
-โครงสร้างไฟล์ที่แนะนำเพิ่ม:
+1.  **เพิ่ม Logic การกรองข้อมูล**
+    ใน `src/server-basic.js` ภายใน `if (pathname === '/books')` และ `if (req.method === 'GET')` ให้เพิ่มโค้ดนี้เข้าไป:
 
-```bash
-mkdir -p data src/repositories
-printf "[]\n" > data/books.json
-touch src/repositories/books-repo.js
-```
+    ```js
+    if (req.method === 'GET') {
+        const search = url.searchParams.get('search');
+        const limit = url.searchParams.get('limit');
+        
+        let result = [...books]; // Copy array to avoid mutation
 
-ตัวอย่าง `src/repositories/books-repo.js` (แนวทาง):
+        if (search) {
+            const needle = search.trim().toLowerCase();
+            result = result.filter(book => 
+                book.title.toLowerCase().includes(needle) || 
+                book.author.toLowerCase().includes(needle)
+            );
+        }
 
-```js
-const fs = require('fs/promises');
-const path = require('path');
+        if (limit) {
+            result = result.slice(0, parseInt(limit, 10));
+        }
 
-const dataFilePath = path.join(process.cwd(), 'data', 'books.json');
+        return sendJson(res, 200, { ok: true, data: { books: result } });
+    }
+    ```
 
-async function readAll() {
-  try {
-    const raw = await fs.readFile(dataFilePath, 'utf8');
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (e) {
-    if (e.code === 'ENOENT') return [];
-    throw e;
-  }
-}
+**✅ Checkpoint:**
+- `http://localhost:3000/books?limit=1` ควรคืนหนังสือแค่ 1 เล่ม
+- `http://localhost:3000/books?search=node` ควรคืนเฉพาะหนังสือที่มีคำว่า "Node"
 
-async function writeAll(books) {
-  const tmpPath = `${dataFilePath}.tmp`;
-  await fs.writeFile(tmpPath, JSON.stringify(books, null, 2), 'utf8');
-  await fs.rename(tmpPath, dataFilePath);
-}
+---
 
-async function getAllBooks() {
-  return readAll();
-}
+### Lab 5: สร้าง `POST /books` และบันทึกข้อมูลลงไฟล์
 
-async function addBook({ title, author }) {
-  const books = await readAll();
-  const nextId = books.reduce((max, b) => Math.max(max, Number(b.id) || 0), 0) + 1;
-  const newBook = { id: nextId, title, author };
-  books.push(newBook);
-  await writeAll(books);
-  return newBook;
-}
+ถึงเวลาทำให้ API ของเราสามารถ "รับ" ข้อมูลและ "บันทึก" มันได้จริงๆแล้ว!
 
-module.exports = { getAllBooks, addBook };
-```
+1.  **สร้าง `data/books.json`**
+    สร้างไฟล์เปล่าๆ ชื่อ `books.json` ในโฟลเดอร์ `data` และใส่ `[]` ลงไป
 
-แนะนำ commit point:
+2.  **สร้าง Repository Layer**
+    เราจะสร้าง "Repository" ซึ่งเป็น Layer ที่รับผิดชอบการจัดการข้อมูลโดยเฉพาะ เพื่อแยก Logic การอ่าน/เขียนไฟล์ออกจาก Server
+    สร้างไฟล์ `src/repositories/books-repo.js` และใส่โค้ดนี้:
+    ```js
+    const fs = require('fs/promises');
+    const path = require('path');
 
-- `feat: persist books to json file`
+    const dataFilePath = path.join(process.cwd(), 'data', 'books.json');
 
-## Lab 10: Refactor โครงสร้างโปรเจกต์ (ให้เหมือนโปรเจกต์จริง)
+    async function readAll() {
+      try {
+        const raw = await fs.readFile(dataFilePath, 'utf8');
+        return JSON.parse(raw);
+      } catch (e) {
+        if (e.code === 'ENOENT') return []; // If file not found, return empty array
+        throw e;
+      }
+    }
 
-แยกออกจากไฟล์ `server-basic.js`:
+    async function writeAll(books) {
+      await fs.writeFile(dataFilePath, JSON.stringify(books, null, 2), 'utf8');
+    }
 
-- `src/server.js`: สร้าง server + listen
-- `src/routes/index.js`: dispatch route
-- `src/handlers/health.js`, `src/handlers/books.js`: แต่ละ endpoint
-- `src/utils/response.js`: `sendJson`/`sendError`
-- `src/config/env.js`: อ่าน env + default
-- `src/utils/logger.js`: logger levels + request id
+    async function getAllBooks(filters) {
+      let books = await readAll();
+      // Apply filters if provided
+      if (filters?.search) {
+        const needle = filters.search.trim().toLowerCase();
+        books = books.filter(book => book.title.toLowerCase().includes(needle) || book.author.toLowerCase().includes(needle));
+      }
+      if (filters?.limit) {
+        books = books.slice(0, parseInt(filters.limit, 10));
+      }
+      return books;
+    }
 
-Checkpoint:
+    async function addBook({ title, author }) {
+      const books = await readAll();
+      const nextId = books.reduce((max, b) => Math.max(max, b.id || 0), 0) + 1;
+      const newBook = { id: nextId, title, author };
+      books.push(newBook);
+      await writeAll(books);
+      return newBook;
+    }
 
-- โค้ดอ่านง่ายขึ้น และแต่ละไฟล์ “มีหน้าที่เดียว”
-- เปลี่ยน business logic ใน books handler โดยไม่ต้องแตะ server entrypoint มาก
+    module.exports = { getAllBooks, addBook };
+    ```
 
-แนวทางการ refactor (step-by-step):
+3.  **สร้างฟังก์ชันอ่าน Body และ Validation**
+    ใน `server-basic.js` เพิ่มฟังก์ชันสำหรับอ่าน JSON body และตรวจสอบความถูกต้องของข้อมูล
+    ```js
+    // ... (ควรวางไว้ใกล้ๆ sendJson)
+    async function readJsonBody(req) {
+        const chunks = [];
+        for await (const chunk of req) chunks.push(chunk);
+        const raw = Buffer.concat(chunks).toString('utf8');
+        if (!raw) return null;
+        try {
+            return JSON.parse(raw);
+        } catch { return null; }
+    }
 
-1. สร้างไฟล์/โฟลเดอร์ตามนี้:
+    function validateBookInput(body) {
+        const title = typeof body?.title === 'string' ? body.title.trim() : '';
+        const author = typeof body?.author === 'string' ? body.author.trim() : '';
 
-```bash
-mkdir -p src/config src/routes src/handlers src/utils
-touch src/server.js src/config/env.js src/routes/index.js src/handlers/health.js src/handlers/books.js src/utils/response.js
-```
+        if (!title) return { ok: false, message: 'title is required' };
+        if (!author) return { ok: false, message: 'author is required' };
 
-2. ย้าย `sendJson`/`sendError` ไป `src/utils/response.js`
-3. ย้ายโค้ดอ่าน `PORT` ไป `src/config/env.js`
-4. ให้ `src/routes/index.js` ทำหน้าที่ dispatch ไป handler
-5. ให้ `src/server.js` เป็น entrypoint แล้วเปลี่ยน scripts ให้รันไฟล์นี้แทน
+        return { ok: true, data: { title, author } };
+    }
+    ```
 
-แนะนำ commit point:
+4.  **ปรับปรุง Server ให้ใช้ Repository และรองรับ `POST`**
+    แก้ไข `server-basic.js` ครั้งใหญ่!
+    ```js
+    // แก้ไข require ด้านบน
+    const http = require('http');
+    const bookRepo = require('./repositories/books-repo'); // เปลี่ยนจาก data/books
 
-- `refactor: split server into routes/handlers/utils`
+    // ... sendJson, readJsonBody, validateBookInput ...
 
-## Lab 11: Logging แบบมีระดับ + request id (เพื่อ debug)
+    const server = http.createServer(async (req, res) => { // <-- เพิ่ม async
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      const pathname = url.pathname;
+      console.log(`Request: ${req.method} ${pathname}`);
 
-อย่างน้อยให้ทำได้:
+      // ... /health endpoint เหมือนเดิม ...
 
-- ทุก request มี `requestId` (สุ่มง่าย ๆ เช่น timestamp+random)
-- log ตอนเริ่ม request และก่อนส่ง response (method/path/status)
-- `warn` สำหรับ 4xx, `error` สำหรับ 5xx
+      if (pathname === '/books') {
+        // GET /books
+        if (req.method === 'GET') {
+          const filters = Object.fromEntries(url.searchParams.entries());
+          const books = await bookRepo.getAllBooks(filters);
+          return sendJson(res, 200, { ok: true, data: { books } });
+        }
+        // POST /books
+        if (req.method === 'POST') {
+          const body = await readJsonBody(req);
+          if (!body) {
+            return sendJson(res, 400, { ok: false, error: { code: 'INVALID_JSON', message: 'Invalid JSON body' } });
+          }
+          const validated = validateBookInput(body);
+          if (!validated.ok) {
+            return sendJson(res, 400, { ok: false, error: { code: 'VALIDATION_ERROR', message: validated.message } });
+          }
+          const newBook = await bookRepo.addBook(validated.data);
+          return sendJson(res, 201, { ok: true, data: { book: newBook } });
+        }
 
-ตัวอย่าง `src/utils/logger.js` (แนวทาง):
+        res.setHeader('Allow', 'GET, POST');
+        return sendJson(res, 405, { ok: false, error: { code: 'METHOD_NOT_ALLOWED', message: 'Method Not Allowed' } });
+      }
 
-```js
-function makeRequestId() {
-  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
-}
+      return sendJson(res, 404, { ok: false, error: { code: 'NOT_FOUND', message: 'The requested resource was not found' } });
+    });
 
-function format(level, requestId, message) {
-  const stamp = new Date().toISOString();
-  return `[${stamp}] [${level}] [${requestId}] ${message}`;
-}
+    // ... server.listen เหมือนเดิม ...
+    ```
 
-function createLogger() {
-  return {
-    makeRequestId,
-    info(requestId, message) {
-      console.log(format('INFO', requestId, message));
-    },
-    warn(requestId, message) {
-      console.warn(format('WARN', requestId, message));
-    },
-    error(requestId, message) {
-      console.error(format('ERROR', requestId, message));
-    },
-  };
-}
+**✅ Checkpoint:**
+- รัน `npm run dev`
+- ใช้ `curl` หรือเครื่องมืออื่นเพื่อ `POST` ข้อมูลหนังสือใหม่:
+  ```bash
+  curl -X POST http://localhost:3000/books \
+    -H "Content-Type: application/json" \
+    -d '{"title": "The Pragmatic Programmer", "author": "Andy Hunt"}'
+  ```
+- เข้า `http://localhost:3000/books` ในเบราว์เซอร์ ควรจะเห็นหนังสือเล่มใหม่
+- ลองปิดเซิร์ฟเวอร์ (`Ctrl+C`) แล้วเปิดใหม่ ข้อมูลหนังสือเล่มใหม่ **ต้องยังอยู่!**
 
-module.exports = { createLogger };
-```
+---
 
-แนะนำ commit point:
+### Lab 6: ก้าวสุดท้าย Refactor โค้ด (Optional, but Recommended)
 
-- `feat: logger levels + request id`
+ตอนนี้ `server-basic.js` ของเราเริ่มใหญ่และทำหลายหน้าที่เกินไปแล้ว เราจะมาจัดระเบียบมันให้เหมือนโปรเจกต์มืออาชีพ
 
-## Lab 12: รันและทดสอบ (ชุดคำสั่ง)
+**แนวทาง:**
+1.  สร้างโฟลเดอร์ `src/handlers`, `src/routes`.
+2.  ย้าย Logic ของแต่ละ Endpoint (`/health`, `/books`) ไปไว้ในไฟล์ของตัวเองใน `src/handlers`.
+3.  สร้าง `src/routes/index.js` ให้ทำหน้าที่เป็น "ผู้จัดการจราจร" คอยดูว่า URL ที่เข้ามาควรจะส่งต่อไปให้ Handler ตัวไหน.
+4.  ให้ `src/server.js` (เปลี่ยนชื่อจาก `server-basic.js`) ทำหน้าที่แค่สร้างเซิร์ฟเวอร์และส่งต่อ Request ทั้งหมดไปให้ Router.
 
-- รันโหมดปกติ: `npm run start`
-- รันโหมด dev: `npm run dev`
-- เปิด `http://localhost:3000/health` แล้วควรเห็น `{ "ok": true }`
-- เปิด `http://localhost:3000/books` แล้วควรเห็น `{ ok: true, data: { books: [...] } }`
-- ลอง `POST /books` แล้ว `GET /books` อีกครั้ง ต้องเห็นรายการเพิ่มขึ้น
+นี่คือการเตรียมความพร้อมที่สำคัญที่สุดก่อนที่เราจะก้าวเข้าสู่โลกของ Express.js ในวันถัดไป!
 
-## Checklist (จบ Day 2 แล้วควรทำได้)
+## Checklist: สรุปความสามารถที่คุณได้รับใน Day 2
 
-- อธิบายได้ว่า `package.json` มีหน้าที่อะไร
-- รู้จัก `npm run start` และ `npm run dev`
-- แยกได้ว่า `src/data` กับ `src/utils` มีไว้ทำอะไร
-- รัน server แล้วตอบ JSON ได้จริงที่ `localhost:3000`
-- ทำ `POST /books` ได้ พร้อม validation
-- ปิด/เปิด server ใหม่ แล้วข้อมูลยังอยู่ (persist file)
-- โครงสร้างโค้ดแยก responsibilities ชัดเจนพอให้ต่อ Express ได้
+- [ ] คุณสามารถอธิบายได้ว่า `package.json` และ `npm scripts` มีไว้ทำอะไร
+- [ ] คุณสามารถสร้างโปรเจกต์ Node.js และจัดโครงสร้างไฟล์เบื้องต้นได้
+- [ ] คุณสามารถสร้างเซิร์ฟเวอร์พื้นฐานที่รันและตอบข้อมูล JSON กลับมาได้
+- [ ] คุณสามารถสร้าง API ที่รับข้อมูล (`POST`) พร้อมตรวจสอบความถูกต้อง และบันทึกข้อมูลลงไฟล์ได้
+- [ ] คุณเข้าใจแล้วว่าข้อมูลไม่หายไปไหนเมื่อปิดเซิร์ฟเวอร์ เพราะเราได้ทำ Persistence แล้ว!
 
-> Call-to-action: ลองเพิ่ม endpoint ใหม่ `/time` ที่ตอบ `{ now: new Date().toISOString() }` และ commit เป็น 1 commit แยกต่างหาก
+> **Challenge:** ลองเพิ่ม Endpoint ใหม่ `GET /books/:id` ที่รับ `id` ของหนังสือจาก URL และคืนข้อมูลเฉพาะหนังสือเล่มนั้นกลับไป

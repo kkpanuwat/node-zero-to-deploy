@@ -46,6 +46,16 @@ const sidebars: SidebarsConfig = {
             'nodejs-zero-to-hero/day-1-introduction/day-1-hands-on-labs'
           ],
         },
+        {
+          type: 'category',
+          label: 'Day 2 — Project Structure',
+          collapsed: false,
+          link: {type: 'doc', id: 'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-nodejs-project-structure'},
+          items: [
+            'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-core-concepts',
+            'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-hands-on-labs',
+          ],
+        },
       ],
     },
   ],

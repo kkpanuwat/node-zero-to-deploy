@@ -53,7 +53,10 @@ const sidebars: SidebarsConfig = {
           link: {type: 'doc', id: 'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-nodejs-project-structure'},
           items: [
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-core-concepts',
+            'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-http-routing',
+            'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-debugging-checklist',
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-hands-on-labs',
+            'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-mini-project',
           ],
         },
       ],

@@ -1,7 +1,7 @@
-# Day 3: Node.js + Project Structure
+# Day 2: Node.js + Project Structure
 
 ## 1. Day Overview
-- วัน: Day 3
+- วัน: Day 2
 - วัตถุประสงค์: เรียนรู้การสร้างโปรเจ็กต์ Node.js อย่างเป็นระบบ, การใช้ npm scripts, การแยกโฟลเดอร์ src/config/utils
 - สิ่งที่จะสร้าง: โครงสร้างโปรเจ็กต์ `library-system` พร้อมสคริปต์ `npm run dev` ที่รันไฟล์ `src/server-basic.js`
 

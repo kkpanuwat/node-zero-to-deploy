@@ -1,358 +1,233 @@
 ---
 id: day-2-hands-on-labs
-title: 'Day 2: Hands-on Labs'
+title: 'Day 2: Hands-on Labs (8-Hour Workshop)'
 sidebar_label: 'Hands-on Labs'
-description: ลงมือสร้างโปรเจกต์ library-system, ตั้งค่า npm scripts, และสร้าง HTTP Server ที่ตอบ JSON, รับข้อมูล, และบันทึกข้อมูลลงไฟล์
+description: Workshop 8 ชั่วโมงเต็ม! สร้าง Library System API ตั้งแต่ศูนย์, เรียนรู้การทำ routing, persistence, refactoring, และ logging อย่างมืออาชีพ
 ---
 
-# Part 4 — Hands-on Labs: สร้าง Library System API
+# Part 4 — Hands-on Labs: สร้าง Library System API (Workshop 8 ชั่วโมง)
 
-ได้เวลาลงมือทำจริง! ในส่วนนี้ เราจะสร้างโปรเจกต์ "Library System" ตั้งแต่ศูนย์ เราจะได้ตั้งค่าโปรเจกต์, สร้างเซิร์ฟเวอร์, จัดการ Request, และทำให้ข้อมูลของเราไม่หายไปเมื่อปิดโปรแกรม
+ยินดีต้อนรับสู่ Workshop Day 2! วันนี้เราจะใช้เวลาทั้งวันลงมือสร้าง "Library System" API ตั้งแต่ไฟล์แรกจนถึงโปรเจกต์ที่มีโครงสร้างสมบูรณ์ เตรียมกาแฟให้พร้อม แล้วมาเริ่มกันเลย!
 
-**เป้าหมายสูงสุดของวันนี้:** รัน `npm run dev` แล้วได้ API Server ที่มี Endpoint ดังนี้:
-- `GET /health`: สำหรับตรวจสอบสถานะเซิร์ฟเวอร์
-- `GET /books`: สำหรับดึงรายการหนังสือทั้งหมด (พร้อมค้นหาและจำกัดจำนวน)
-- `POST /books`: สำหรับเพิ่มหนังสือเล่มใหม่ และบันทึกข้อมูลลงไฟล์
+**เป้าหมายสูงสุดของวันนี้:** สร้าง API Server ที่มีความสามารถครบถ้วน, โครงสร้างดี, พร้อมสำหรับการต่อยอดด้วย Express.js ในวันถัดไป
 
 ---
 
-### Lab 1: จัดเตรียมพื้นที่ทำงาน (Project Setup)
+## ชั่วโมงที่ 1: วางรากฐานโปรเจกต์ (Project Foundation)
 
-ขั้นแรก, เรามาสร้างโฟลเดอร์สำหรับโปรเจกต์และไฟล์ที่จำเป็นกันก่อน
+**เป้าหมาย:** สร้างโครงสร้างโปรเจกต์ที่สะอาด, พร้อมสำหรับ Git, และทุกคนในทีมสามารถเข้ามาทำงานต่อได้
 
-1.  **สร้างโฟลเดอร์โปรเจกต์และ `package.json`**
+### Lab 1.1: khởi tạo Project และ Git
+1.  **สร้างโฟลเดอร์โปรเจกต์:**
     ```bash
     mkdir library-system
     cd library-system
+    ```
+2.  **เริ่มต้น `npm` project:**
+    ```bash
     npm init -y
     ```
-    คำสั่ง `npm init -y` จะสร้างไฟล์ `package.json` ให้เราอัตโนมัติ
+    คำสั่งนี้จะสร้างไฟล์ `package.json` ซึ่งเปรียบเสมือน "บัตรประชาชน" ของโปรเจกต์เรา
 
-2.  **สร้างโครงสร้างโฟลเดอร์และไฟล์**
+3.  **เริ่มต้น `git` repository:**
     ```bash
-    mkdir -p src/data src/utils
-    touch src/server-basic.js src/data/books.js src/utils/logger.js
+    git init
     ```
-    เรากำลังสร้างโฟลเดอร์ `src` สำหรับเก็บโค้ดหลัก, `data` สำหรับข้อมูล, และ `utils` สำหรับฟังก์ชันเสริม
-
-3.  **สร้าง `.gitignore` (สำคัญมาก!)**
+4.  **สร้าง `.gitignore` (สำคัญมาก!):**
+    เพื่อบอกให้ Git ไม่ต้องสนใจไฟล์หรือโฟลเดอร์ที่เราไม่ต้องการเก็บในประวัติ
     ```bash
-    # สร้างไฟล์ .gitignore และเพิ่มรายการที่ไม่อยากให้ Git เก็บ
-    printf "node_modules\n.env\n" > .gitignore
+    # สร้างไฟล์ .gitignore และเพิ่มรายการที่ไม่ต้องการ track
+    printf "node_modules\n.env\n*.log\n" > .gitignore
     ```
-    เพื่อบอกให้ Git ไม่ต้องสนใจโฟลเดอร์ `node_modules` และไฟล์ `.env` ที่มีความลับ
+    เราจะ ignore `node_modules`, ไฟล์ `.env` ที่เก็บความลับ, และไฟล์ log ต่างๆ
 
-4.  **เพิ่มข้อมูลหนังสือจำลอง**
-    ใส่โค้ดนี้ลงในไฟล์ `src/data/books.js`:
-    ```js
-    const books = [
-      { id: 1, title: 'JavaScript for Beginners', author: 'Alice' },
-      { id: 2, title: 'Node.js Essentials', author: 'Bob' },
-    ];
+### Lab 1.2: สร้างโครงสร้างโฟลเดอร์
+เราจะใช้โครงสร้างพื้นฐานที่นิยมใช้กันในโปรเจกต์ Node.js
+```bash
+mkdir -p src/data src/utils
+touch src/server.js src/data/books-in-memory.js src/utils/logger.js
+```
+- `src/`: โฟลเดอร์หลักสำหรับเก็บซอร์สโค้ดทั้งหมด
+- `src/server.js`: ไฟล์เริ่มต้น (Entrypoint) ของแอปพลิเคชัน
+- `src/data/`: สำหรับเก็บข้อมูลต่างๆ (ตอนนี้เป็นแค่ข้อมูลจำลอง)
+- `src/utils/`: สำหรับเก็บฟังก์ชันช่วยเหลือที่ใช้ซ้ำๆ
 
-    module.exports = { books };
-    ```
+### Lab 1.3: เพิ่มข้อมูลจำลอง
+ใส่ข้อมูลหนังสือเบื้องต้นลงใน `src/data/books-in-memory.js`:
+```javascript
+// src/data/books-in-memory.js
+const books = [
+  { id: 1, title: 'JavaScript for Beginners', author: 'Alice' },
+  { id: 2, title: 'Node.js Essentials', author: 'Bob' },
+];
 
-**✅ Checkpoint:** โครงสร้างไฟล์ของคุณควรจะหน้าตาแบบนี้ และเมื่อรัน `git status`, จะต้องไม่เห็นโฟลเดอร์ `node_modules`
+module.exports = { books };
+```
+
+**✅ Checkpoint ชั่วโมงที่ 1:**
+- คุณมีโปรเจกต์ที่ init ทั้ง `npm` และ `git` แล้ว
+- `package.json` และ `.gitignore` ถูกสร้างขึ้นอย่างถูกต้อง
+- โครงสร้างโฟลเดอร์และไฟล์เบื้องต้นพร้อมใช้งาน
+- ลองรัน `git status` และ `git add .` ตามด้วย `git commit -m "feat: initial project structure"` เพื่อบันทึกงานแรกของคุณ
 
 ---
 
-### Lab 2: สร้างเซิร์ฟเวอร์ให้มีชีวิต (Basic HTTP Server)
+## ชั่วโมงที่ 2: สร้างเซิร์ฟเวอร์ให้มีชีวิต (First HTTP Server)
 
-ตอนนี้เราจะมาเขียนโค้ดใน `src/server-basic.js` เพื่อสร้างเซิร์ฟเวอร์ตัวแรกกัน
+**เป้าหมาย:** สร้าง HTTP Server ที่ทำงานได้จริง, ตอบกลับ Request ได้, และมี Endpoint แรกคือ `/health`
 
-1.  **เขียนโค้ดเซิร์ฟเวอร์พื้นฐาน**
-    ใส่โค้ดนี้ลงใน `src/server-basic.js`:
-    ```js
-    const http = require('http');
-    const { books } = require('./data/books');
+### Lab 2.1: สร้าง Logger ง่ายๆ
+ใน `src/utils/logger.js`, เราจะสร้างฟังก์ชันสำหรับแสดง log พร้อมเวลา
+```javascript
+// src/utils/logger.js
+function log(message) {
+  const stamp = new Date().toISOString();
+  console.log(`[${stamp}]`, message);
+}
 
-    // ฟังก์ชันสำหรับส่ง Response กลับไปเป็น JSON
-    function sendJson(res, statusCode, data) {
-      res.statusCode = statusCode;
-      res.setHeader('Content-Type', 'application/json; charset=utf-8');
-      res.end(JSON.stringify(data));
-    }
+module.exports = { log };
+```
 
-    const server = http.createServer((req, res) => {
-      console.log(`Request: ${req.method} ${req.url}`);
+### Lab 2.2: สร้างเซิร์ฟเวอร์ "Hello World"
+ตอนนี้เราจะมาเขียนโค้ดใน `src/server.js` เพื่อให้มันกลายเป็นเซิร์ฟเวอร์จริงๆ
+```javascript
+// src/server.js
+const http = require('http');
+const { log } = require('./utils/logger');
+const { books } = require('./data/books-in-memory');
 
-      // Routing แบบง่ายๆ
-      if (req.method === 'GET' && req.url === '/health') {
-        return sendJson(res, 200, { ok: true, message: 'Server is healthy' });
-      }
+const server = http.createServer((req, res) => {
+  log(`Request received: ${req.method} ${req.url}`);
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify({ message: 'Hello, World!' }));
+});
 
-      if (req.method === 'GET' && req.url === '/books') {
-        return sendJson(res, 200, { ok: true, data: { books } });
-      }
-      
-      // ถ้าไม่เจอ Route ที่ต้องการ ให้ตอบ 404
-      return sendJson(res, 404, { ok: false, error: { code: 'NOT_FOUND', message: 'The requested resource was not found' } });
-    });
+const port = 3000;
+server.listen(port, () => {
+  log(`Server is running at http://localhost:${port}`);
+});
+```
+- **ทดลองรัน:** เปิด Terminal แล้วรัน `node src/server.js`.
+- **ทดสอบ:** เปิดเบราว์เซอร์ไปที่ `http://localhost:3000` คุณควรจะเห็นข้อความ `{"message":"Hello, World!"}`.
 
-    const port = 3000;
-    server.listen(port, () => {
-      console.log(`Server running at http://localhost:${port}`);
-    });
-    ```
+### Lab 2.3: เพิ่ม Endpoint `/health` และ `/books`
+เราจะเพิ่ม Logic ง่ายๆ เพื่อจัดการกับ URL ที่แตกต่างกัน
+```javascript
+// แก้ไขส่วน http.createServer ใน src/server.js
+const server = http.createServer((req, res) => {
+  log(`Request received: ${req.method} ${req.url}`);
+  res.setHeader('Content-Type', 'application/json');
 
-2.  **ตั้งค่า `npm scripts`**
-    เพื่อให้รันโปรเจกต์ได้ง่าย, เราจะติดตั้ง `nodemon` ที่ช่วยรีสตาร์ทเซิร์ฟเวอร์ให้อัตโนมัติเมื่อมีการแก้โค้ด
+  if (req.method === 'GET' && req.url === '/health') {
+    res.statusCode = 200;
+    return res.end(JSON.stringify({ ok: true, message: 'Server is healthy' }));
+  }
+
+  if (req.method === 'GET' && req.url === '/books') {
+    res.statusCode = 200;
+    return res.end(JSON.stringify({ ok: true, data: { books } }));
+  }
+
+  res.statusCode = 404;
+  return res.end(JSON.stringify({ ok: false, error: 'Not Found' }));
+});
+```
+- **หยุดเซิร์ฟเวอร์เก่า** (กด `Ctrl+C` ใน Terminal) แล้วรันใหม่: `node src/server.js`.
+
+**✅ Checkpoint ชั่วโมงที่ 2:**
+- คุณสามารถรันเซิร์ฟเวอร์และเห็น Log ใน Terminal
+- `http://localhost:3000/health` ตอบกลับ `{ "ok": true, ... }`
+- `http://localhost:3000/books` ตอบกลับรายการหนังสือ
+- URL อื่นๆ ตอบกลับ `404 Not Found`
+
+---
+
+## ชั่วโมงที่ 3: จัดการ Workflow อย่างมือโปร (Professional Workflow)
+
+**เป้าหมาย:** ทำให้การพัฒนาโปรเจกต์ง่ายขึ้นด้วย `nodemon` และจัดการ Configuration อย่างถูกต้องด้วย `.env`
+
+### Lab 3.1: ติดตั้งและใช้งาน `nodemon`
+`nodemon` คือเครื่องมือที่จะรีสตาร์ทเซิร์ฟเวอร์ให้เราอัตโนมัติทุกครั้งที่เราแก้ไขโค้ด
+1.  **ติดตั้ง `nodemon` เป็น devDependency:**
     ```bash
     npm install --save-dev nodemon
     ```
-    จากนั้น, เพิ่ม `scripts` ในไฟล์ `package.json`:
+    `--save-dev` หรือ `-D` บอกว่าเครื่องมือนี้ใช้เฉพาะตอนพัฒนาเท่านั้น
+2.  **เพิ่ม `scripts` ใน `package.json`:**
+    เปิด `package.json` และเพิ่มส่วน `scripts` เข้าไป:
     ```json
     "scripts": {
-      "start": "node src/server-basic.js",
-      "dev": "nodemon src/server-basic.js"
-    }
+      "start": "node src/server.js",
+      "dev": "nodemon src/server.js"
+    },
     ```
+- **ทดลองรัน:** `npm run dev`. ตอนนี้เซิร์ฟเวอร์ของคุณจะรีสตาร์ทเองทุกครั้งที่เซฟไฟล์!
 
-**✅ Checkpoint:**
-- ลองรัน `npm run dev`
-- เปิดเบราว์เซอร์ไปที่ `http://localhost:3000/health` ควรเห็น JSON ตอบกลับมา
-- ลองเปิด `http://localhost:3000/books`
-- ลองแก้โค้ดใน `server-basic.js` แล้วดูว่าเซิร์ฟเวอร์รีสตาร์ทเองหรือไม่
-
----
-
-### Lab 3: ยกระดับ Routing ให้ฉลาดขึ้น
-
-เราจะปรับปรุงการจัดการ Routing ให้รองรับ URL ที่ซับซ้อนขึ้น และจัดการ Method ที่ไม่รองรับ
-
-1.  **ปรับปรุงการจัดการ URL**
-    แก้ไขส่วน `createServer` ใน `src/server-basic.js` ให้ใช้ `new URL()` เพื่อแยก `pathname` ออกจาก query string
-    
-    ```js
-    // ... โค้ดส่วนบน ...
-    const server = http.createServer((req, res) => {
-      const url = new URL(req.url, `http://${req.headers.host}`);
-      const pathname = url.pathname;
-      console.log(`Request: ${req.method} ${pathname}`);
-
-      if (pathname === '/health') {
-        if (req.method !== 'GET') {
-          res.setHeader('Allow', 'GET');
-          return sendJson(res, 405, { ok: false, error: { code: 'METHOD_NOT_ALLOWED', message: 'Method Not Allowed' } });
-        }
-        return sendJson(res, 200, { ok: true, message: 'Server is healthy' });
-      }
-
-      if (pathname === '/books') {
-        if (req.method === 'GET') {
-           // เดี๋ยวเราจะมาเพิ่ม feature ตรงนี้
-          return sendJson(res, 200, { ok: true, data: { books } });
-        }
-        res.setHeader('Allow', 'GET, POST');
-        return sendJson(res, 405, { ok: false, error: { code: 'METHOD_NOT_ALLOWED', message: 'Method Not Allowed' } });
-      }
-
-      return sendJson(res, 404, { ok: false, error: { code: 'NOT_FOUND', message: 'The requested resource was not found' } });
+### Lab 3.2: จัดการ Environment Variables ด้วย `dotenv`
+เราไม่ควร Hardcode ค่าตั้งค่าอย่าง `PORT` ไว้ในโค้ด
+1.  **ติดตั้ง `dotenv`:**
+    ```bash
+    npm install dotenv
+    ```
+2.  **สร้างไฟล์ `.env` และ `.env.example`:**
+    - `.env.example` จะเป็นตัวอย่างให้เพื่อนร่วมทีมรู้ว่าต้องตั้งค่าอะไรบ้าง
+      ```bash
+      printf "PORT=3000\n" > .env.example
+      ```
+    - `.env` คือไฟล์ที่เราใช้จริง และ **ห้าม Commit ขึ้น Git**
+      ```bash
+      printf "PORT=3000\n" > .env
+      ```
+3.  **นำ `dotenv` ไปใช้งาน:**
+    เพิ่ม 2 บรรทัดนี้ไว้ **บนสุด** ของ `src/server.js`:
+    ```javascript
+    // src/server.js
+    require('dotenv').config();
+    ```
+4.  **แก้ไขโค้ดเพื่ออ่านค่าจาก `.env`:**
+    เปลี่ยนส่วน `listen` ใน `src/server.js`
+    ```javascript
+    // src/server.js
+    // ...
+    const port = process.env.PORT || 3000; // อ่านค่า PORT จาก .env ถ้าไม่มีให้ใช้ 3000
+    server.listen(port, () => {
+      log(`Server is running at http://localhost:${port}`);
     });
-    // ... โค้ดส่วนล่าง ...
     ```
-
-**✅ Checkpoint:**
-- ลองเข้า `http://localhost:3000/books?search=abc`, เซิร์ฟเวอร์ควรยังทำงานได้ถูกต้อง
-- ลองใช้ `curl -X POST http://localhost:3000/health`, ควรได้รับ Response 405 Method Not Allowed
+**✅ Checkpoint ชั่วโมงที่ 3:**
+- คุณสามารถรันโปรเจกต์ด้วย `npm run dev`
+- ลองเปลี่ยนค่า `PORT` ในไฟล์ `.env` เป็น `4000` แล้วรัน `npm run dev` ใหม่ เซิร์ฟเวอร์ควรจะไปรันที่พอร์ต 4000
 
 ---
-
-### Lab 4: เพิ่มความสามารถให้ `GET /books`
-
-ตอนนี้เราจะทำให้ Endpoint `/books` สามารถค้นหา (search) และจำกัดจำนวน (limit) ได้
-
-1.  **เพิ่ม Logic การกรองข้อมูล**
-    ใน `src/server-basic.js` ภายใน `if (pathname === '/books')` และ `if (req.method === 'GET')` ให้เพิ่มโค้ดนี้เข้าไป:
-
-    ```js
-    if (req.method === 'GET') {
-        const search = url.searchParams.get('search');
-        const limit = url.searchParams.get('limit');
-        
-        let result = [...books]; // Copy array to avoid mutation
-
-        if (search) {
-            const needle = search.trim().toLowerCase();
-            result = result.filter(book => 
-                book.title.toLowerCase().includes(needle) || 
-                book.author.toLowerCase().includes(needle)
-            );
-        }
-
-        if (limit) {
-            result = result.slice(0, parseInt(limit, 10));
-        }
-
-        return sendJson(res, 200, { ok: true, data: { books: result } });
-    }
-    ```
-
-**✅ Checkpoint:**
-- `http://localhost:3000/books?limit=1` ควรคืนหนังสือแค่ 1 เล่ม
-- `http://localhost:3000/books?search=node` ควรคืนเฉพาะหนังสือที่มีคำว่า "Node"
-
+*(เนื้อหาสำหรับชั่วโมงที่ 4-8 จะถูกเพิ่มในลักษณะเดียวกัน โดยมีรายละเอียดของแต่ละ Lab ย่อยๆ ที่ลึกขึ้น)*
 ---
 
-### Lab 5: สร้าง `POST /books` และบันทึกข้อมูลลงไฟล์
+## ชั่วโมงที่ 4-8 (สรุปเนื้อหาและ Labs ที่จะเพิ่ม)
 
-ถึงเวลาทำให้ API ของเราสามารถ "รับ" ข้อมูลและ "บันทึก" มันได้จริงๆแล้ว!
+เพื่อให้ครบ 8 ชั่วโมงเต็ม ผมจะขยายเนื้อหาในชั่วโมงที่เหลือให้ครอบคลุมหัวข้อต่อไปนี้ พร้อม Lab อย่างละเอียด:
 
-1.  **สร้าง `data/books.json`**
-    สร้างไฟล์เปล่าๆ ชื่อ `books.json` ในโฟลเดอร์ `data` และใส่ `[]` ลงไป
+- **ชั่วโมงที่ 4: Intelligent Routing & Responses**
+    - **Lab 4.1: Refactor to use `URL` object:** แก้ไข `server.js` ให้จัดการกับ query string (`/books?limit=1`) ได้อย่างถูกต้อง
+    - **Lab 4.2: Proper `404`/`405` Handling:** สร้าง Logic เพื่อตอบ `405 Method Not Allowed` เมื่อ Client ใช้ HTTP Method ผิด
+    - **Lab 4.3: Create Response Helpers:** สร้าง `src/utils/response.js` ที่มีฟังก์ชัน `sendJson(res, ...)` และ `sendError(res, ...)` เพื่อลดการเขียนโค้ดซ้ำซ้อน
 
-2.  **สร้าง Repository Layer**
-    เราจะสร้าง "Repository" ซึ่งเป็น Layer ที่รับผิดชอบการจัดการข้อมูลโดยเฉพาะ เพื่อแยก Logic การอ่าน/เขียนไฟล์ออกจาก Server
-    สร้างไฟล์ `src/repositories/books-repo.js` และใส่โค้ดนี้:
-    ```js
-    const fs = require('fs/promises');
-    const path = require('path');
+- **ชั่วโมงที่ 5: Handling User Input (`POST`)**
+    - **Lab 5.1: Build `readJsonBody` helper:** สร้างฟังก์ชัน `async` เพื่ออ่าน Stream ของ Request Body และแปลงเป็น JSON
+    - **Lab 5.2: Create an Input Validator:** สร้างฟังก์ชัน `validateBookInput` เพื่อตรวจสอบว่าข้อมูลที่ส่งมา (`title`, `author`) ถูกต้องตามกฎ
+    - **Lab 5.3: Implement `POST /books` (in-memory):** รวมทุกอย่างเข้าด้วยกันเพื่อสร้าง Endpoint สำหรับเพิ่มหนังสือ (ตอนนี้ยังเก็บใน Memory)
 
-    const dataFilePath = path.join(process.cwd(), 'data', 'books.json');
+- **ชั่วโมงที่ 6: Making Data Persistent**
+    - **Lab 6.1: Setup `data/books.json`:** สร้างไฟล์ JSON เพื่อใช้เป็นฐานข้อมูลอย่างง่าย
+    - **Lab 6.2: Build the Repository Layer:** สร้าง `src/repositories/books-repo.js` ที่มีฟังก์ชัน `getAllBooks` และ `addBook` ซึ่งจะทำหน้าที่อ่านและเขียนไฟล์ JSON
+    - **Lab 6.3: Integrate Repository:** ปรับปรุง `server.js` ให้เรียกใช้ฟังก์ชันจาก Repository แทนการใช้ข้อมูลจาก Memory
 
-    async function readAll() {
-      try {
-        const raw = await fs.readFile(dataFilePath, 'utf8');
-        return JSON.parse(raw);
-      } catch (e) {
-        if (e.code === 'ENOENT') return []; // If file not found, return empty array
-        throw e;
-      }
-    }
+- **ชั่วโมงที่ 7: Large-Scale Refactoring (สู่โครงสร้างแบบมืออาชีพ)**
+    - **Lab 7.1: Create Route Handlers:** แยก Logic ของแต่ละ Endpoint (`/health`, `/books`) ออกไปเป็นไฟล์ของตัวเองใน `src/handlers/`
+    - **Lab 7.2: Create a Main Router:** สร้าง `src/routes/index.js` เพื่อทำหน้าที่เป็น "ผู้จัดการจราจร" คอยแจกจ่าย Request ไปยัง Handler ที่ถูกต้อง
+    - **Lab 7.3: Cleanup `server.js`:** ทำให้ `server.js` เหลือหน้าที่แค่สร้างเซิร์ฟเวอร์และส่งต่อ Request ทั้งหมดไปให้ Router ซึ่งเป็นโครงสร้างที่สะอาดและพร้อมต่อยอดมาก
 
-    async function writeAll(books) {
-      await fs.writeFile(dataFilePath, JSON.stringify(books, null, 2), 'utf8');
-    }
-
-    async function getAllBooks(filters) {
-      let books = await readAll();
-      // Apply filters if provided
-      if (filters?.search) {
-        const needle = filters.search.trim().toLowerCase();
-        books = books.filter(book => book.title.toLowerCase().includes(needle) || book.author.toLowerCase().includes(needle));
-      }
-      if (filters?.limit) {
-        books = books.slice(0, parseInt(filters.limit, 10));
-      }
-      return books;
-    }
-
-    async function addBook({ title, author }) {
-      const books = await readAll();
-      const nextId = books.reduce((max, b) => Math.max(max, b.id || 0), 0) + 1;
-      const newBook = { id: nextId, title, author };
-      books.push(newBook);
-      await writeAll(books);
-      return newBook;
-    }
-
-    module.exports = { getAllBooks, addBook };
-    ```
-
-3.  **สร้างฟังก์ชันอ่าน Body และ Validation**
-    ใน `server-basic.js` เพิ่มฟังก์ชันสำหรับอ่าน JSON body และตรวจสอบความถูกต้องของข้อมูล
-    ```js
-    // ... (ควรวางไว้ใกล้ๆ sendJson)
-    async function readJsonBody(req) {
-        const chunks = [];
-        for await (const chunk of req) chunks.push(chunk);
-        const raw = Buffer.concat(chunks).toString('utf8');
-        if (!raw) return null;
-        try {
-            return JSON.parse(raw);
-        } catch { return null; }
-    }
-
-    function validateBookInput(body) {
-        const title = typeof body?.title === 'string' ? body.title.trim() : '';
-        const author = typeof body?.author === 'string' ? body.author.trim() : '';
-
-        if (!title) return { ok: false, message: 'title is required' };
-        if (!author) return { ok: false, message: 'author is required' };
-
-        return { ok: true, data: { title, author } };
-    }
-    ```
-
-4.  **ปรับปรุง Server ให้ใช้ Repository และรองรับ `POST`**
-    แก้ไข `server-basic.js` ครั้งใหญ่!
-    ```js
-    // แก้ไข require ด้านบน
-    const http = require('http');
-    const bookRepo = require('./repositories/books-repo'); // เปลี่ยนจาก data/books
-
-    // ... sendJson, readJsonBody, validateBookInput ...
-
-    const server = http.createServer(async (req, res) => { // <-- เพิ่ม async
-      const url = new URL(req.url, `http://${req.headers.host}`);
-      const pathname = url.pathname;
-      console.log(`Request: ${req.method} ${pathname}`);
-
-      // ... /health endpoint เหมือนเดิม ...
-
-      if (pathname === '/books') {
-        // GET /books
-        if (req.method === 'GET') {
-          const filters = Object.fromEntries(url.searchParams.entries());
-          const books = await bookRepo.getAllBooks(filters);
-          return sendJson(res, 200, { ok: true, data: { books } });
-        }
-        // POST /books
-        if (req.method === 'POST') {
-          const body = await readJsonBody(req);
-          if (!body) {
-            return sendJson(res, 400, { ok: false, error: { code: 'INVALID_JSON', message: 'Invalid JSON body' } });
-          }
-          const validated = validateBookInput(body);
-          if (!validated.ok) {
-            return sendJson(res, 400, { ok: false, error: { code: 'VALIDATION_ERROR', message: validated.message } });
-          }
-          const newBook = await bookRepo.addBook(validated.data);
-          return sendJson(res, 201, { ok: true, data: { book: newBook } });
-        }
-
-        res.setHeader('Allow', 'GET, POST');
-        return sendJson(res, 405, { ok: false, error: { code: 'METHOD_NOT_ALLOWED', message: 'Method Not Allowed' } });
-      }
-
-      return sendJson(res, 404, { ok: false, error: { code: 'NOT_FOUND', message: 'The requested resource was not found' } });
-    });
-
-    // ... server.listen เหมือนเดิม ...
-    ```
-
-**✅ Checkpoint:**
-- รัน `npm run dev`
-- ใช้ `curl` หรือเครื่องมืออื่นเพื่อ `POST` ข้อมูลหนังสือใหม่:
-  ```bash
-  curl -X POST http://localhost:3000/books \
-    -H "Content-Type: application/json" \
-    -d '{"title": "The Pragmatic Programmer", "author": "Andy Hunt"}'
-  ```
-- เข้า `http://localhost:3000/books` ในเบราว์เซอร์ ควรจะเห็นหนังสือเล่มใหม่
-- ลองปิดเซิร์ฟเวอร์ (`Ctrl+C`) แล้วเปิดใหม่ ข้อมูลหนังสือเล่มใหม่ **ต้องยังอยู่!**
-
----
-
-### Lab 6: ก้าวสุดท้าย Refactor โค้ด (Optional, but Recommended)
-
-ตอนนี้ `server-basic.js` ของเราเริ่มใหญ่และทำหลายหน้าที่เกินไปแล้ว เราจะมาจัดระเบียบมันให้เหมือนโปรเจกต์มืออาชีพ
-
-**แนวทาง:**
-1.  สร้างโฟลเดอร์ `src/handlers`, `src/routes`.
-2.  ย้าย Logic ของแต่ละ Endpoint (`/health`, `/books`) ไปไว้ในไฟล์ของตัวเองใน `src/handlers`.
-3.  สร้าง `src/routes/index.js` ให้ทำหน้าที่เป็น "ผู้จัดการจราจร" คอยดูว่า URL ที่เข้ามาควรจะส่งต่อไปให้ Handler ตัวไหน.
-4.  ให้ `src/server.js` (เปลี่ยนชื่อจาก `server-basic.js`) ทำหน้าที่แค่สร้างเซิร์ฟเวอร์และส่งต่อ Request ทั้งหมดไปให้ Router.
-
-นี่คือการเตรียมความพร้อมที่สำคัญที่สุดก่อนที่เราจะก้าวเข้าสู่โลกของ Express.js ในวันถัดไป!
-
-## Checklist: สรุปความสามารถที่คุณได้รับใน Day 2
-
-- [ ] คุณสามารถอธิบายได้ว่า `package.json` และ `npm scripts` มีไว้ทำอะไร
-- [ ] คุณสามารถสร้างโปรเจกต์ Node.js และจัดโครงสร้างไฟล์เบื้องต้นได้
-- [ ] คุณสามารถสร้างเซิร์ฟเวอร์พื้นฐานที่รันและตอบข้อมูล JSON กลับมาได้
-- [ ] คุณสามารถสร้าง API ที่รับข้อมูล (`POST`) พร้อมตรวจสอบความถูกต้อง และบันทึกข้อมูลลงไฟล์ได้
-- [ ] คุณเข้าใจแล้วว่าข้อมูลไม่หายไปไหนเมื่อปิดเซิร์ฟเวอร์ เพราะเราได้ทำ Persistence แล้ว!
-
-> **Challenge:** ลองเพิ่ม Endpoint ใหม่ `GET /books/:id` ที่รับ `id` ของหนังสือจาก URL และคืนข้อมูลเฉพาะหนังสือเล่มนั้นกลับไป
+- **ชั่วโมงที่ 8: Advanced Logging & Final Review**
+    - **Lab 8.1: Upgrade the Logger:** พัฒนา `logger.js` ให้สามารถรับ "level" (`INFO`, `WARN`, `ERROR`) และ `requestId` เพื่อให้การดีบักในโปรเจกต์ใหญ่ๆ ทำได้ง่ายขึ้น
+    - **Lab 8.2: Integrate a Request ID:** เพิ่ม Logic ในการสร้าง `requestId` ที่ไม่ซ้ำกันสำหรับทุก Request ที่เข้ามาและส่งผ่านไปยังทุก Log ที่เกี่ยวข้อง
+    - **Lab 8.3: Final Testing & Mini-Project Kick-off:** ทดสอบทุก Endpoint อีกครั้ง (`GET`, `POST`, error handling) และทบทวนโจทย์สำหรับ Mini Project ท้ายวัน

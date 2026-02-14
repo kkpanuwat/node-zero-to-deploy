@@ -71,3 +71,25 @@ description: 'เวิร์คช็อปเต็มวัน: สร้า�
 5. **Refactor Sprint**: แยก `server` → `router` → `handlers` → `repositories` → `utils` พร้อมตั้งกติกาการ import
 6. **API Usability**: เพิ่ม query `?search=` และ `?limit=` ให้ `/books`
 7. **Hardening**: ตรวจ `Content-Type` เป็น `application/json` ก่อน parse body (ผิดให้ตอบ `415 Unsupported Media Type`)
+
+---
+
+## System & Flow Diagram
+### API Sequence Diagram
+```mermaid
+sequenceDiagram
+  participant User
+  participant Browser as Browser/Terminal
+  participant Server as Node.js Server
+  participant Memory as In-memory Data (books.js)
+
+  User->>Browser: เปิด http://localhost:3000
+  Browser->>Server: ส่ง HTTP Request
+  Server->>Memory: ขอข้อมูลหนังสือจาก `data/books.js`
+  Memory-->>Server: ส่งข้อมูลหนังสือกลับไป (Array)
+  Server-->>Browser: ตอบกลับเป็น JSON
+  Browser-->>User: แสดงผลในหน้าต่างหรือ Terminal
+```
+
+### UI Flow
+- ในวันนี้เราจะยังไม่มีส่วนติดต่อผู้ใช้ (UI) ที่สวยงาม แต่จะใช้เบราว์เซอร์หรือ Terminal ในการแสดงผลข้อมูลแบบ JSON ไปก่อน

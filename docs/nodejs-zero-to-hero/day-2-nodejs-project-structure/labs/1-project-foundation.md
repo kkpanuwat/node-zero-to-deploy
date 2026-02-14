@@ -36,7 +36,7 @@ sidebar_label: '1. Project Foundation'
 เราจะใช้โครงสร้างพื้นฐานที่นิยมใช้กันในโปรเจกต์ Node.js
 ```bash
 mkdir -p src/data src/utils
-touch src/server.js src/data/books-in-memory.js src/utils/logger.js
+touch src/server.js src/data/books.js src/utils/logger.js
 ```
 - `src/`: โฟลเดอร์หลักสำหรับเก็บซอร์สโค้ดทั้งหมด
 - `src/server.js`: ไฟล์เริ่มต้น (Entrypoint) ของแอปพลิเคชัน
@@ -44,9 +44,9 @@ touch src/server.js src/data/books-in-memory.js src/utils/logger.js
 - `src/utils/`: สำหรับเก็บฟังก์ชันช่วยเหลือที่ใช้ซ้ำๆ
 
 ### 1.3: เพิ่มข้อมูลจำลอง
-ใส่ข้อมูลหนังสือเบื้องต้นลงใน `src/data/books-in-memory.js`:
+ใส่ข้อมูลหนังสือเบื้องต้นลงใน `src/data/books.js`:
 ```javascript
-// src/data/books-in-memory.js
+// src/data/books.js
 const books = [
   { id: 1, title: 'JavaScript for Beginners', author: 'Alice' },
   { id: 2, title: 'Node.js Essentials', author: 'Bob' },

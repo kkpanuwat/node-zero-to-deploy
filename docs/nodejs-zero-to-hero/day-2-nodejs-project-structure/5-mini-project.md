@@ -11,6 +11,8 @@ description: "Challenge ท้ายวัน: สร้าง Library System AP
 
 **ภารกิจของคุณ:** สร้าง API Server สำหรับระบบจัดการหนังสือขนาดเล็ก (`Library System`) โดย **ไม่ใช้ Express.js** เป้าหมายคือการสร้างเซิร์ฟเวอร์ที่สมบูรณ์ด้วย Node.js พื้นฐาน, สามารถรันได้, และมีฟังก์ชันครบถ้วนตามที่กำหนด
 
+> Timebox แนะนำ: 50–90 นาที (เริ่มทำในห้อง + ทำต่อเป็นการบ้านได้)
+
 ## Core Features (ฟีเจอร์หลักที่ต้องมี)
 
 - **Project Setup:**
@@ -64,3 +66,28 @@ description: "Challenge ท้ายวัน: สร้าง Library System AP
   - วิธีการติดตั้งและรันโปรเจกต์ (`npm install`, `npm run dev`)
   - รายชื่อ API Endpoints ทั้งหมดที่มี
   - ตัวอย่างการเรียกใช้งานด้วย `curl` อย่างน้อย 2-3 คำสั่ง (สำหรับ `GET` และ `POST`)
+
+---
+
+## Suggested Milestones (ช่วยจัดลำดับงาน)
+
+1. **M1: Server up** — `GET /health` ทำงาน + มี logger
+2. **M2: Read** — `GET /books` อ่านจากไฟล์ `data/books.json`
+3. **M3: Create** — `POST /books` (validation + error handling) และเขียนกลับไฟล์
+4. **M4: Polish** — response format consistent + 404/405 ถูกต้อง
+5. **M5 (Optional)** — `GET /books/:id`, `DELETE /books/:id`, search/limit, payload limit
+
+## Acceptance Tests (copy/paste)
+
+```bash
+curl -i http://localhost:3000/health
+curl -i http://localhost:3000/books
+curl -i -X POST http://localhost:3000/books -H "Content-Type: application/json" -d '{"title":"Clean Code","author":"Robert C. Martin"}'
+curl -i -X POST http://localhost:3000/books -H "Content-Type: application/json" -d '{"title":'
+```
+
+## Demo Checklist (ตอนนำเสนอ/ตรวจงาน)
+
+- โชว์ว่า `npm install` + `npm run dev` รันได้จริง
+- เรียก `GET /books` ก่อนสร้าง → สร้างด้วย `POST` → เรียก `GET /books` อีกครั้งเห็นรายการเพิ่ม
+- restart server → ข้อมูลยังอยู่

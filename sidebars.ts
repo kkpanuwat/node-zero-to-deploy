@@ -54,8 +54,25 @@ const sidebars: SidebarsConfig = {
           items: [
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-core-concepts',
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-http-routing',
+            {
+              type: 'category',
+              label: 'Hands-on Labs',
+              link: {
+                type: 'doc',
+                id: 'nodejs-zero-to-hero/day-2-nodejs-project-structure/labs/day-2-lab-1-project-foundation'
+              },
+              items: [
+                'nodejs-zero-to-hero/day-2-nodejs-project-structure/labs/day-2-lab-1-project-foundation',
+                'nodejs-zero-to-hero/day-2-nodejs-project-structure/labs/day-2-lab-2-first-http-server',
+                'nodejs-zero-to-hero/day-2-nodejs-project-structure/labs/day-2-lab-3-professional-workflow',
+                'nodejs-zero-to-hero/day-2-nodejs-project-structure/labs/day-2-lab-4-advanced-routing-and-response',
+                'nodejs-zero-to-hero/day-2-nodejs-project-structure/labs/day-2-lab-5-persistence-and-json-file',
+                'nodejs-zero-to-hero/day-2-nodejs-project-structure/labs/day-2-lab-6-post-validation-and-crud',
+                'nodejs-zero-to-hero/day-2-nodejs-project-structure/labs/day-2-lab-7-refactor-to-professional-structure',
+                'nodejs-zero-to-hero/day-2-nodejs-project-structure/labs/day-2-lab-8-debugging-and-api-testing-drills',
+              ],
+            },
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-debugging-checklist',
-            'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-hands-on-labs',
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-mini-project',
           ],
         },

@@ -4,6 +4,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// TODO: Replace with your real links
+const githubUrl = 'https://github.com/REPLACE_ME';
+
 const config: Config = {
   title: 'Kcode Doc',
   tagline: 'Dinosaurs are cool',
@@ -31,8 +34,8 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'REPLACE_ME', // Usually your GitHub org/user name.
+  projectName: 'REPLACE_ME', // Usually your repo name.
 
   onBrokenLinks: 'throw',
 
@@ -86,53 +89,13 @@ const config: Config = {
           position: 'left',
           label: 'Document',
         },
-        {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
-        },
+        {href: githubUrl, label: 'GitHub', position: 'right'},
       ],
     },
     footer: {
       style: 'dark',
-      links: [
-        {
-          title: 'Docs',
-          items: [
-            {
-              label: 'Document',
-              to: '/docs/nodejs-zero-to-hero',
-            },
-          ],
-        },
-        {
-          title: 'Community',
-          items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
-          ],
-        },
-      ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      links: [],
+      copyright: ' ',
     },
     prism: {
       theme: prismThemes.github,

@@ -2,11 +2,13 @@
 id: day-1-javascript-functions
 title: 'ฟังก์ชัน (Functions)'
 sidebar_label: Functions
-description: สูตรคำสั่งที่เรียกใช้ซ้ำได้เพื่อให้โค้ดกระชับและอ่านง่าย
+description: ชุดคำสั่งที่เรียกใช้ซ้ำได้เพื่อให้โค้ดกระชับและอ่านง่าย
 ---
 
-# ฟังก์ชัน (Functions): สูตรอาหารที่ใช้ซ้ำได้
-
+# ฟังก์ชัน (Functions): ชุดคำสั่งที่ใช้ซ้ำได้
+<p align="center">
+  <img src={require('../../../../static/img/day-1/day1-function-cover.png').default} alt="Day 1 variable" style={{maxWidth: '600px', width: '80%'}} />
+</p>
 ฟังก์ชันคือ "ชุดคำสั่ง" ที่เราตั้งชื่อให้มัน และสามารถเรียกใช้งานซ้ำที่ไหนก็ได้เมื่อต้องการ ช่วยให้เราไม่ต้องเขียนโค้ดเดิม ๆ ซ้ำไปซ้ำมา และทำให้โค้ดอ่านง่ายขึ้นมาก คิดเสียว่าเราเปิดร้านหนังสือ ถ้าเรามีฟังก์ชันที่จัดการงานซ้ำ ๆ ได้ก็เท่ากับมีพนักงานที่เชี่ยวชาญงานแต่ละอย่างตลอดเวลา
 
 ```javascript
@@ -16,7 +18,7 @@ function welcomeCustomer(name) {
 }
 
 // เรียกใช้งานฟังก์ชัน (Calling the function)
-welcomeCustomer("สโรชา");
+welcomeCustomer("ลูกพีช");
 welcomeCustomer("ธีร์");
 ```
 

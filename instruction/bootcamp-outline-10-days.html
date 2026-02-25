@@ -1,0 +1,385 @@
+<!DOCTYPE html><html><head>
+      <title>bootcamp-outline-10-days</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////Users/kkpnw/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.20/crossnote/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+
+      </style>
+      </head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="แผนการสอน-bootcamp-10-วัน-kku-library-system-nodejs--express--postgresql">แผนการสอน Bootcamp 10 วัน: KKU Library System (Node.js + Express + PostgreSQL) </h1>
+<blockquote>
+<p>โปรเจกต์ต่อเนื่องตลอดคอร์ส: <strong>KKU Library System</strong><br>
+ฟีเจอร์หลัก: รายการหนังสือ, สมาชิก, ยืม-คืน, Dashboard</p>
+</blockquote>
+<hr>
+<h2 id="day-1-บทนําการพัฒนาเว็บและพื้นฐาน-javascript">Day 1: บทนำการพัฒนาเว็บและพื้นฐาน JavaScript </h2>
+<h3 id="แนะนําแนวคิดพื้นฐานการพัฒนาเว็บ-duration-60-นาที">แนะนำแนวคิดพื้นฐานการพัฒนาเว็บ (Duration: 60 นาที) </h3>
+<ul>
+<li>ทำความเข้าใจหลักการทำงานแบบ Client–Server และ HTTP (Browser ส่ง request, Server ตอบ response)</li>
+<li>ยกตัวอย่างการสื่อสารระหว่าง Web Browser กับ Server</li>
+<li>แนะนำภาพรวมโปรเจกต์ “KKU Library System” (ระบบรายการหนังสือ, สมาชิก, ยืม-คืน, Dashboard)</li>
+</ul>
+<h3 id="ติดตั้งและเตรียมเครื่องมือ-duration-50-นาที">ติดตั้งและเตรียมเครื่องมือ (Duration: 50 นาที) </h3>
+<ul>
+<li>ติดตั้ง Node.js และ npm (เป็นสภาพแวดล้อม runtime สำหรับรัน JavaScript ฝั่งเซิร์ฟเวอร์)</li>
+<li>เปิดตัว VS Code (หรือ Editor ที่ถนัด) และติดตั้ง Extension พื้นฐาน</li>
+<li>สร้างโปรเจกต์ Node เบื้องต้น (<code>npm init</code>), ติดตั้ง Express.js (เฟรมเวิร์ก Node.js ยอดนิยมสำหรับสร้างเว็บ)</li>
+</ul>
+<h3 id="พื้นฐาน-javascript-es6-duration-220-นาที">พื้นฐาน JavaScript (ES6) (Duration: 220 นาที) </h3>
+<ul>
+<li>แนะนำตัวแปร (<code>let</code>, <code>const</code>) และชนิดข้อมูลพื้นฐาน (ตัวเลข, ข้อความ, อาร์เรย์, อ็อบเจกต์)</li>
+<li>คำสั่งเงื่อนไข (<code>if/else</code>) และลูป (<code>for</code>, <code>while</code>) ใน JavaScript</li>
+<li>ฟังก์ชันพื้นฐาน, Arrow Function, การใช้งาน <code>console.log</code> เพื่อตรวจสอบการทำงานของโค้ด</li>
+<li>เรียนรู้การใช้ NPM ติดตั้งแพ็กเกจพื้นฐาน (เช่น Express)</li>
+</ul>
+<h3 id="พื้นฐาน-html-และ-tailwind-css-duration-150-นาที">พื้นฐาน HTML และ Tailwind CSS (Duration: 150 นาที) </h3>
+<ul>
+<li>สร้างโครงสร้างหน้าเว็บด้วย HTML เบื้องต้น (แท็ก <code>&lt;!doctype html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>)</li>
+<li>แนะนำ Tailwind CSS (ใช้ผ่าน CDN): เฟรมเวิร์ก CSS แบบ utility-first มีคลาสช่วยให้สร้างดีไซน์ได้ง่าย</li>
+<li>ฝึกใช้ Tailwind จัดแต่ง layout แบบง่ายๆ (กำหนดสี, ขนาด, การจัดวางด้วยคลาสเช่น <code>flex</code>, <code>text-center</code> ฯลฯ)</li>
+</ul>
+<hr>
+<h2 id="day-2-เริ่มต้นใช้งาน-nodejs-และ-expressjs">Day 2: เริ่มต้นใช้งาน Node.js และ Express.js </h2>
+<h3 id="เรียนรู้-nodejs-พื้นฐาน-duration-80-นาที">เรียนรู้ Node.js พื้นฐาน (Duration: 80 นาที) </h3>
+<ul>
+<li>เรียกใช้คำสั่ง <code>node</code> เพื่อรันไฟล์ <code>.js</code> ง่ายๆ (เช่น <code>console.log</code>)</li>
+<li>ทำความเข้าใจโฟลเดอร์โปรเจกต์ Node และไฟล์ <code>package.json</code></li>
+<li>ใช้ npm ติดตั้งแพ็กเกจ (เช่น Express) และดูวิธีจัดการ dependencies</li>
+</ul>
+<h3 id="สร้างโปรเจกต์-node-แรก-duration-100-นาที">สร้างโปรเจกต์ Node แรก (Duration: 100 นาที) </h3>
+<ul>
+<li>สร้างไฟล์ <code>app.js</code> แล้วเขียนโค้ด Node.js เบื้องต้น (ใช้ CommonJS <code>require</code> นำเข้าโมดูล)</li>
+<li>ทดลองใช้โมดูลในตัว (เช่น <code>fs</code> สำหรับอ่าน/เขียนไฟล์) เพื่อเข้าใจพื้นฐาน Node</li>
+<li>เรียนรู้แนวคิด event-driven และ non-blocking I/O ของ Node.js (เช่น ติดป้ายเหตุการณ์ <code>listen</code>, <code>callback</code>)</li>
+</ul>
+<h3 id="แนะนํา-expressjs-duration-100-นาที">แนะนำ Express.js (Duration: 100 นาที) </h3>
+<ul>
+<li>ติดตั้ง Express และเรียกใช้งานในโปรเจกต์ (<code>const express = require('express')</code>)</li>
+<li>เข้าใจแนวคิดการทำงานของ Express (Framework บางเบาบน Node.js ที่ช่วยจัดการ routing ได้ง่าย)</li>
+<li>ทำความเข้าใจหลักการ Middleware เบื้องต้น (เช่น <code>express.json()</code>, <code>express.static()</code>)</li>
+</ul>
+<h3 id="สร้างเว็บเซิร์ฟเวอร์ด้วย-express-duration-100-นาที">สร้างเว็บเซิร์ฟเวอร์ด้วย Express (Duration: 100 นาที) </h3>
+<ul>
+<li>เขียนตัวอย่าง “Hello World” ด้วย Express (สร้าง server, <code>app.get('/', ...)</code>, <code>app.listen</code>)</li>
+<li>ทดลองส่งข้อความกลับผู้ใช้ผ่าน <code>res.send()</code> และเปิดดูผลลัพธ์ในเบราว์เซอร์</li>
+<li>ฝึกใช้ Express สร้างเส้นทาง (Route) แบบง่ายๆ (<code>GET</code>, <code>POST</code>) และทดสอบด้วย Postman หรือเบราว์เซอร์</li>
+</ul>
+<h3 id="สรุปและทบทวน-duration-50-นาที">สรุปและทบทวน (Duration: 50 นาที) </h3>
+<ul>
+<li>ทบทวนเนื้อหาทั้งหมดในวัน (ถาม-ตอบ, แก้ไขปัญหาที่พบ)</li>
+</ul>
+<hr>
+<h2 id="day-3-การสร้าง-rest-api-ด้วย-expressjs">Day 3: การสร้าง REST API ด้วย Express.js </h2>
+<h3 id="routing-ใน-express-duration-120-นาที">Routing ใน Express (Duration: 120 นาที) </h3>
+<ul>
+<li>สร้างเส้นทางหลายแบบ (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>) และทำความเข้าใจกับ <code>req</code> และ <code>res</code></li>
+<li>ใช้พารามิเตอร์ใน URL (เช่น <code>/books/:id</code>) และ query parameters (เช่น <code>?q=keyword</code>)</li>
+<li>กำหนดโครงสร้างโปรเจกต์ (แยกไฟล์ Route ต่างๆ, ใช้ <code>express.Router()</code>)</li>
+</ul>
+<h3 id="ส่งไฟล์-static-และ-template-duration-100-นาที">ส่งไฟล์ static และ Template (Duration: 100 นาที) </h3>
+<ul>
+<li>ใช้ Express เสิร์ฟไฟล์ HTML/CSS/JS แบบ static (<code>express.static()</code>)</li>
+<li>(อาจใช้ EJS/Pug เบื้องต้น) ทดลองสร้าง HTML แบบ dynamic เช่น แสดงชื่อหนังสือจากตัวแปรในหน้า Template</li>
+<li>ฝึกสร้างหน้าฟอร์ม HTML (เช่น ฟอร์มเพิ่มหนังสือใหม่) แล้วส่งข้อมูลด้วยวิธี <code>POST</code></li>
+</ul>
+<h3 id="การจัดการข้อมูลแบบง่าย-duration-80-นาที">การจัดการข้อมูลแบบง่าย (Duration: 80 นาที) </h3>
+<ul>
+<li>สร้างตัวแปร/อาร์เรย์เก็บข้อมูลหนังสือแบบชั่วคราว (ในหน่วยความจำ) เพื่อฝึก CRUD</li>
+<li>เขียนโค้ดสำหรับเพิ่ม (create) อ่าน (read) อัพเดต (update) ลบ (delete) หนังสือ โดยไม่ใช้ฐานข้อมูล</li>
+<li>ทดสอบ API เหล่านี้โดยใช้งานกับ Postman และดู JSON response</li>
+</ul>
+<h3 id="ฝึกใช้งาน-json-และ-rest-duration-80-นาที">ฝึกใช้งาน JSON และ REST (Duration: 80 นาที) </h3>
+<ul>
+<li>เรียนรู้รูปแบบการส่งข้อมูล JSON ในการสื่อสาร Client–Server</li>
+<li>บันทึกเนื้อหาใน <code>package.json</code> และใช้งาน body-parser (หรือ <code>express.json()</code>) เพื่อรับ JSON payload</li>
+<li>ทดสอบโค้ดด้วยตนเอง (เช่น ส่ง JSON เข้า API ด้วย Postman)</li>
+</ul>
+<h3 id="สรุปและทบทวน-duration-50-นาที-1">สรุปและทบทวน (Duration: 50 นาที) </h3>
+<ul>
+<li>ถาม-ตอบปัญหา, ทบทวนแนวคิด REST API และฟังก์ชันพื้นฐานของ Express</li>
+</ul>
+<hr>
+<h2 id="day-4-เริ่มต้นกับฐานข้อมูล-postgresql">Day 4: เริ่มต้นกับฐานข้อมูล PostgreSQL </h2>
+<h3 id="พื้นฐาน-postgresql-และ-sql-duration-100-นาที">พื้นฐาน PostgreSQL และ SQL (Duration: 100 นาที) </h3>
+<ul>
+<li>แนะนำ PostgreSQL (Postgres) เป็นฐานข้อมูลเชิงสัมพันธ์ (RDBMS) แบบโอเพ่นซอร์ส</li>
+<li>คำสั่ง SQL เบื้องต้น: <code>CREATE TABLE</code>, <code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, <code>DELETE</code></li>
+<li>อธิบายโครงสร้างข้อมูล (<code>table</code>, <code>row</code>, <code>column</code>, <code>schema</code>) และความสัมพันธ์ (book ↔ author, member ↔ loans)</li>
+</ul>
+<h3 id="ออกแบบฐานข้อมูลระบบห้องสมุด-duration-80-นาที">ออกแบบฐานข้อมูลระบบห้องสมุด (Duration: 80 นาที) </h3>
+<ul>
+<li>วางโครงสร้างตารางหลัก: ตาราง <code>books</code> (id, title, author, year, status ฯลฯ)</li>
+<li>ตาราง <code>members</code> (id, name, email, password ฯลฯ) และ <code>loans</code> (id, book_id, member_id, borrow_date, return_date)</li>
+<li>สรุปความสัมพันธ์: หนังสือ 1 เล่มยืมได้หลายครั้ง, สมาชิก 1 คนยืมได้หลายเล่ม</li>
+</ul>
+<h3 id="ติดตั้งและเริ่มต้นใช้งาน-postgresql-duration-60-นาที">ติดตั้งและเริ่มต้นใช้งาน PostgreSQL (Duration: 60 นาที) </h3>
+<ul>
+<li>ติดตั้ง PostgreSQL บนเครื่อง (หรือใช้ Docker/เครื่องมือบน Cloud หากสะดวก)</li>
+<li>ใช้ <code>psql</code> หรือ pgAdmin สร้างฐานข้อมูลใหม่และล็อกอิน (สอนคำสั่งเบื้องต้น เช่น <code>\\c</code>, <code>\\dt</code>)</li>
+<li>สร้าง role/user ใหม่สำหรับโปรเจกต์ (ตัวอย่าง <code>me</code> พร้อมสิทธิ์สร้าง DB)</li>
+</ul>
+<h3 id="สร้างตารางในฐานข้อมูล-duration-100-นาที">สร้างตารางในฐานข้อมูล (Duration: 100 นาที) </h3>
+<ul>
+<li>เขียนคำสั่ง SQL สร้างตาราง <code>books</code>, <code>members</code>, <code>loans</code> ตามออกแบบ (กำหนด <code>PRIMARY KEY</code>, <code>FOREIGN KEY</code>)</li>
+<li>ทดลองเพิ่มข้อมูลตัวอย่าง (<code>INSERT</code>) ด้วยคำสั่ง SQL ผ่าน <code>psql</code></li>
+<li>ดูการใช้งานคำสั่ง <code>\\dt</code> เพื่อตรวจสอบตาราง และ <code>SELECT</code> เพื่อตรวจสอบข้อมูล</li>
+</ul>
+<h3 id="เชื่อมต่อ-nodejs-กับ-postgresql-duration-80-นาที">เชื่อมต่อ Node.js กับ PostgreSQL (Duration: 80 นาที) </h3>
+<ul>
+<li>ใช้ไลบรารี node-postgres (<code>pg</code>) ใน Node.js (<code>npm install pg</code>)</li>
+<li>เขียนโค้ดเชื่อมต่อฐานข้อมูล (ตั้งค่าการเชื่อมต่อ host, user, database, password)</li>
+<li>ทดสอบการ query ด้วย Node (<code>SELECT * FROM books</code>) และแสดงผลผ่าน <code>console.log</code></li>
+</ul>
+<h3 id="ทบทวนและสรุป-duration-20-นาที">ทบทวนและสรุป (Duration: 20 นาที) </h3>
+<ul>
+<li>ทบทวนคำสั่ง SQL และขั้นตอนการเชื่อมต่อ, แก้ปัญหาที่เจอ</li>
+</ul>
+<hr>
+<h2 id="day-5-สร้าง-api-สําหรับระบบรายการหนังสือ-backend">Day 5: สร้าง API สำหรับระบบรายการหนังสือ (Backend) </h2>
+<h3 id="สร้าง-api-ดึงรายการหนังสือทั้งหมด-get-books-duration-60-นาที">สร้าง API ดึงรายการหนังสือทั้งหมด (<code>GET /books</code>) (Duration: 60 นาที) </h3>
+<ul>
+<li>เขียนโค้ด Express สร้าง route <code>GET /books</code> เพื่อดึงข้อมูลจากตาราง <code>books</code> (<code>SELECT * FROM books</code>)</li>
+<li>คืนค่า JSON ของรายการหนังสือทั้งหมด</li>
+</ul>
+<h3 id="สร้าง-api-แสดงรายละเอียดหนังสือ-get-booksid-duration-60-นาที">สร้าง API แสดงรายละเอียดหนังสือ (<code>GET /books/:id</code>) (Duration: 60 นาที) </h3>
+<ul>
+<li>เขียน route <code>GET /books/:id</code> ดึงข้อมูลหนังสือตาม id (<code>SELECT * FROM books WHERE id = $1</code>)</li>
+<li>ส่งคืนข้อมูลหนังสือที่ค้นหาเป็น JSON</li>
+</ul>
+<h3 id="สร้าง-api-เพิ่มหนังสือใหม่-post-books-duration-60-นาที">สร้าง API เพิ่มหนังสือใหม่ (<code>POST /books</code>) (Duration: 60 นาที) </h3>
+<ul>
+<li>เขียน route <code>POST /books</code> รับ JSON จาก front-end (เช่น <code>title</code>, <code>author</code>)</li>
+<li>ใช้ SQL <code>INSERT INTO books ... RETURNING *</code> เพื่อเพิ่มหนังสือและส่งกลับข้อมูลที่เพิ่มแล้ว</li>
+</ul>
+<h3 id="สร้าง-api-อัพเดตหนังสือ-put-booksid-duration-60-นาที">สร้าง API อัพเดตหนังสือ (<code>PUT /books/:id</code>) (Duration: 60 นาที) </h3>
+<ul>
+<li>เขียน route <code>PUT /books/:id</code> รับข้อมูลใหม่จาก front-end</li>
+<li>ใช้ SQL <code>UPDATE books SET ... WHERE id = $1</code> แล้วส่งคืนข้อมูลที่อัพเดตแล้ว</li>
+</ul>
+<h3 id="สร้าง-api-ลบหนังสือ-delete-booksid-duration-40-นาที">สร้าง API ลบหนังสือ (<code>DELETE /books/:id</code>) (Duration: 40 นาที) </h3>
+<ul>
+<li>เขียน route <code>DELETE /books/:id</code> ใช้ SQL <code>DELETE FROM books WHERE id = $1</code></li>
+<li>ส่งสถานะสำเร็จหรือข้อความยืนยันการลบกลับไป</li>
+</ul>
+<h3 id="ทดสอบ-api-ด้วย-postman-duration-60-นาที">ทดสอบ API ด้วย Postman (Duration: 60 นาที) </h3>
+<ul>
+<li>ส่งคำขอ (<code>GET/POST/PUT/DELETE</code>) จาก Postman ไปยัง API ที่สร้าง</li>
+<li>ตรวจสอบโครงสร้าง JSON ที่ได้กลับมา</li>
+<li>แก้ไขข้อผิดพลาดที่พบจากการทดสอบ</li>
+</ul>
+<h3 id="ภาพรวม-json-และ-rest-duration-60-นาที">ภาพรวม JSON และ REST (Duration: 60 นาที) </h3>
+<ul>
+<li>ทบทวนแนวคิด CRUD และ HTTP Methods (<code>GET/POST/PUT/DELETE</code>) ที่สัมพันธ์กับ REST API</li>
+<li>ย้ำการใช้ JSON เป็นรูปแบบแลกเปลี่ยนข้อมูลระหว่าง client-server</li>
+</ul>
+<h3 id="สรุปและฝึกปฏิบัติ-duration-60-นาที">สรุปและฝึกปฏิบัติ (Duration: 60 นาที) </h3>
+<ul>
+<li>ฝึกเชื่อมต่อ front-end (ทดสอบด้วย <code>curl</code> หรือ <code>fetch</code> เริ่มต้น)</li>
+<li>สรุปสิ่งที่ได้เรียนรู้ในวัน</li>
+</ul>
+<hr>
+<h2 id="day-6-สร้างหน้าแสดงรายการหนังสือ-frontend">Day 6: สร้างหน้าแสดงรายการหนังสือ (Frontend) </h2>
+<h3 id="สร้างโครงสร้างหน้ารายการหนังสือ-html--tailwind-duration-80-นาที">สร้างโครงสร้างหน้ารายการหนังสือ (HTML &amp; Tailwind) (Duration: 80 นาที) </h3>
+<ul>
+<li>สร้างไฟล์ <code>index.html</code> สำหรับหน้าแสดงรายการหนังสือ</li>
+<li>ออกแบบด้วย Tailwind: เพิ่ม navbar ง่ายๆ, ตารางหรือการ์ดสำหรับแสดงหนังสือ (ใช้คลาสเช่น <code>container</code>, <code>grid</code>, card ของ Tailwind)</li>
+<li>ตรวจสอบ layout ให้เป็น Responsive เบื้องต้น (ใช้ breakpoints ของ Tailwind)</li>
+</ul>
+<h3 id="เรียนรู้-fetch-api-get-ใน-javascript-duration-80-นาที">เรียนรู้ Fetch API (<code>GET</code>) ใน JavaScript (Duration: 80 นาที) </h3>
+<ul>
+<li>ใช้ฟังก์ชัน <code>fetch()</code> เรียกใช้งาน API <code>GET /books</code> ที่สร้างเมื่อวาน</li>
+<li>รู้จัก Promises และ <code>async/await</code> เพื่อจัดการ response (แปลงเป็น JSON ด้วย <code>response.json()</code>)</li>
+<li>จัดการกรณีเกิดข้อผิดพลาด (<code>catch</code> errors ง่ายๆ)</li>
+</ul>
+<h3 id="แสดงข้อมูลหนังสือบนหน้าเว็บ-duration-80-นาที">แสดงข้อมูลหนังสือบนหน้าเว็บ (Duration: 80 นาที) </h3>
+<ul>
+<li>เขียนฟังก์ชัน JavaScript ดึงข้อมูลหนังสือ จากนั้นวนลูปสร้าง element (เช่น <code>&lt;tr&gt;</code> หรือ <code>&lt;div&gt;</code>) แทรกเข้าในตารางหรือ grid บน HTML</li>
+<li>ใช้ Tailwind จัดตกแต่ง (เช่น ข้อความโทนสี, ขนาด font) ให้ดูสวยงาม</li>
+<li>เพิ่มลิงก์หรือปุ่มบนแต่ละรายการเพื่อนำไปหน้ารายละเอียดหนังสือ</li>
+</ul>
+<h3 id="เพิ่มหน้ารายละเอียดหนังสือ-duration-40-นาที">เพิ่มหน้ารายละเอียดหนังสือ (Duration: 40 นาที) </h3>
+<ul>
+<li>สร้างไฟล์ <code>book.html</code> (หรือใช้ dynamic routing) สำหรับแสดงรายละเอียดหนังสือ</li>
+<li>รับพารามิเตอร์ id จาก URL (เช่น <code>?id=123</code>) และดึงข้อมูลเฉพาะหนังสือด้วย Fetch อีกครั้ง (<code>GET /books/:id</code>)</li>
+<li>แสดงข้อมูลเช่น ชื่อเรื่อง, ผู้แต่ง, สถานะ เป็นต้น</li>
+</ul>
+<h3 id="ฝึกเขียนโค้ดและดีบัก-duration-40-นาที">ฝึกเขียนโค้ดและดีบัก (Duration: 40 นาที) </h3>
+<ul>
+<li>ทดลองเปิดหน้าเว็บ, ดู console log และ network tab ในเบราว์เซอร์ Developer Tools</li>
+<li>แก้ไขบั๊กที่พบ (เช่น ปัญหา CORS, path ผิดพลาด)</li>
+</ul>
+<h3 id="สรุปและทบทวน-duration-40-นาที">สรุปและทบทวน (Duration: 40 นาที) </h3>
+<ul>
+<li>สอบถาม-ตอบปัญหา, สรุปการใช้ Fetch และ DOM manipulation</li>
+</ul>
+<hr>
+<h2 id="day-7-จัดการรายละเอียดหนังสือและฟอร์ม-full-stack">Day 7: จัดการรายละเอียดหนังสือและฟอร์ม (Full Stack) </h2>
+<h3 id="สร้างหน้ารายละเอียดหนังสือ-frontend-duration-60-นาที">สร้างหน้ารายละเอียดหนังสือ (Frontend) (Duration: 60 นาที) </h3>
+<ul>
+<li>ออกแบบหน้าเว็บ <code>book.html</code> ด้วย Tailwind ให้แสดงข้อมูลหนังสือแบบอ่านง่าย (เช่น card หรือ sections)</li>
+<li>ดึง id จาก URL และใช้ Fetch เรียก API <code>/books/:id</code> มาแสดงข้อมูลในฟอร์มหรือหน้า</li>
+<li>เพิ่มปุ่ม “แก้ไข” และ “ลบ” ในหน้านี้ (เชื่อมโยงกับฟังก์ชันด้านหลัง)</li>
+</ul>
+<h3 id="สร้างฟอร์มเพิ่มหนังสือ-frontend-duration-60-นาที">สร้างฟอร์มเพิ่มหนังสือ (Frontend) (Duration: 60 นาที) </h3>
+<ul>
+<li>ออกแบบฟอร์ม HTML หน้าใหม่ (เช่น <code>new-book.html</code>) ให้มีช่องกรอกข้อมูลหนังสือ (title, author, year)</li>
+<li>ใช้ Tailwind จัดรูปแบบฟอร์มให้ง่ายต่อการใช้งาน</li>
+</ul>
+<h3 id="ส่งฟอร์มเพิ่มหนังสือ-frontend-duration-60-นาที">ส่งฟอร์มเพิ่มหนังสือ (Frontend) (Duration: 60 นาที) </h3>
+<ul>
+<li>เขียน JavaScript รับค่าจากฟอร์มและใช้ Fetch ส่ง <code>POST /books</code> ในรูปแบบ JSON</li>
+<li>หลังส่งสำเร็จ นำผู้ใช้กลับไปหน้าแรก (หรือแสดงข้อความยืนยัน)</li>
+<li>ทดสอบด้วยการเพิ่มหนังสือใหม่แล้วตรวจสอบว่าอยู่ในฐานข้อมูล</li>
+</ul>
+<h3 id="แก้ไขหนังสือ-edit-duration-60-นาที">แก้ไขหนังสือ (Edit) (Duration: 60 นาที) </h3>
+<ul>
+<li>เมื่อกด “แก้ไข” ในหน้ารายละเอียด ให้แสดงฟอร์มแบบเติมค่าปัจจุบันของหนังสือ</li>
+<li>เขียน JavaScript ส่งคำขอ <code>PUT /books/:id</code> พร้อมข้อมูลใหม่ที่กรอก</li>
+<li>อัปเดตหน้า UI หลังแก้ไขเสร็จ (อาจ redirect กลับ หรือแสดงข้อความสำเร็จ)</li>
+</ul>
+<h3 id="สรุปการเชื่อมต่อ-front-end-และ-back-end-duration-40-นาที">สรุปการเชื่อมต่อ Front-End และ Back-End (Duration: 40 นาที) </h3>
+<ul>
+<li>ทบทวนการ map ระหว่างหน้าต่างๆ ของเว็บ กับ API (เช่น ฟอร์ม -&gt; <code>POST</code>, หน้ารายการ -&gt; <code>GET</code>)</li>
+<li>แนะนำวิธีตรวจสอบว่า Request ไปถึง Server หรือไม่ (ดู Network tab)</li>
+</ul>
+<h3 id="ฝึกปฏิบัติ-duration-80-นาที">ฝึกปฏิบัติ (Duration: 80 นาที) </h3>
+<ul>
+<li>ให้ผู้เรียนทำแบบฝึกหัดเขียนโค้ดเพิ่ม/แก้ไขหนังสือตามโจทย์</li>
+<li>ครูช่วยแก้ปัญหาเฉพาะหน้า และอธิบายเพิ่มเติมตามต้องการ</li>
+</ul>
+<h3 id="สรุปและถาม-ตอบ-duration-10-นาที">สรุปและถาม-ตอบ (Duration: 10 นาที) </h3>
+<hr>
+<h2 id="day-8-ระบบสมาชิกและการล็อกอินพื้นฐาน">Day 8: ระบบสมาชิกและการล็อกอินพื้นฐาน </h2>
+<h3 id="ออกแบบตารางสมาชิก-members-duration-40-นาที">ออกแบบตารางสมาชิก (Members) (Duration: 40 นาที) </h3>
+<ul>
+<li>สร้างตาราง <code>members</code> (เช่น id, username, email, password (hashed) ฯลฯ)</li>
+<li>ทบทวนหลักการ hashing รหัสผ่าน (เช่น bcrypt เบื้องต้น) เพื่อความปลอดภัย (คงไม่ลงลึกมาก)</li>
+</ul>
+<h3 id="สร้าง-api-จัดการสมาชิก-duration-40-นาที">สร้าง API จัดการสมาชิก (Duration: 40 นาที) </h3>
+<ul>
+<li>เขียน <code>POST /members</code> สำหรับสมัครสมาชิก (รับข้อมูล user/password)</li>
+<li>สร้าง <code>GET /members</code> (ดึงสมาชิกทั้งหมด), <code>GET /members/:id</code>, <code>PUT /members/:id</code>, <code>DELETE /members/:id</code> (ถ้ามีเวลา)</li>
+</ul>
+<h3 id="ยืนยันตัวตน-authentication-duration-60-นาที">ยืนยันตัวตน (Authentication) (Duration: 60 นาที) </h3>
+<ul>
+<li>อธิบายแนวคิดเบื้องต้น: session vs token (JWT) (เน้นง่ายๆ ว่าเป็นวิธีเก็บสถานะผู้ใช้)</li>
+<li>ใช้ Express session หรือ Cookie เพื่อตรวจสอบว่าใครล็อกอิน (ตั้งค่า <code>express-session</code>)</li>
+<li>สอนการเข้ารหัส / ตรวจสอบรหัสผ่านด้วย bcrypt (หรือบอกว่าเป็น step ถัดไป)</li>
+</ul>
+<h3 id="เขียนฟังก์ชันล็อกอินล็อกเอาต์-duration-60-นาที">เขียนฟังก์ชันล็อกอิน/ล็อกเอาต์ (Duration: 60 นาที) </h3>
+<ul>
+<li>เขียน API <code>POST /login</code> รับ username/password, ตรวจสอบกับฐานข้อมูล ถ้าถูกต้องเซ็ต session</li>
+<li>เขียน API <code>GET /logout</code> เคลียร์ session ของผู้ใช้</li>
+</ul>
+<h3 id="สร้างฟอร์มล็อกอินและลงทะเบียน-frontend-duration-60-นาที">สร้างฟอร์มล็อกอินและลงทะเบียน (Frontend) (Duration: 60 นาที) </h3>
+<ul>
+<li>สร้างหน้า <code>login.html</code> และ <code>register.html</code> ด้วย HTML/Tailwind</li>
+<li>มีช่องกรอก username/password และปุ่มยืนยัน</li>
+<li>เขียน JS ส่ง request: <code>POST /login</code> และ <code>POST /members</code> ตามลำดับ</li>
+</ul>
+<h3 id="ปกป้องเส้นทางที่สําคัญ-middleware-duration-40-นาที">ปกป้องเส้นทางที่สำคัญ (Middleware) (Duration: 40 นาที) </h3>
+<ul>
+<li>สร้าง middleware ตรวจสอบ session (เช่น <code>if (!req.session.user) return res.redirect('/login');</code>)</li>
+<li>ใช้ middleware นี้กับ route ที่ต้องล็อกอิน เช่น หน้า Dashboard หรือฟังก์ชันแก้ไขข้อมูล</li>
+</ul>
+<h3 id="ฝึกปฏิบัติและทดสอบ-duration-30-นาที">ฝึกปฏิบัติและทดสอบ (Duration: 30 นาที) </h3>
+<ul>
+<li>ทดสอบไหล่สอน: สร้างสมาชิกใหม่, ล็อกอิน, เข้าถึงข้อมูลส่วนตัว</li>
+<li>แก้ไขบั๊ก (เช่น cookie ไม่ทำงาน, ข้อมูลไม่ถูกส่ง)</li>
+</ul>
+<h3 id="สรุปและถาม-ตอบ-duration-20-นาที">สรุปและถาม-ตอบ (Duration: 20 นาที) </h3>
+<hr>
+<h2 id="day-9-ระบบยืม-คืนหนังสือ">Day 9: ระบบยืม-คืนหนังสือ </h2>
+<h3 id="ออกแบบตาราง-loans-duration-60-นาที">ออกแบบตาราง Loans (Duration: 60 นาที) </h3>
+<ul>
+<li>สร้างตาราง <code>loans</code> (เช่น id, book_id (FK), member_id (FK), borrow_date, return_date)</li>
+<li>เพิ่มสถานะหนังสือในตาราง <code>books</code> (เช่น available หรือ not available) เพื่อใช้ตรวจสอบการยืม</li>
+</ul>
+<h3 id="สร้าง-api-สําหรับยืมหนังสือ-post-loans-duration-60-นาที">สร้าง API สำหรับยืมหนังสือ (<code>POST /loans</code>) (Duration: 60 นาที) </h3>
+<ul>
+<li>เขียน route <code>POST /loans</code> เพื่อบันทึกการยืมใหม่ (รับ <code>book_id</code> และ <code>member_id</code>)</li>
+<li>อัปเดตสถานะในตาราง <code>books</code> เป็นยืมแล้ว (<code>available = false</code>)</li>
+<li>ส่งข้อมูล loan กลับ (หรือสถานะสำเร็จ)</li>
+</ul>
+<h3 id="สร้าง-api-สําหรับคืนหนังสือ-put-loansid-หรือ-delete-duration-40-นาที">สร้าง API สำหรับคืนหนังสือ (<code>PUT /loans/:id</code> หรือ <code>DELETE</code>) (Duration: 40 นาที) </h3>
+<ul>
+<li>เขียน route <code>PUT /loans/:id</code> เพื่อบันทึกคืนหนังสือ (เช่น set <code>return_date</code>)</li>
+<li>อัปเดตสถานะใน <code>books</code> เป็นว่าง (<code>available = true</code>)</li>
+<li>(หรือใช้ <code>DELETE /loans/:id</code> ถ้าไม่เก็บประวัติ)</li>
+</ul>
+<h3 id="สร้าง-api-แสดงประวัติยืม-get-loans-duration-40-นาที">สร้าง API แสดงประวัติยืม (<code>GET /loans</code>) (Duration: 40 นาที) </h3>
+<ul>
+<li>รวบรวมข้อมูลการยืมทั้งหมด (join กับหนังสือและสมาชิกเพื่อดึงชื่อ)</li>
+<li>ส่งคืน JSON ให้ front-end เพื่อแสดงใน Dashboard หรือหน้า members</li>
+</ul>
+<h3 id="สร้าง-ui-ยืม-คืน-frontend-duration-100-นาที">สร้าง UI ยืม-คืน (Frontend) (Duration: 100 นาที) </h3>
+<ul>
+<li>สร้างฟอร์มบนหน้าเว็บ เช่น ปุ่ม “ยืมหนังสือ” ในหน้ารายละเอียดหนังสือ (ถ้าว่าง)</li>
+<li>เมื่อกดปุ่ม ส่งคำขอ <code>POST /loans</code> ผ่าน Fetch (ใส่ <code>book_id</code>, <code>member_id</code> จาก session)</li>
+<li>สร้างฟอร์ม “คืนหนังสือ” ในหน้ารายละเอียดการยืมหรือที่หน้า Dashboard (ขึ้นกับโครงสร้าง)</li>
+<li>ส่งคำขอ <code>PUT /loans/:id</code> เมื่อยืนยันคืน</li>
+</ul>
+<h3 id="ฝึกใช้งานและแก้ปัญหา-duration-30-นาที">ฝึกใช้งานและแก้ปัญหา (Duration: 30 นาที) </h3>
+<ul>
+<li>ทดสอบการยืมและคืน ดูผลในฐานข้อมูล (status หนังสือต้องเปลี่ยน)</li>
+<li>แก้ไขบั๊ก เช่น กรณีไม่มีหนังสือ หรือหนังสือไม่ว่าง</li>
+</ul>
+<h3 id="สรุปและถาม-ตอบ-duration-10-นาที-1">สรุปและถาม-ตอบ (Duration: 10 นาที) </h3>
+<hr>
+<h2 id="day-10-หน้า-dashboard-และสรุปโครงการ">Day 10: หน้า Dashboard และสรุปโครงการ </h2>
+<h3 id="ออกแบบหน้า-dashboard-duration-60-นาที">ออกแบบหน้า Dashboard (Duration: 60 นาที) </h3>
+<ul>
+<li>สร้าง <code>dashboard.html</code> ด้วย Tailwind ให้แสดงสรุปข้อมูล (เช่น จำนวนหนังสือทั้งหมด, ยืมไปแล้ว, สมาชิก, ฯลฯ)</li>
+<li>อาจใช้การ์ดหรือกราฟเสริม (ถ้าเวลามี)</li>
+</ul>
+<h3 id="ดึงข้อมูลสถิติจาก-api-duration-40-นาที">ดึงข้อมูลสถิติจาก API (Duration: 40 นาที) </h3>
+<ul>
+<li>เขียน API เช่น <code>GET /stats</code> หรือใช้หลาย route (<code>/books</code>, <code>/loans</code>) เพื่อดึงตัวเลขสรุป</li>
+<li>ใช้ Fetch ในหน้า Dashboard มาเติมลงใน HTML (เช่น วนแสดงตัวเลข)</li>
+</ul>
+<h3 id="แสดงข้อมูลบน-dashboard-duration-40-นาที">แสดงข้อมูลบน Dashboard (Duration: 40 นาที) </h3>
+<ul>
+<li>แสดงรายชื่อสมาชิกใหม่ล่าสุดหรือหนังสือที่ถูกยืมบ่อย (ถ้าออกแบบมา)</li>
+<li>ปรับแต่งด้วย Tailwind ให้น่าใช้งาน</li>
+</ul>
+<h3 id="สรุปโครงสร้างโปรเจกต์-duration-100-นาที">สรุปโครงสร้างโปรเจกต์ (Duration: 100 นาที) </h3>
+<ul>
+<li>ทบทวนการทำงานโดยรวม: Frontend ↔ Backend ↔ Database</li>
+<li>สรุปไฟล์สำคัญในโปรเจกต์ (เช่น <code>app.js</code>, ไฟล์ route แต่ละอัน, structure ใน VS Code)</li>
+<li>ให้ผู้เรียนลองอธิบาย flow การทำงานของระบบ (ตั้งแต่เปิดหน้าเว็บถึงแสดงข้อมูล)</li>
+</ul>
+<h3 id="ทดสอบและแก้ไขปัญหาทั้งระบบ-duration-60-นาที">ทดสอบและแก้ไขปัญหาทั้งระบบ (Duration: 60 นาที) </h3>
+<ul>
+<li>ให้ผู้เรียนทดสอบฟีเจอร์ทั้งหมด (เพิ่ม/แก้หนังสือ, ยืม/คืน, ลงทะเบียน/ล็อกอิน)</li>
+<li>แก้ไขบั๊กที่พบ (เช่น Route ผิด, ข้อมูลไม่ถูกบันทึก)</li>
+</ul>
+<h3 id="สรุปบทเรียนและถาม-ตอบ-duration-60-นาที">สรุปบทเรียนและถาม-ตอบ (Duration: 60 นาที) </h3>
+<ul>
+<li>สรุปหัวข้อสำคัญทั้งหมดที่เรียนมา</li>
+<li>เปิดโอกาสให้ผู้เรียนถามคำถามเพิ่มเติม</li>
+<li>ให้คำแนะนำต่อยอด (เช่น นำไปพัฒนาต่อ, เรียนรู้ security, deployment ในอนาคต)</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

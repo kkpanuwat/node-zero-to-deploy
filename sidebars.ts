@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
           collapsed: false,
           link: {type: 'doc', id: 'nodejs-zero-to-hero/day-1-introduction/day-1-introduction'},
           items: [
+            'nodejs-zero-to-hero/day-1-introduction/day-1-nvm',
             'nodejs-zero-to-hero/day-1-introduction/day-1-core-concepts',
             {
               type: 'category',
@@ -74,6 +75,41 @@ const sidebars: SidebarsConfig = {
             },
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-debugging-checklist',
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-mini-project',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Day 3 — Express.js Core',
+          collapsed: false,
+          link: {type: 'doc', id: 'nodejs-zero-to-hero/day-3-express-core/day-3-express-core'},
+          items: [
+            'nodejs-zero-to-hero/day-3-express-core/day-3-http-refresher',
+            'nodejs-zero-to-hero/day-3-express-core/day-3-lecture-notes',
+            'nodejs-zero-to-hero/day-3-express-core/day-3-core-concepts',
+            'nodejs-zero-to-hero/day-3-express-core/day-3-routing-and-middleware',
+            'nodejs-zero-to-hero/day-3-express-core/day-3-params-query-and-status-codes',
+            'nodejs-zero-to-hero/day-3-express-core/day-3-error-handling-and-404',
+            {
+              type: 'category',
+              label: 'Hands-on Labs',
+              link: {
+                type: 'doc',
+                id: 'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-1-express-foundation'
+              },
+              items: [
+                'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-1-express-foundation',
+                'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-2-books-endpoint',
+                'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-3-router-controller',
+                'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-4-middleware-logger',
+                'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-5-git-checkpoint',
+                'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-6-get-book-by-id',
+                'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-7-query-search-and-limit',
+                'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-8-404-and-error-middleware',
+                'nodejs-zero-to-hero/day-3-express-core/labs/day-3-lab-9-api-testing-drills',
+              ],
+            },
+            'nodejs-zero-to-hero/day-3-express-core/day-3-debugging-checklist',
+            'nodejs-zero-to-hero/day-3-express-core/day-3-mini-project',
           ],
         },
       ],

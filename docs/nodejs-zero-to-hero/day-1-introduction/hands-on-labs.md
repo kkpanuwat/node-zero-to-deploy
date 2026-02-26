@@ -2,7 +2,7 @@
 id: day-1-hands-on-labs
 title: 'Day 1: Hands-on Labs'
 sidebar_label: 'Hands-on Labs'
-description: Workshop ตั้งค่าโฟลเดอร์ เขียน hello-library.js และทำ Git commit แรก
+description: Workshop ธีม KKU Library — ตั้งค่าโฟลเดอร์, เขียน hello-library.js และทำ Git commit แรก
 ---
 
 # Part 4 — Hands-on Labs
@@ -20,21 +20,20 @@ code .
 
 - ถ้า `code .` ใช้ไม่ได้ แปลว่ายังไม่ได้ติดตั้งคำสั่ง `code` สำหรับ VS Code (ดูหัวข้อ Troubleshooting ท้ายหน้า)
 
-## Lab 1 — ตั้งค่าโฟลเดอร์ Library System
+## Lab 1 — ตั้งค่าโฟลเดอร์ KKU Library System
 
 1. เปิด Terminal
-2. พิมพ์ `mkdir library-system && cd library-system`
+2. พิมพ์ `mkdir kku-library-system && cd kku-library-system`
 3. พิมพ์ `npm init -y` (อธิบายว่าไฟล์ `package.json` เก็บข้อมูลโปรเจกต์ เช่น ชื่อ, เวอร์ชัน, สคริปต์)
 4. สร้างไฟล์ `.gitignore` และใส่บรรทัดนี้ (อธิบายว่าเราไม่ commit ของที่ติดตั้งใหม่ได้เสมอ และใหญ่เกินจำเป็น):
    ```
    node_modules/
    ```
-5. สร้างไฟล์ `README.md` แล้วให้ผู้เรียนจด bullet “สิ่งที่ได้เรียนวันนี้”
-6. เปิดโฟลเดอร์ใน VS Code (`code .`)
+5. เปิดโฟลเดอร์ใน VS Code (`code .`)
 
 ---
 
-## Lab 2 — เขียนโค้ด Hello Library (Code-along + ทดลองเพิ่มเอง)
+## Lab 2 — เขียนโค้ด Hello KKU Library (Code-along + ทดลองเพิ่มเอง)
 
 ได้เวลาเขียนโค้ด JavaScript แรกกันแล้ว! เปิดไฟล์ `hello-library.js` ใน VS Code แล้วพิมพ์โค้ดต่อไปนี้ตามได้เลยครับ เราจะมาทำความเข้าใจความหมายของแต่ละส่วนไปพร้อม ๆ กัน
 
@@ -45,14 +44,14 @@ code .
 
 // ใช้ const เพื่อสร้าง "กล่อง" เก็บข้อมูลที่ค่าจะไม่เปลี่ยน
 // libraryName คือชื่อกล่อง ในที่นี้เก็บข้อความ (String)
-const libraryName = "My Awesome Library";
+const libraryName = "KKU Library (Khon Kaen University)";
 
 // books คือกล่องที่เก็บ "รายการ" ของข้อมูล (Array)
 // ในที่นี้คือรายการชื่อหนังสือ
 const books = [
   "Clean Code",
-  "Designing Data-Intensive Applications",
   "Node.js in Action",
+  "Database System Concepts",
   "The Pragmatic Programmer",
 ];
 
@@ -85,7 +84,7 @@ books.forEach((book, index) => {
 
 - **`const`**: คำสั่งสำหรับสร้าง "ตัวแปร" หรือ "กล่องเก็บข้อมูล" แบบค่าคงที่ (Constant) หมายความว่าเมื่อเรากำหนดค่าให้มันครั้งแรกแล้ว จะไม่สามารถเปลี่ยนค่าได้อีก เหมาะสำหรับข้อมูลที่เราไม่ต้องการให้เปลี่ยน เช่น ชื่อระบบ, ค่า pi (3.14)
 - **`libraryName`**: นี่คือ "ชื่อ" ของตัวแปรที่เราตั้งขึ้นเอง เพื่อให้เราจำได้ว่ามันเก็บข้อมูลอะไร
-- **`"My Awesome Library"`**: ข้อมูลประเภท "ข้อความ" (String) จะต้องอยู่ภายในเครื่องหมายคำพูด `""` หรือ `''` เสมอ
+- **`"KKU Library (Khon Kaen University)"`**: ข้อมูลประเภท "ข้อความ" (String) จะต้องอยู่ภายในเครื่องหมายคำพูด `""` หรือ `''` เสมอ
 - **`books`**: ชื่อตัวแปรอีกตัวหนึ่ง
 - **`[...]`**: ข้อมูลประเภท "อาร์เรย์" (Array) หรือ "รายการ" ใช้สำหรับเก็บข้อมูลหลายชิ้นไว้ในที่เดียว โดยแต่ละชิ้นจะคั่นด้วยเครื่องหมายลูกน้ำ `,`
 
@@ -112,7 +111,7 @@ books.forEach((book, index) => {
 
 </details>
 
-### ลงมือทำและทดลอง
+### ทดสอบโปรแกรม
 
 1. **รันโปรแกรม:** กลับไปที่ Terminal แล้วพิมพ์คำสั่ง:
 
@@ -123,12 +122,12 @@ node hello-library.js
 คุณควรจะเห็นผลลัพธ์ประมาณนี้:
 
 ```text
-สวัสดีจาก My Awesome Library
+สวัสดีจาก KKU Library (Khon Kaen University)
 วันนี้มีหนังสือในระบบ 4 เล่ม
 --- รายการหนังสือทั้งหมด ---
 1. Clean Code
-2. Designing Data-Intensive Applications
-3. Node.js in Action
+2. Node.js in Action
+3. Database System Concepts
 4. The Pragmatic Programmer
 ```
 
@@ -145,6 +144,7 @@ node hello-library.js
 2. ใน `printLibraryStatus(books)` เดิม:
    - ถ้า `books.length > 3` ให้แสดงเพิ่ม `"หนังสือเยอะมาก! เลือกอ่านได้เลย"` (ถ้ามี 3 เล่มพอดี จะไม่แสดงบรรทัดนี้ เพราะเงื่อนไขคือ `> 3`)
 3. ทำฟังก์ชัน `hasBook(books, title)` เพื่อเช็คว่า “มีหนังสือนี้อยู่ในระบบไหม” (ใบ้: ใช้ `books.includes(title)`)
+4. (ธีม KKU Library) ทำตัวแปร `openHour` และ `closeHour` (ตัวเลข 0–23) แล้วเขียนเงื่อนไขแสดงว่า “หอสมุดเปิดอยู่ไหม” จากชั่วโมงปัจจุบัน (ใบ้: `new Date().getHours()`)
 
 #### Sequence Diagram
 
@@ -159,9 +159,9 @@ node hello-library.js
 sequenceDiagram
   participant User
   participant Terminal
-  participant App as mini-hallenges.js
+  participant App as mini-challenges.js
 
-  User->>Terminal: รัน node mini-hallenges.js
+  User->>Terminal: รัน node mini-challenges.js
   Terminal->>App: เริ่มรันสคริปต์
 
   App->>App: printLibraryStatus(books)
@@ -182,9 +182,9 @@ sequenceDiagram
 sequenceDiagram
   participant User
   participant Terminal
-  participant App as mini-hallenges.js
+  participant App as mini-challenges.js
 
-  User->>Terminal: รัน node mini-hallenges.js
+  User->>Terminal: รัน node mini-challenges.js
   Terminal->>App: เริ่มรันสคริปต์
 
   App->>App: hasBook(books, "<title>")
@@ -225,7 +225,7 @@ console.log("มี Clean Code ไหม:", hasBook(books, "Clean Code"));
 3. `git diff` → ดูว่ามีอะไรเปลี่ยนไปจากเดิมบ้าง (ก่อนจะถ่าย snapshot)
 4. `git add .`
 5. `git status` อีกรอบเพื่อเช็กว่าไฟล์ขึ้นเป็น staged แล้ว
-6. `git commit -m "feat: add hello-library script"`
+6. `git commit -m "feat: add kku-library welcome script"`
 7. `git log --oneline` เพื่อดูว่า commit ถูกบันทึกแล้วจริง
 8. บันทึกใน `README.md` ว่าการ commit คือการ “ถ่ายรูป” งานเก็บไว้ย้อนกลับได้
 
@@ -234,7 +234,7 @@ console.log("มี Clean Code ไหม:", hasBook(books, "Clean Code"));
 ถ้าอยากฝึก workflow แบบทีม ให้ลองสร้าง branch ก่อน commit:
 
 ```bash
-git checkout -b feature/hello-library
+git checkout -b feature/kku-library
 ```
 
 จากนั้นค่อย `git add` และ `git commit` ตามขั้นตอนด้านบน

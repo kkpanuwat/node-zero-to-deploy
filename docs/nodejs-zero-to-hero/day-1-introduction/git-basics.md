@@ -17,29 +17,77 @@ Git คือเครื่องมือบนเครื่องเรา 
 
 1) เข้าไปที่ https://github.com/signup  
 <p align="center">
-  <img src={require('../../../static/img/day-1/git-1.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+  <img src={require('../../../static/img/day-1/git-1.png').default} alt="หน้าแรก GitHub (มีปุ่ม Sign up มุมขวาบน)" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+<p align="center">
+  <em>ภาพที่ 1: หน้าแรก GitHub — กด <strong>Sign up</strong> (มุมขวาบน) เพื่อเริ่มสมัคร หรือพิมพ์อีเมลในช่องกลางหน้าแล้วกด <strong>Sign up for GitHub</strong> ก็ได้</em>
 </p>
 2) กรอก `Email` / `Password` / `Username` แล้วทำขั้นตอนยืนยันตามที่เว็บแจ้ง หรือสามารถสมัครผ่าน Google account ได้ 
 <p align="center">
-  <img src={require('../../../static/img/day-1/git-2.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+  <img src={require('../../../static/img/day-1/git-2.png').default} alt="หน้า Sign up for GitHub (ฟอร์ม Email/Password/Username และปุ่ม Create account)" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+<p align="center">
+  <em>ภาพที่ 2: หน้า Sign up — เลือกสมัครด้วย Google/Apple หรือกรอกอีเมล/รหัสผ่าน/ชื่อผู้ใช้ จากนั้นกด <strong>Create account</strong> (ถ้ามีบัญชีอยู่แล้วกด <strong>Sign in</strong> มุมขวาบนได้เลย)</em>
 </p>
 3) ไปที่อีเมล แล้วกดลิงก์เพื่อ **Verify email** (ถ้าไม่ verify บางฟีเจอร์จะใช้ไม่ได้)  
 4) (แนะนำ) เปิด **Two-factor authentication (2FA)** ใน Settings เพื่อความปลอดภัย  
+
+### วิธี Login GitHub (บนเว็บ)
+
+1) เข้าไปที่ https://github.com/login (หรือกด **Sign in** มุมขวาบนจากหน้าแรก)  
+2) กรอก **Username/Email** และ **Password** แล้วกด **Sign in**  
+3) ถ้าเปิด **2FA** ไว้ ระบบจะให้กรอกรหัสยืนยัน (Authenticator / SMS / Passkey แล้วแต่ที่ตั้งค่า)  
+
+> ทิป: ถ้าเครื่องเป็นเครื่องสาธารณะ อย่าติ๊ก “Remember me” และอย่าลืม Sign out ทุกครั้ง
+
+### สร้าง Repository แรกบน GitHub
 
 หลังสมัครเสร็จ คุณจะสามารถ:
 
 - สร้าง repository ใหม่บน GitHub
 <p align="center">
-  <img src={require('../../../static/img/day-1/git-3.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+  <img src={require('../../../static/img/day-1/git-3.png').default} alt="หน้า GitHub Dashboard (ปุ่ม New เพื่อสร้าง repository)" style={{maxWidth: '800px', width: '100%'}} />
 </p>
 <p align="center">
-  <img src={require('../../../static/img/day-1/git-4.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+  <em>ภาพที่ 3: GitHub Dashboard — กดปุ่ม <strong>New</strong> เพื่อสร้าง repository ใหม่</em>
 </p>
 <p align="center">
-  <img src={require('../../../static/img/day-1/git-5.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+  <img src={require('../../../static/img/day-1/git-4.png').default} alt="หน้า Create a new repository (ตั้งชื่อ repo, เลือก Public/Private และกด Create repository)" style={{maxWidth: '800px', width: '100%'}} />
 </p>
+<p align="center">
+  <em>ภาพที่ 4: ฟอร์มสร้าง repo — ตั้งชื่อ <strong>Repository name</strong>, เลือก <strong>Public/Private</strong>, (ถ้าต้องการ) เปิด <strong>Add README</strong> แล้วกด <strong>Create repository</strong></em>
+</p>
+<p align="center">
+  <img src={require('../../../static/img/day-1/git-5.png').default} alt="หน้า repo หลังสร้างเสร็จ (Quick setup, URL และคำสั่ง git remote/push)" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+<p align="center">
+  <em>ภาพที่ 5: หน้า repo หลังสร้างเสร็จ — คัดลอก URL (HTTPS/SSH) และทำตามคำสั่งด้านล่างเพื่อเชื่อม repo บนเครื่องกับ GitHub แล้ว <strong>push</strong> ขึ้นไป</em>
+</p>
+> หมายเหตุ: ถ้าใช้ **HTTPS** ตอน `git push` ระบบจะให้ยืนยันตัวตนด้วย **Personal Access Token (PAT)** (ไม่ใช้ password แล้ว) หรืออีกทางคือใช้ **SSH** แล้วตั้งค่า SSH key ครั้งเดียว
 - ทำงานผ่าน Pull Request/Code Review
 - เชื่อม repo บนเครื่องเข้ากับ GitHub ด้วย `git remote add origin ...` แล้ว `git push`
+
+### Login/เชื่อม GitHub กับ VS Code (แนะนำ)
+
+เวลาใช้ VS Code ทำงานกับ GitHub (เช่น GitHub Actions, Copilot, หรือเปิด repo ผ่านบัญชี) เราสามารถ Sign in ได้จากในโปรแกรม
+
+1) เปิด VS Code → คลิกไอคอนโปรไฟล์มุมซ้ายล่าง → เลือก **Sign in with GitHub**
+<p align="center">
+  <img src={require('../../../static/img/day-1/git-6.png').default} alt="VS Code (เมนูโปรไฟล์มุมซ้ายล่าง และตัวเลือก Sign in with GitHub)" style={{maxWidth: '900px', width: '100%'}} />
+</p>
+<p align="center">
+  <em>ภาพที่ 6: VS Code — เริ่ม Sign in โดยกด <strong>Sign in with GitHub</strong> จากเมนูโปรไฟล์มุมซ้ายล่าง</em>
+</p>
+
+2) เบราว์เซอร์จะเด้งหน้า GitHub ให้ “Authorize Visual Studio Code” → เลือกบัญชีแล้วกด **Continue**
+<p align="center">
+  <img src={require('../../../static/img/day-1/git-7.png').default} alt="GitHub Authorize Visual Studio Code (ปุ่ม Continue หรือเลือกบัญชีอื่น)" style={{maxWidth: '900px', width: '100%'}} />
+</p>
+<p align="center">
+  <em>ภาพที่ 7: GitHub Authorization — อนุญาตให้ VS Code เข้าถึงบัญชี GitHub (ถ้ามี 2FA ระบบจะให้ยืนยันเพิ่ม)</em>
+</p>
+
+3) กลับมา VS Code → สถานะด้านล่างควรขึ้นว่า Sign in แล้ว (จากนั้นค่อย clone/pull/push ได้ตามปกติ)
 
 ## ทำไมต้องใช้ Version Control
 

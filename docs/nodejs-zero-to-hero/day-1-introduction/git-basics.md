@@ -9,6 +9,38 @@ description: เข้าใจ Git คืออะไร, ทำไมต้อ
 
 Git คือระบบ **Version Control** (VCS) ที่ช่วยให้เราบันทึก, ย้อนกลับ, และทำงานร่วมกับผู้อื่นได้อย่างเป็นระเบียบ เสมือนมี Time Machine สำหรับซอร์สโค้ด เมื่อทำงานโปรเจกต์จริง Git จะเป็นหัวใจที่คอยเชื่อมต่อทั้งทีมเข้าด้วยกัน
 
+## สมัคร GitHub (เพื่อเก็บโค้ดออนไลน์/ทำงานเป็นทีม)
+
+Git คือเครื่องมือบนเครื่องเรา แต่เวลาทำงานเป็นทีมเรามักใช้ **GitHub** เป็นที่เก็บ repo แบบออนไลน์ (remote)
+
+### Step-by-step สมัคร GitHub
+
+1) เข้าไปที่ https://github.com/signup  
+<p align="center">
+  <img src={require('../../../static/img/day-1/git-1.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+2) กรอก `Email` / `Password` / `Username` แล้วทำขั้นตอนยืนยันตามที่เว็บแจ้ง หรือสามารถสมัครผ่าน Google account ได้ 
+<p align="center">
+  <img src={require('../../../static/img/day-1/git-2.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+3) ไปที่อีเมล แล้วกดลิงก์เพื่อ **Verify email** (ถ้าไม่ verify บางฟีเจอร์จะใช้ไม่ได้)  
+4) (แนะนำ) เปิด **Two-factor authentication (2FA)** ใน Settings เพื่อความปลอดภัย  
+
+หลังสมัครเสร็จ คุณจะสามารถ:
+
+- สร้าง repository ใหม่บน GitHub
+<p align="center">
+  <img src={require('../../../static/img/day-1/git-3.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+<p align="center">
+  <img src={require('../../../static/img/day-1/git-4.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+<p align="center">
+  <img src={require('../../../static/img/day-1/git-5.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+- ทำงานผ่าน Pull Request/Code Review
+- เชื่อม repo บนเครื่องเข้ากับ GitHub ด้วย `git remote add origin ...` แล้ว `git push`
+
 ## ทำไมต้องใช้ Version Control
 
 - **ย้อนเวลาได้:** ทุก commit เก็บ snapshot ของโค้ด หากเกิดปัญหาสามารถย้อนกลับไปยังสถานะก่อนหน้าได้ทันที

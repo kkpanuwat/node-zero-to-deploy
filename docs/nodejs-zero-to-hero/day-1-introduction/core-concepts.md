@@ -5,7 +5,7 @@ sidebar_label: 'Core Concepts'
 description: ทำความเข้าใจภาพรวมโปรแกรม Request/Response Terminal Express และการแบ่งหน้าที่ Client/Server
 ---
 
-# Part 1 — Concepts สำหรับมือใหม่
+# Part 1 — Concepts
 
 ## Web Overview (User → Server → Response)
 
@@ -48,10 +48,8 @@ library-system/
   สมมติว่าเราต้องการสร้างระบบห้องสมุดดิจิทัล เราสามารถใช้ JavaScript ในการพัฒนาส่วนประกอบทั้งหมดของระบบได้เลย:
   1.  **Web Application (Frontend):** พัฒนาด้วย React เพื่อให้ผู้ใช้มีประสบการณ์การใช้งานที่ดี
   2.  **Backend API:** พัฒนาด้วย Node.js และ Express เพื่อเป็นแกนกลางของระบบ
-  3.  **Mobile Application:** พัฒนาด้วย React Native เพื่อให้ใช้งานบนมือถือได้
   จะเห็นว่าเราสามารถใช้ภาษาเดียวในการพัฒนาระบบที่ครอบคลุมได้ทั้งหมดครับ
-- **Ecosystem ใหญ่**: npm มีแพ็กเกจกว่า 2 ล้าน ถัดจาก Day 1 นักเรียนจะได้ลอง `nodemon` (รีรันอัตโนมัติ), `express` (สร้าง API), `mysql2`/`prisma` (คุยกับฐานข้อมูล), `dotenv` (จัดการ environment)
-- **เชื่อมกลับโปรเจกต์เรา**: วันนี้แค่ Array + `console.log` แต่ Day 3 จะมี API `/books`, Day 6 เชื่อม Database, Day 8 เชื่อม Frontend ทั้งหมดด้วยภาษาเดียว → นี่แหละคือ “JavaScript Revolution”
+- **Ecosystem ใหญ่**: npm มีแพ็กเกจกว่า 2 ล้าน ถัดจาก Day 1 จะได้ลอง `nodemon` (รีรันอัตโนมัติ), `express` (สร้าง API), `mysql2`/`prisma` (คุยกับฐานข้อมูล), `dotenv` (จัดการ environment)
 
 ## Introducing Express
 

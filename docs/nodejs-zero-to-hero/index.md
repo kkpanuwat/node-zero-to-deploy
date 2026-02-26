@@ -6,6 +6,10 @@ sidebar_position: 2
 
 # KKU Library (Express.js + Next.js + GraphQL + PostgreSQL)
 
+<p align="center">
+  <img src={require('../../static/img/day-1/thumbnail.png').default} alt="Day 1 Hero" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+
 > คอร์สนี้โฟกัส “สร้างระบบ KKU Library” แบบ Full‑stack โดยสอนเฉพาะสิ่งที่จำเป็น: **Git**, **Express.js**, **GraphQL**, **Next.js**, และ **Docker (สำหรับรัน DB)**
 
 เป้าหมายคือทำระบบห้องสมุดที่มีทั้ง **Backend API** และ **Frontend** เชื่อมกับฐานข้อมูลจริง (รันผ่าน Docker) พร้อม workflow ทำงานแบบทีมด้วย Git/GitHub

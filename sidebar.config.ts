@@ -28,5 +28,8 @@ export type SidebarToggleConfig = {
  */
 export const sidebarToggleConfig: SidebarToggleConfig = {
   // แสดง "เฉพาะ Day 1" ในเมนู
-  enabledCategoryDocIds: ['nodejs-zero-to-hero/day-1-introduction/day-1-introduction'],
+  enabledCategoryDocIds: [
+    'nodejs-zero-to-hero/day-1-introduction/day-1-introduction',
+    'nodejs-zero-to-hero/day-2-nodejs-express/day-2-nodejs-express',
+  ],
 };

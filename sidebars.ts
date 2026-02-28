@@ -228,6 +228,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-core-concepts',
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-http-routing',
+            'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-node-express-quickstart',
             {
               type: 'category',
               label: 'Hands-on Labs',
@@ -248,6 +249,20 @@ const sidebars: SidebarsConfig = {
             },
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-debugging-checklist',
             'nodejs-zero-to-hero/day-2-nodejs-project-structure/day-2-mini-project',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Day 2 — Node.js & Express.js',
+          collapsed: false,
+          link: {type: 'doc', id: 'nodejs-zero-to-hero/day-2-nodejs-express/day-2-nodejs-express'},
+          items: [
+            'nodejs-zero-to-hero/day-2-nodejs-express/day-2-introduction-express-js',
+            'nodejs-zero-to-hero/day-2-nodejs-express/day-2-http-server',
+            'nodejs-zero-to-hero/day-2-nodejs-express/day-2-express-js',
+            'nodejs-zero-to-hero/day-2-nodejs-express/day-2-http-method',
+            'nodejs-zero-to-hero/day-2-nodejs-express/day-2-url-structure',
+            'nodejs-zero-to-hero/day-2-nodejs-express/day-2-lab',
           ],
         },
         {

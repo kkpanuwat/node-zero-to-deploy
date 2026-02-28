@@ -65,6 +65,11 @@
   color: var(--kcode-blue-500);
 }
 
+/* Minimal spacing utilities (Tailwind-like names). */
+.mt-8 {
+  margin-top: 2rem;
+}
+
 .kcode-logo {
   margin: 0;
   line-height: 1;

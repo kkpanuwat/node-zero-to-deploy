@@ -31,5 +31,6 @@ export const sidebarToggleConfig: SidebarToggleConfig = {
   enabledCategoryDocIds: [
     'nodejs-zero-to-hero/day-1-introduction/day-1-introduction',
     'nodejs-zero-to-hero/day-2-nodejs-express/day-2-nodejs-express',
+    'nodejs-zero-to-hero/day-3-docker/day-3-docker',
   ],
 };

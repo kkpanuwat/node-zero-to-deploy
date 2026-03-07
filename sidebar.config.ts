@@ -32,5 +32,6 @@ export const sidebarToggleConfig: SidebarToggleConfig = {
     'nodejs-zero-to-hero/day-1-introduction/day-1-introduction',
     'nodejs-zero-to-hero/day-2-nodejs-express/day-2-nodejs-express',
     'nodejs-zero-to-hero/day-3-docker/day-3-docker',
+    'nodejs-zero-to-hero/day-4-express-2/day-4-express-2',
   ],
 };

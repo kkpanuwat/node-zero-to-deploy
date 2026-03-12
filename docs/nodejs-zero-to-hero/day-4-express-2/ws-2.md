@@ -10,13 +10,11 @@ Workshop นี้เป็นโจทย์สั้น ๆ เพื่อฝ
 
 ## เป้าหมาย (Learning Outcomes)
 
-หลังจบ workshop นี้ควรจะ:
-
 - สร้าง endpoint `POST /users` เพื่อสร้างผู้ใช้ใหม่ได้
 - เขียน middleware `validateCreateUser` เพื่อ validate `req.body` ให้ครบ/ถูกชนิดข้อมูล
 - เก็บ `password` แบบปลอดภัยด้วยการ hash และบันทึกลงฐานข้อมูล (เก็บเป็น `password_hash`)
 - ใช้ parameterized query เพื่อป้องกัน SQL injection
-- แยกความรับผิดชอบ: validation → handler → response ให้ชัดเจน
+- validation → route → repository → response ให้ชัดเจน
 - เข้าใจลำดับการทำงานของ Express middleware ผ่าน sequence diagram
 
 ---
@@ -116,6 +114,8 @@ express-mw-ws2/
       pool.js
     middlewares/
       validateCreateUser.js
+    repositories/
+      user.repo.js
     routes/
       users.routes.js
   sql/
@@ -237,7 +237,8 @@ const app = express();
 // ต้องมาก่อน validation/route ที่อ่าน req.body
 app.use(express.json());
 
-app.use(usersRouter);
+// mount router ที่ /users
+app.use('/users', usersRouter);
 
 module.exports = app;
 ```
@@ -295,20 +296,45 @@ module.exports = validateCreateUser;
 
 ---
 
-## Step 6: สร้าง route `POST /users` (hash password + insert ลง DB)
+## Step 6: สร้าง Repo user
+
+สร้างไฟล์ `src/repositories/user.repo.js`
+
+```js
+const env = require('../config/env');
+const pool = require('../db/pool');
+
+async function createUser({ email, name, passwordHash }) {
+  const sql = `
+    INSERT INTO ${env.dbSchema}.users (email, name, password_hash)
+    VALUES ($1, $2, $3)
+    RETURNING id, email, name, created_at
+  `;
+
+  const result = await pool.query(sql, [email, name, passwordHash]);
+  return result.rows[0];
+}
+
+module.exports = {
+  createUser,
+};
+```
+
+---
+
+## Step 7: สร้าง route `POST /users` (hash password + เรียก repo)
 
 สร้างไฟล์ `src/routes/users.routes.js`
 
 ```js
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const env = require('../config/env');
-const pool = require('../db/pool');
 const validateCreateUser = require('../middlewares/validateCreateUser');
+const userRepo = require('../repositories/user.repo');
 
 const router = express.Router();
 
-router.post('/users', validateCreateUser, async (req, res, next) => {
+router.post('/', validateCreateUser, async (req, res, next) => {
   try {
     const email = req.body.email.trim().toLowerCase();
     const name = req.body.name.trim();
@@ -317,14 +343,7 @@ router.post('/users', validateCreateUser, async (req, res, next) => {
     // ห้ามเก็บ password แบบ plain text -> hash ก่อน
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const sql = `
-      INSERT INTO ${env.dbSchema}.users (email, name, password_hash)
-      VALUES ($1, $2, $3)
-      RETURNING id, email, name, created_at
-    `;
-
-    const result = await pool.query(sql, [email, name, passwordHash]);
-    const user = result.rows[0];
+    const user = await userRepo.createUser({ email, name, passwordHash });
 
     res.status(201).json({
       id: user.id,
@@ -350,7 +369,7 @@ module.exports = router;
 
 ---
 
-## Step 7: สร้าง `server.js` แล้วรัน
+## Step 8: สร้าง `server.js` แล้วรัน
 
 สร้างไฟล์ `src/server.js`
 
@@ -409,6 +428,7 @@ sequenceDiagram
   participant JSON as express.json()
   participant V as validateCreateUser
   participant H as POST /users handler
+  participant R as userRepo.createUser
   participant B as bcrypt.hash()
   participant DB as PostgreSQL
 
@@ -420,15 +440,18 @@ sequenceDiagram
     V-->>Client: 400 {message, errors}
   else valid payload
     V-->>App: next()
-    App->>H: route handler
+    App->>H: mounted at /users (router POST /)
     H->>B: hash(password)
     B-->>H: passwordHash
-    H->>DB: INSERT app.users(...) RETURNING ...
+    H->>R: createUser({email,name,passwordHash})
+    R->>DB: INSERT app.users(...) RETURNING ...
     alt email already exists
-      DB-->>H: error code 23505
+      DB-->>R: error code 23505
+      R-->>H: throw error
       H-->>Client: 409 {message}
     else success
-      DB-->>H: row(id,email,name,created_at)
+      DB-->>R: row(id,email,name,created_at)
+      R-->>H: user row
       H-->>Client: 201 {id,email,name,createdAt}
     end
   end
@@ -445,7 +468,7 @@ sequenceDiagram
 4) **Route handler เตรียมข้อมูลและ hash รหัสผ่าน**  
    - normalize: `email` → trim + lowercase, `name` → trim
    - hash `password` ด้วย bcrypt แล้วเก็บเป็น `password_hash` (ไม่เก็บ plain text)
-5) **INSERT ลง PostgreSQL** ด้วย parameterized query  
+5) **เรียก Repository ให้จัดการ DB** (INSERT ด้วย parameterized query)  
    - ถ้า `email` ซ้ำ DB จะตอบ error `23505` (unique violation) → API ตอบ `409`
    - ถ้าสำเร็จ DB จะคืนค่าจาก `RETURNING` → API ตอบ `201`
 

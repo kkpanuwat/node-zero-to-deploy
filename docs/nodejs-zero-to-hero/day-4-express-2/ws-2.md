@@ -30,6 +30,12 @@ Workshop นี้เป็นโจทย์สั้น ๆ เพื่อฝ
 
 ---
 
+## Github
+
+```text
+https://github.com/kkpanuwat/day-4-ws-2
+```
+
 ## โจทย์ (Task)
 
 ให้สร้าง API ดังนี้:

@@ -20,6 +20,12 @@ sidebar_label: 'Workshop 1: Borrow'
 
 ---
 
+## Github
+
+```text
+https://github.com/kkpanuwat/day-5-ws-1
+```
+
 ## 1) สเปกของ `POST /borrows`
 
 **Method:** `POST`  

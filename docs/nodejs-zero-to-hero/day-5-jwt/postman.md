@@ -173,9 +173,7 @@ pm.environment.set('accessToken', json.accessToken);
 
 ---
 
-## 7) เก็บงาน (แชร์กับเพื่อน/ส่งตรวจ)
+## 7) แชร์ Collection
 
 1) คลิก collection → **Export** → เลือก `Collection v2.1` ได้ไฟล์ `.json`
 2) คลิก environment `local` → **Export** ได้ไฟล์ `.json`
-
-> ก่อนส่ง แนะนำให้ลบค่า `accessToken` ออก (หรือ set ให้เป็นค่าว่าง) แล้วค่อย export

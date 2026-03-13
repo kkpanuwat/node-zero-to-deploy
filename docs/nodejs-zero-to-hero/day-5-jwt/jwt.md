@@ -329,7 +329,7 @@ curl -i http://localhost:3000/me -H "Authorization: Bearer nope"
 
 ---
 
-## 9) เช็คให้ครบก่อนจบคาบ
+## 9) Recheck
 
 - payload ห้ามมีข้อมูลลับ
 - token ต้องมีวันหมดอายุ

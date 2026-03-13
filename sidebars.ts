@@ -293,6 +293,18 @@ const sidebars: SidebarsConfig = {
             'nodejs-zero-to-hero/day-4-express-2/day-4-express-2-ws-2',
           ],
         },
+        {
+          type: 'category',
+          label: 'Day 5 — JWT',
+          collapsed: false,
+          link: {type: 'doc', id: 'nodejs-zero-to-hero/day-5-jwt/day-5-jwt'},
+          items: [
+            'nodejs-zero-to-hero/day-5-jwt/day-5-jwt-60m',
+            'nodejs-zero-to-hero/day-5-jwt/day-5-postman-create-login-me',
+            'nodejs-zero-to-hero/day-5-jwt/day-5-ws-1',
+            'nodejs-zero-to-hero/day-5-jwt/day-5-ws-2',
+          ],
+        },
       ],
     },
   ] as SidebarItemConfig[]),

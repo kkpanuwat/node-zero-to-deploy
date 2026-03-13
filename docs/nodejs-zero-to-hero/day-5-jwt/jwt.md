@@ -280,7 +280,7 @@ const authRequired = require('../middlewares/authRequired');
 
 const router = express.Router();
 
-router.get('/me', authRequired, (req, res) => {
+router.get('/', authRequired, (req, res) => {
   res.json({
     user: {
       id: req.user.sub,
@@ -340,5 +340,4 @@ curl -i http://localhost:3000/me -H "Authorization: Bearer nope"
 
 ## แบบฝึกหัด
 
-- เพิ่ม `GET /admin/ping` แล้วตรวจ `req.user.role` ถ้าไม่ใช่ `admin` ให้ตอบ 403
 - ตั้ง `JWT_EXPIRES_IN=1m` แล้วลองให้ token หมดอายุจริง

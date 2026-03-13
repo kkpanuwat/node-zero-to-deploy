@@ -305,6 +305,18 @@ const sidebars: SidebarsConfig = {
             'nodejs-zero-to-hero/day-5-jwt/day-5-ws-2',
           ],
         },
+        // {
+        //   type: 'category',
+        //   label: 'Day 6 — Next.js + Tailwind (JS)',
+        //   collapsed: false,
+        //   link: {type: 'doc', id: 'nodejs-zero-to-hero/day-6-nextjs-tailwind/day-6-nextjs-tailwind'},
+        //   items: [
+        //     'nodejs-zero-to-hero/day-6-nextjs-tailwind/day-6-setup',
+        //     'nodejs-zero-to-hero/day-6-nextjs-tailwind/day-6-next-basics',
+        //     'nodejs-zero-to-hero/day-6-nextjs-tailwind/day-6-tailwind-basics',
+        //     'nodejs-zero-to-hero/day-6-nextjs-tailwind/day-6-ws-1',
+        //   ],
+        // },
       ],
     },
   ] as SidebarItemConfig[]),

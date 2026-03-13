@@ -34,5 +34,6 @@ export const sidebarToggleConfig: SidebarToggleConfig = {
     'nodejs-zero-to-hero/day-3-docker/day-3-docker',
     'nodejs-zero-to-hero/day-4-express-2/day-4-express-2',
     'nodejs-zero-to-hero/day-5-jwt/day-5-jwt',
+    'nodejs-zero-to-hero/day-6-nextjs-tailwind/day-6-nextjs-tailwind',
   ],
 };

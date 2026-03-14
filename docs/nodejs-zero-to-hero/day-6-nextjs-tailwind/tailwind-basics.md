@@ -1,57 +1,18 @@
 ---
 id: day-6-tailwind-basics
-title: 'Tailwind พื้นฐาน (ใช้งานให้พอดี)'
-sidebar_label: 'Tailwind Basics'
+title: 'Modern Styling with Tailwind CSS'
+sidebar_label: 'Tailwind'
 ---
 
-จุดที่อยากให้ชินในวันแรก:
+## บทย่อย
 
-- ทำ layout ด้วย `flex`, `grid`, `gap`
-- ใส่ระยะด้วย `p-*`, `m-*`, `space-y-*`
-- ทำกรอบด้วย `border`, `rounded-*`
-- ทำตัวอักษรด้วย `text-*`, `font-*`
-- กำหนด container ด้วย `max-w-*` และ `mx-auto`
-
----
-
-## ตัวอย่าง “การ์ด” ที่ใช้ได้บ่อย
-
-```jsx
-export function Card({ title, children }) {
-  return (
-    <section className="rounded-lg border bg-white p-4">
-      <h2 className="text-base font-semibold">{title}</h2>
-      <div className="mt-3">{children}</div>
-    </section>
-  );
-}
-```
-
----
-
-## ตัวอย่างปุ่มและ input แบบง่าย
-
-```jsx
-export function Button({ children, ...props }) {
-  return (
-    <button
-      className="rounded-md bg-black px-3 py-2 text-sm font-medium text-white hover:opacity-90 disabled:opacity-50"
-      {...props}
-    >
-      {children}
-    </button>
-  );
-}
-```
-
-```jsx
-export function TextInput(props) {
-  return (
-    <input
-      className="w-full rounded-md border px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-black/20"
-      {...props}
-    />
-  );
-}
-```
+- [1) Utility-first และ “สเกล” ของ Tailwind](./tailwind-1-utility-first.md)
+- [2) Spacing & Sizing (ระยะและขนาด)](./tailwind-2-spacing-sizing.md)
+- [3) Layout: Display/Position/Container](./tailwind-3-layout.md)
+- [4) Flexbox](./tailwind-4-flexbox.md)
+- [5) Grid](./tailwind-5-grid.md)
+- [6) Typography](./tailwind-6-typography.md)
+- [7) Backgrounds, Borders, Radius, Shadow](./tailwind-7-backgrounds-borders.md)
+- [8) Tables (รายการข้อมูลแบบตาราง)](./tailwind-8-tables.md)
+- [9) Responsive + State + แนวทางจัดโค้ดให้เป็นระเบียบ](./tailwind-9-responsive-state-best-practices.md)
 

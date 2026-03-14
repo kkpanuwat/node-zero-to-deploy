@@ -24,13 +24,21 @@ npx create-next-app@latest kku-library-web
 cd kku-library-web
 ```
 
+<p align="center">
+<img src={require('../../../static/img/day-6/setup/1.png').default} alt="Day 5 JWT" style={{maxWidth: '800px', width: '100%'}} />
+</p>
+
 ตอนรันคำสั่งจะมีคำถามให้ตอบ แนะนำให้ตอบประมาณนี้ (ให้เป็น JavaScript และเตรียมไว้ต่อกับ workshop):
+
+<p align="center">
+<img src={require('../../../static/img/day-6/setup/2.png').default} alt="Day 5 JWT" style={{maxWidth: '800px', width: '100%'}} />
+</p>
 
 | Prompt | เลือก |
 |---|---|
 | Would you like to use the recommended Next.js defaults? | No, customize settings |
 | Would you like to use TypeScript? | No |
-| Which linter would you like to use? | None *(ถ้าทีมอยากเข้ม เลือก ESLint ก็ได้)* |
+| Which linter would you like to use? | None |
 | Would you like to use React Compiler? | No |
 | Would you like to use Tailwind CSS? | Yes |
 | Would you like your code inside a `src/` directory? | Yes |
@@ -38,17 +46,16 @@ cd kku-library-web
 | Would you like to customize the import alias (`@/*` by default)? | Yes |
 | What import alias would you like configured? | `@/*` |
 
-อธิบายแต่ละตัว (เลือกไปทำไม):
+อธิบาย:
 
-- **Recommended defaults → No (customize)**: จะได้เลือกให้ตรงกับคลาส เช่น ไม่ใช้ TypeScript และเปิด Tailwind แน่นอน
-- **TypeScript → No**: วันนี้โฟกัส JavaScript ให้ทุกคนตามทันก่อน
-- **Linter → None**: ตัดความซับซ้อน/เสียงเตือนระหว่างเรียน (ถ้าทีมพร้อมค่อยเปิด ESLint ทีหลัง)
-- **React Compiler → No**: ยังไม่จำเป็นสำหรับพื้นฐาน และบางทีทำให้ดีบักยากขึ้นในวันแรก
+- **Recommended defaults → No (customize)**
+- **TypeScript → No**: เลือกใช้ JavaScript
+- **Linter → None**: ตัดความซับซ้อนและกฏของการเขียนโค้ด (ถ้าคล่องให้ใช้ ESLint ทีหลัง)
+- **React Compiler → No**: ยังไม่จำเป็นสำหรับพื้นฐาน
 - **Tailwind CSS → Yes**: ใช้ทำ UI เร็ว ๆ ด้วย class utility ไม่ต้องเขียน CSS เยอะ
 - **`src/` directory → Yes**: แยกโค้ดแอปไว้ใน `src/` ทำให้โปรเจกต์ดูเป็นระเบียบ
-- **App Router → Yes**: ใช้โครง `src/app` ตามแนวทางใหม่ของ Next.js (route/layout ทำงานชัด)
-- **Customize import alias → Yes**: ตั้ง alias ให้ import สั้นลง
-- **Import alias `@/*`**: จะได้ import แบบ `@/components/...` แทน `../../components/...` เวลาโครงสร้างเริ่มลึก
+- **App Router → Yes**: ใช้โครง `src/app` ตามแนวทางใหม่ของ Next.js (route/layout)
+- **Customize import alias → No**: ตั้ง alias ให้ import สั้นลง
 
 รัน dev server ที่ port 3001 (กันชนกับ Express ที่ใช้ 3000):
 
